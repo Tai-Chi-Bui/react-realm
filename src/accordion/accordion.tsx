@@ -1,14 +1,14 @@
-import React, {useMemo, useState} from 'react'
-import {Transitions} from '..'
+import React, { useMemo, useState } from 'react'
+import { Transitions } from '..'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import AccordionContext from './accordion-context'
 import AccordionExpandIcon, {
   AccordionExpandIconProps,
 } from './accordion-expandIcon'
 import AccordionTable from './accordion-table'
-import AccordionTitle, {AccordionTitleProps} from './accordion-title'
+import AccordionTitle, { AccordionTitleProps } from './accordion-title'
 import styles from './styles/accordion.module.css'
 
 interface Props {
@@ -27,8 +27,6 @@ export type AccordionProps = Props &
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       // ComponentProps
       expand: controlledExpand, //map the prop to a different name
       defaultExpand = false,
@@ -59,18 +57,18 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     }, [])
 
     const contextValue = React.useMemo(
-      () => ({expand, setExpand: setExpandIfUncontrolled, onExpandChange}),
+      () => ({ expand, setExpand: setExpandIfUncontrolled, onExpandChange }),
       [expand, setExpandIfUncontrolled, onExpandChange],
     )
 
-    const {child: AccordionTitleElement, rest: NotAccordionaTitleElement} =
+    const { child: AccordionTitleElement, rest: NotAccordionaTitleElement } =
       pickChild<React.ReactElement<AccordionTitleProps>>(
         children,
         AccordionTitle,
       )
 
     // pick accordion expand icon from NotAccordionaTitleElement
-    const {child: AccordionExpandIconElement, rest: AccordionContent} =
+    const { child: AccordionExpandIconElement, rest: AccordionContent } =
       pickChild<React.ReactElement<AccordionExpandIconProps>>(
         NotAccordionaTitleElement,
         AccordionExpandIcon,
@@ -79,31 +77,31 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     const AccordionTitleWithIcon =
       AccordionTitleElement && AccordionExpandIconElement
         ? React.cloneElement(AccordionTitleElement, {
-            expandIcon: AccordionExpandIconElement,
-          })
+          expandIcon: AccordionExpandIconElement,
+        })
         : AccordionTitleElement
 
     return (
-        <div
-          className={`${styles.accordion} ${className}`}
-          {...htmlProps}
-          ref={accordionRef}
-        >
-          <AccordionContext.Provider value={contextValue}>
-            {AccordionTitleWithIcon}
-            <Transitions
-              role='region'
-              aria-labelledby={props['aria-labelledby']}
-              ref={accordionBodyRef}
-              isLazyMounted={true}
-              show={expand}
-            >
-              <div className={`${styles.accordionBodyInner}`}>
-                {AccordionContent}
-              </div>
-            </Transitions>
-          </AccordionContext.Provider>
-        </div>
+      <div
+        className={`${styles.accordion} ${className}`}
+        {...htmlProps}
+        ref={accordionRef}
+      >
+        <AccordionContext.Provider value={contextValue}>
+          {AccordionTitleWithIcon}
+          <Transitions
+            role='region'
+            aria-labelledby={props['aria-labelledby']}
+            ref={accordionBodyRef}
+            isLazyMounted={true}
+            show={expand}
+          >
+            <div className={`${styles.accordionBodyInner}`}>
+              {AccordionContent}
+            </div>
+          </Transitions>
+        </AccordionContext.Provider>
+      </div>
     )
   },
 )

@@ -1,5 +1,4 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import FooterInfoDownload from './footer-info-download'
 import FooterInfoSocial from './footer-info-social'
 import styles from './styles/footer-info.module.css'
@@ -11,21 +10,18 @@ interface Props {
 export type FooterInfoProps = Props &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof Props>
 
-// eslint-disable-next-line react-refresh/only-export-components
 const FooterInfo = React.forwardRef<HTMLDivElement, FooterInfoProps>(
   (props, ref) => {
-    const {children, css = {}, className, ...htmlProps} = props
+    const { children, css = {}, className, ...htmlProps } = props
 
     const rootClasses = [styles.footerInfo, className, 'cdg-footer-info']
       .filter(Boolean)
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div className={rootClasses} ref={ref} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div className={rootClasses} ref={ref} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

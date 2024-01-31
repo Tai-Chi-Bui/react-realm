@@ -1,8 +1,6 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/card.module.css'
 interface Props {
-  css?: unknown
   children?: React.ReactNode
 }
 
@@ -11,7 +9,7 @@ export type CardTitleProps = Props &
 
 const CardTitle = React.forwardRef<HTMLDivElement, CardTitleProps>(
   (props, ref) => {
-    const {children, css = {}, className, ...htmlProps} = props
+    const { children, className, ...htmlProps } = props
 
     const renderTitle = () => {
       if (typeof children === 'string') {
@@ -21,15 +19,13 @@ const CardTitle = React.forwardRef<HTMLDivElement, CardTitleProps>(
     }
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div
-          className={`${styles.cardTitleContainer} ${className}`}
-          ref={ref}
-          {...htmlProps}
-        >
-          {renderTitle()}
-        </div>
-      </CssInjection>
+      <div
+        className={`${styles.cardTitleContainer} ${className}`}
+        ref={ref}
+        {...htmlProps}
+      >
+        {renderTitle()}
+      </div>
     )
   },
 )

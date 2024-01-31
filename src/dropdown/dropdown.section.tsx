@@ -1,6 +1,5 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/dropdown.module.css'
 
 export interface DropdownSectionBase {
@@ -11,7 +10,6 @@ export interface DropdownSectionBase {
   onClick?: () => void
   isChecked?: boolean
   checkmark?: 'checkbox' | 'tick'
-  css?: unknown
 }
 
 export type DropdownSectionProps = DropdownSectionBase &
@@ -24,7 +22,6 @@ const DropdownSection = React.forwardRef<HTMLDivElement, DropdownSectionProps>(
       title,
       isClickable,
       className,
-      css = {},
       onClick,
       ...htmlProps
     } = props
@@ -55,16 +52,14 @@ const DropdownSection = React.forwardRef<HTMLDivElement, DropdownSectionProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={DropdownSectionRef}>
-        <div {...htmlProps} className={rootClasses} ref={DropdownSectionRef}>
-          {title && (
-            <div className={titleClasses} onClick={handleOnClick}>
-              {title}
-            </div>
-          )}
-          {children}
-        </div>
-      </CssInjection>
+      <div {...htmlProps} className={rootClasses} ref={DropdownSectionRef}>
+        {title && (
+          <div className={titleClasses} onClick={handleOnClick}>
+            {title}
+          </div>
+        )}
+        {children}
+      </div>
     )
   },
 )

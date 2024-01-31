@@ -1,6 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import FooterHeader from './footer-header'
 import FooterNavigation from './footer-nav'
 import FooterPolicy from './footer-policy'
@@ -15,18 +13,16 @@ export type FooterProps = Props &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof Props>
 
 const Footer = React.forwardRef<HTMLDivElement, FooterProps>((props, ref) => {
-  const {children, color = 'white', className, css = {}, ...htmlProps} = props
+  const { children, color = 'white', className, css = {}, ...htmlProps } = props
 
   const rootClasses = [styles.footer, styles[color], className, 'cdg-footer']
     .filter(Boolean)
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div className={rootClasses} ref={ref} color={color} {...htmlProps}>
-        {children}
-      </div>
-    </CssInjection>
+    <div className={rootClasses} ref={ref} color={color} {...htmlProps}>
+      {children}
+    </div>
   )
 })
 

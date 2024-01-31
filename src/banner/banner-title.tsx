@@ -1,13 +1,10 @@
 'use client'
-
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/banner.module.css'
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
   className?: string
 }
 
@@ -16,7 +13,7 @@ export type BannerTitleProps = Props &
 
 const BannerTitle = React.forwardRef<HTMLHeadingElement, BannerTitleProps>(
   (props, ref) => {
-    const {children, css = {}, className = '', ...htmlProps} = props
+    const { children, className = '', ...htmlProps } = props
     const bannerTitleRef = useDOMRef<HTMLDivElement>(ref)
     const renderTitle = () => {
       if (typeof children === 'string') {
@@ -26,15 +23,13 @@ const BannerTitle = React.forwardRef<HTMLHeadingElement, BannerTitleProps>(
     }
 
     return (
-      <CssInjection css={css} childrenRef={bannerTitleRef}>
-        <h1
-          className={`cdg-banner-title ${styles.bannerTitle} ${className}`}
-          ref={bannerTitleRef}
-          {...htmlProps}
-        >
-          {renderTitle()}
-        </h1>
-      </CssInjection>
+      <h1
+        className={`cdg-banner-title ${styles.bannerTitle} ${className}`}
+        ref={bannerTitleRef}
+        {...htmlProps}
+      >
+        {renderTitle()}
+      </h1>
     )
   },
 )

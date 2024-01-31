@@ -1,12 +1,12 @@
 import Singapore from '@comfortdelgro/compass-icons/react/flag-sgp'
 import USA from '@comfortdelgro/compass-icons/react/flag-usa'
-import type {Meta} from '@storybook/react'
-import {toString} from 'lodash'
-import React, {useEffect, useState} from 'react'
+import type { Meta } from '@storybook/react'
+import { toString } from 'lodash'
+import React, { useEffect, useState } from 'react'
 import Dropdown from '../dropdown'
 import Textarea from '../textarea'
 import TextField from '../textfield'
-import DropdownTextfield, {DropdownOptions} from './dropdown-textfield'
+import DropdownTextfield, { DropdownOptions } from './dropdown-textfield'
 
 const style: React.CSSProperties = {
   display: 'flex',
@@ -65,7 +65,7 @@ export const Variants: React.FC = () => {
   }, [])
   return (
     <>
-      <div style={{...style}}>
+      <div style={{ ...style }}>
         <h3>Default</h3>
 
         <DropdownTextfield
@@ -124,8 +124,8 @@ export const Variants: React.FC = () => {
           isRequired={true}
         />
       </div>
-      <div style={{...styleRow}}>
-        <div style={{...style}}>
+      <div style={{ ...styleRow }}>
+        <div style={{ ...style }}>
           <h3>Min length</h3>
 
           <DropdownTextfield
@@ -134,10 +134,10 @@ export const Variants: React.FC = () => {
             onChange={handleInputsChange}
             label='Enter your mobile number'
             minLength={5}
-            placeholder='Min length of 5'
+            dropdownPlaceholder='Min length of 5'
           />
         </div>
-        <div style={{...style}}>
+        <div style={{ ...style }}>
           <h3>Max length</h3>
 
           <DropdownTextfield
@@ -146,7 +146,7 @@ export const Variants: React.FC = () => {
             onChange={handleInputsChange}
             label='Enter your mobile number'
             maxLength={10}
-            placeholder='Max length of 10'
+            dropdownPlaceholder='Max length of 10'
           />
         </div>
       </div>
@@ -156,9 +156,9 @@ export const Variants: React.FC = () => {
 
 export const H5Form: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h4>Your Information</h4>
-      <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <DropdownTextfield
           options={dropdownOptions}
           inputType='text'
@@ -182,7 +182,7 @@ export const H5Form: React.FC = () => {
       </div>
 
       <h4>Your Information</h4>
-      <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <Dropdown.Select h5 label='Feedback' defaultSelectedKey={'General'}>
           <Dropdown.Item key={'General'}>General</Dropdown.Item>
         </Dropdown.Select>

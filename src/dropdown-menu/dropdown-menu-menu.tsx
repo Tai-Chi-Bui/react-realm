@@ -1,12 +1,11 @@
 'use client'
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/dropdown-menu.module.css'
 
 interface MenuProps {
   children?: React.ReactNode
-  css?: unknown
 }
 
 export type DropdownMenuMenuProps = MenuProps &
@@ -18,22 +17,19 @@ const DropdownMenuMenu = React.forwardRef<
   HTMLUListElement,
   DropdownMenuMenuProps
 >((props, ref) => {
-  const {children, css = {}, className, ...htmlProps} = props
+  const { children, className, ...htmlProps } = props
 
   const DropdownMenuMenuRef = useDOMRef<HTMLUListElement>(ref)
 
   return (
-    <CssInjection css={css} childrenRef={DropdownMenuMenuRef}>
-      <ul
-        ref={DropdownMenuMenuRef}
-        className={`${className ?? ''} ${MULTILEVEL_MENU_CLASS_NAME} ${
-          styles.dropdownMenuBoxshadow
+    <ul
+      ref={DropdownMenuMenuRef}
+      className={`${className ?? ''} ${MULTILEVEL_MENU_CLASS_NAME} ${styles.dropdownMenuBoxshadow
         }`}
-        {...htmlProps}
-      >
-        {children}
-      </ul>
-    </CssInjection>
+      {...htmlProps}
+    >
+      {children}
+    </ul>
   )
 })
 

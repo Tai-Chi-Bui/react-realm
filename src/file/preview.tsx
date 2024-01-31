@@ -1,10 +1,9 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/preview.module.css'
 
 interface Props {
-  css?: unknown
   imageSrc?: string
   children?: React.ReactNode
 }
@@ -14,7 +13,7 @@ export type FilePreviewProps = Props &
 
 const FilePreview = React.forwardRef<HTMLDivElement, FilePreviewProps>(
   (props, ref) => {
-    const {css = {}, imageSrc, children, className, ...htmlProps} = props
+    const { imageSrc, children, className, ...htmlProps } = props
     const previewRef = useDOMRef<HTMLDivElement>(ref)
     const [failed, setFailed] = React.useState(false)
 
@@ -34,7 +33,7 @@ const FilePreview = React.forwardRef<HTMLDivElement, FilePreviewProps>(
     )
 
     return (
-      <CssInjection css={css} childrenRef={previewRef}>
+      <CssInjection childrenRef={previewRef}>
         <div ref={previewRef} className={previewClasses} {...htmlProps}>
           <div
             className={`${styles.imagePreviewWrapper} cdg-file-preview-image-wrapper`}

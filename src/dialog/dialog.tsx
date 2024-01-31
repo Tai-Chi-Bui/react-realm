@@ -1,8 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import DialogActions from './dialog-actions'
 import DialogDescription from './dialog-description'
 import DialogIcon from './dialog-icon'
@@ -17,7 +16,6 @@ interface Props {
   onKeyDown?: (e: KeyboardEvent) => void
   triggerId?: string
   handleClose?: () => void
-  css?: unknown
 }
 
 export type DialogProps = Props &
@@ -25,8 +23,6 @@ export type DialogProps = Props &
 
 const Dialog = React.forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
   const {
-    // StyledComponentProps
-    css = {},
     // children
     children,
     // ComponentProps
@@ -47,25 +43,25 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
   const LastFocusableRef = React.useRef<HTMLElement | null>(null)
 
   // Pick title child component
-  const {child: DialogTitleElement} = pickChild<typeof DialogTitle>(
+  const { child: DialogTitleElement } = pickChild<typeof DialogTitle>(
     children,
     DialogTitle,
   )
 
   // Pick description child component
-  const {child: DialogDescriptionElement} = pickChild<typeof DialogDescription>(
+  const { child: DialogDescriptionElement } = pickChild<typeof DialogDescription>(
     children,
     DialogDescription,
   )
 
   // Pick action child component
-  const {child: DialogActionsElement} = pickChild<typeof DialogActions>(
+  const { child: DialogActionsElement } = pickChild<typeof DialogActions>(
     children,
     DialogActions,
   )
 
   // Pick icon child component
-  const {child: DialogIconElement} = pickChild<typeof DialogIcon>(
+  const { child: DialogIconElement } = pickChild<typeof DialogIcon>(
     children,
     DialogIcon,
   )
@@ -172,25 +168,23 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection css={css}>
-      <div
-        ref={DialogRef}
-        tabIndex={0}
-        role='dialog'
-        aria-modal={true}
-        onClick={(e) => handleClick?.(e as unknown as MouseEvent)}
-        onKeyDown={(e) => handleKeyDown?.(e as unknown as KeyboardEvent)}
-        {...htmlProps}
-        className={dialogClassNames}
-      >
-        <div tabIndex={0} className={contentClassNames}>
-          {variant == 'alert' ? DialogIconElement : null}
-          {DialogTitleElement}
-          {DialogDescriptionElement}
-          {DialogActionsElement}
-        </div>
+    <div
+      ref={DialogRef}
+      tabIndex={0}
+      role='dialog'
+      aria-modal={true}
+      onClick={(e) => handleClick?.(e as unknown as MouseEvent)}
+      onKeyDown={(e) => handleKeyDown?.(e as unknown as KeyboardEvent)}
+      {...htmlProps}
+      className={dialogClassNames}
+    >
+      <div tabIndex={0} className={contentClassNames}>
+        {variant == 'alert' ? <DialogIconElement /> : null}
+        <DialogTitleElement />
+        <DialogDescriptionElement />
+        <DialogActionsElement />
       </div>
-    </CssInjection>
+    </div>
   )
 })
 

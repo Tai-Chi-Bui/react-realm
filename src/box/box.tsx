@@ -1,5 +1,4 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/box.module.css'
 
@@ -8,7 +7,6 @@ export type BoxProps = Props &
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
   className?: string
   as?: React.ElementType
   border?: string
@@ -98,8 +96,6 @@ const Box = React.forwardRef<HTMLElement, BoxProps>((props, ref) => {
   const {
     // children props
     children,
-    // styled component props
-    css = {},
     className = '',
     // custom props
     as: asProp = 'div',
@@ -202,99 +198,97 @@ const Box = React.forwardRef<HTMLElement, BoxProps>((props, ref) => {
 
   return (
     <>
-      <CssInjection css={css}>
-        <Component
-          {...htmlProps}
-          ref={BoxRef as never}
-          className={rootClasses}
-          style={{
-            border,
-            borderBottom,
-            borderColor,
-            borderLeft,
-            borderRadius,
-            borderRight,
-            borderTop,
-            boxShadow,
-            displayPrint,
-            displayRaw,
-            alignContent,
-            alignItems,
-            alignSelf,
-            flex,
-            flexDirection,
-            flexGrow,
-            flexShrink,
-            flexWrap,
-            justifyContent,
-            order,
-            gap,
-            columnGap,
-            rowGap,
-            gridColumn,
-            gridRow,
-            gridAutoFlow,
-            gridAutoColumns,
-            gridAutoRows,
-            gridTemplateColumns,
-            gridTemplateRows,
-            gridTemplateAreas,
-            gridArea,
-            bgcolor,
-            color,
-            bottom,
-            left,
-            position,
-            right,
-            top,
-            zIndex,
-            height,
-            maxHeight,
-            maxWidth,
-            minHeight,
-            minWidth,
-            width,
-            boxSizing,
-            margin,
-            marginBottom,
-            marginLeft,
-            marginRight,
-            marginTop,
-            marginX,
-            marginY,
-            marginInline,
-            marginInlineStart,
-            marginInlineEnd,
-            marginBlock,
-            marginBlockStart,
-            marginBlockEnd,
-            padding,
-            paddingBottom,
-            paddingLeft,
-            paddingRight,
-            paddingTop,
-            paddingX,
-            paddingY,
-            paddingInline,
-            paddingInlineStart,
-            paddingInlineEnd,
-            paddingBlock,
-            paddingBlockStart,
-            paddingBlockEnd,
-            typography,
-            fontFamily,
-            fontSize,
-            fontStyle,
-            fontWeight,
-            letterSpacing,
-            lineHeight,
-            textAlign,
-            ...style,
-          }}
-        >
-          {children}
-        </Component>
-      </CssInjection>
+      <Component
+        {...htmlProps}
+        ref={BoxRef as never}
+        className={rootClasses}
+        style={{
+          border,
+          borderBottom,
+          borderColor,
+          borderLeft,
+          borderRadius,
+          borderRight,
+          borderTop,
+          boxShadow,
+          displayPrint,
+          displayRaw,
+          alignContent,
+          alignItems,
+          alignSelf,
+          flex,
+          flexDirection,
+          flexGrow,
+          flexShrink,
+          flexWrap,
+          justifyContent,
+          order,
+          gap,
+          columnGap,
+          rowGap,
+          gridColumn,
+          gridRow,
+          gridAutoFlow,
+          gridAutoColumns,
+          gridAutoRows,
+          gridTemplateColumns,
+          gridTemplateRows,
+          gridTemplateAreas,
+          gridArea,
+          bgcolor,
+          color,
+          bottom,
+          left,
+          position,
+          right,
+          top,
+          zIndex,
+          height,
+          maxHeight,
+          maxWidth,
+          minHeight,
+          minWidth,
+          width,
+          boxSizing,
+          margin,
+          marginBottom,
+          marginLeft,
+          marginRight,
+          marginTop,
+          marginX,
+          marginY,
+          marginInline,
+          marginInlineStart,
+          marginInlineEnd,
+          marginBlock,
+          marginBlockStart,
+          marginBlockEnd,
+          padding,
+          paddingBottom,
+          paddingLeft,
+          paddingRight,
+          paddingTop,
+          paddingX,
+          paddingY,
+          paddingInline,
+          paddingInlineStart,
+          paddingInlineEnd,
+          paddingBlock,
+          paddingBlockStart,
+          paddingBlockEnd,
+          typography,
+          fontFamily,
+          fontSize,
+          fontStyle,
+          fontWeight,
+          letterSpacing,
+          lineHeight,
+          textAlign,
+          ...style,
+        }}
+      >
+        {children}
+      </Component>
     </>
   )
 })

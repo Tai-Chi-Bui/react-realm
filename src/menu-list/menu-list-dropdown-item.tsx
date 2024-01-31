@@ -1,5 +1,4 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/menu-list-dropdown-item.module.css'
 
 interface Props {
@@ -46,20 +45,18 @@ const MenuListDropdownItem = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div className={rootClasses} ref={ref} tabIndex={tabIndex} {...htmlProps}>
-        {icon ? (
-          <div
-            className={`${styles.cdgMenuListDropdownIcon} cdg-menu-list-dropdown-icon`}
-          >
-            {icon}
-          </div>
-        ) : (
-          <></>
-        )}
-        {children}
-      </div>
-    </CssInjection>
+    <div className={rootClasses} ref={ref} tabIndex={tabIndex} {...htmlProps}>
+      {icon ? (
+        <div
+          className={`${styles.cdgMenuListDropdownIcon} cdg-menu-list-dropdown-icon`}
+        >
+          {icon}
+        </div>
+      ) : (
+        <></>
+      )}
+      {children}
+    </div>
   )
 })
 

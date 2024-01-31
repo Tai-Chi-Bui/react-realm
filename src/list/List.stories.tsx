@@ -1,10 +1,10 @@
-import {faChevronRight, faFaceSmile} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import type {Meta} from '@storybook/react'
+import { faChevronRight, faFaceSmile } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import Avatar from '../avatar'
 import AvatarGroup from '../avatar/avatar-group'
-import List, {DragAndDropList, InteractiveList} from './index'
+import List, { DragAndDropList, InteractiveList } from './index'
 import ListCard from './list-card'
 import ListCardDetail from './list-card-detail'
 import ListImage from './list-image'
@@ -15,7 +15,7 @@ const imgSrc =
 export const Variants: React.FC = () => {
   return (
     <>
-      <div style={{width: 300}}>
+      <div style={{ width: 300 }}>
         <h3>Interactive</h3>
         <List
           title='Title'
@@ -28,7 +28,7 @@ export const Variants: React.FC = () => {
         />
       </div>
 
-      <div style={{width: 300}}>
+      <div style={{ width: 300 }}>
         <h3>Item</h3>
         <List
           title='Title'
@@ -42,14 +42,14 @@ export const Variants: React.FC = () => {
         />
       </div>
 
-      <div style={{width: 500}}>
+      <div style={{ width: 500 }}>
         <h3>H5</h3>
         <List
           title='ComfortRIDE'
           description='Car or Taxi, Flat Fare'
           descriptionIcon={
             <FontAwesomeIcon
-              style={{width: 14, height: 14, color: '#0142AF'}}
+              style={{ width: 14, height: 14, color: '#0142AF' }}
               icon={faFaceSmile}
             />
           }
@@ -65,7 +65,7 @@ export const Variants: React.FC = () => {
         />
       </div>
 
-      <div style={{width: 300}}>
+      <div style={{ width: 300 }}>
         <h3>Interactive Disabled</h3>
         <List
           isDisabled
@@ -79,7 +79,7 @@ export const Variants: React.FC = () => {
         />
       </div>
 
-      <div style={{width: 300}}>
+      <div style={{ width: 300 }}>
         <h3>Item Disabled</h3>
         <List
           isDisabled
@@ -94,7 +94,7 @@ export const Variants: React.FC = () => {
         />
       </div>
 
-      <div style={{width: 500}}>
+      <div style={{ width: 500 }}>
         <h3>H5 Disabled</h3>
         <List
           isDisabled
@@ -102,7 +102,7 @@ export const Variants: React.FC = () => {
           description='Car or Taxi, Flat Fare'
           descriptionIcon={
             <FontAwesomeIcon
-              style={{width: 14, height: 14, color: '#0142AF'}}
+              style={{ width: 14, height: 14, color: '#0142AF' }}
               icon={faFaceSmile}
             />
           }
@@ -123,14 +123,14 @@ export const Variants: React.FC = () => {
 
 export const Size: React.FC = () => {
   return (
-    <div style={{width: 300}}>
+    <div style={{ width: 300 }}>
       <h3>SM</h3>
       <List
         size='sm'
         leftInfo={<FontAwesomeIcon icon={faChevronRight} />}
         title='Title'
         description='Lorem Ipsum'
-        css={{maxWidth: '198px'}}
+        style={{ maxWidth: '198px' }}
       />
       <List
         size='sm'
@@ -138,7 +138,7 @@ export const Size: React.FC = () => {
         leftInfo={<FontAwesomeIcon icon={faChevronRight} />}
         title='Title'
         description='Lorem Ipsum'
-        css={{maxWidth: '198px'}}
+        style={{ maxWidth: '198px' }}
       />
     </div>
   )
@@ -146,14 +146,14 @@ export const Size: React.FC = () => {
 
 export const ListCards: React.FC = () => {
   return (
-    <div style={{width: 300}}>
+    <div style={{ width: 300 }}>
       <h3>SM</h3>
       <ListCard
         showActionButton
         title='Lorem Ipsum'
         description='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
         badge={<ListImage src={imgSrc} alt='singapore' />}
-        css={{width: '347px', backgroundColor: '$background'}}
+        style={{ width: '347px', backgroundColor: '$background' }}
       >
         <ListCard.Detail
           title='Detail 1'
@@ -172,7 +172,7 @@ export const ListCards: React.FC = () => {
         showActionButton
         description='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
         badge={<ListImage src={imgSrc} alt='singapore' />}
-        css={{width: '347px', backgroundColor: '$background'}}
+        style={{ width: '347px', backgroundColor: '$background' }}
       >
         <ListCardDetail
           title='Detail 1'
@@ -226,7 +226,7 @@ const GroupLabel = (
 
 export const InteractiveLists: React.FC = () => {
   return (
-    <div style={{width: 300}}>
+    <div style={{ width: 300 }}>
       <InteractiveList
         groupLabel={GroupLabel}
         avatar={
@@ -241,7 +241,7 @@ export const InteractiveLists: React.FC = () => {
         }
         title='Title'
         description='Lorem ipsum dolor sit amet'
-        css={{width: '315px', height: 'fit-content'}}
+        style={{ width: '315px', height: 'fit-content' }}
       />
 
       <InteractiveList
@@ -257,13 +257,13 @@ export const InteractiveLists: React.FC = () => {
 
 export const H5: React.FC = () => {
   return (
-    <div style={{width: 500}}>
+    <div style={{ width: 500 }}>
       <List
         title='ComfortRIDE'
         description='Car or Taxi, Flat Fare'
         descriptionIcon={
           <FontAwesomeIcon
-            style={{width: 14, height: 14, color: '#0142AF'}}
+            style={{ width: 14, height: 14, color: '#0142AF' }}
             icon={faFaceSmile}
           />
         }
@@ -284,7 +284,7 @@ export const H5: React.FC = () => {
         leftInfo={
           <ListImage variant='h5' isRounded src={imgSrc} alt='singapore' />
         }
-        rightInfo={{text: '$9.90', description: 'Fees may apply'}}
+        rightInfo={{ text: '$9.90', description: 'Fees may apply' }}
       />
       <List
         title='ComfortRIDE'
@@ -293,10 +293,10 @@ export const H5: React.FC = () => {
         leftInfo={
           <ListImage variant='h5' isRounded src={imgSrc} alt='singapore' />
         }
-        rightInfo={{text: '$9.90', description: 'Fees may apply'}}
+        rightInfo={{ text: '$9.90', description: 'Fees may apply' }}
         descriptionIcon={
           <FontAwesomeIcon
-            style={{width: 14, height: 14, color: '#0142AF'}}
+            style={{ width: 14, height: 14, color: '#0142AF' }}
             icon={faFaceSmile}
           />
         }
@@ -308,7 +308,7 @@ export const H5: React.FC = () => {
         leftInfo={
           <ListImage variant='h5' isRounded src={imgSrc} alt='singapore' />
         }
-        rightInfo={{text: '$9.90', description: 'Fees may apply'}}
+        rightInfo={{ text: '$9.90', description: 'Fees may apply' }}
       />
       <List
         title='ComfortRIDE'
@@ -317,7 +317,7 @@ export const H5: React.FC = () => {
         leftInfo={
           <ListImage variant='h5' isRounded src={imgSrc} alt='singapore' />
         }
-        rightInfo={{text: '$9.90', description: 'Fees may apply'}}
+        rightInfo={{ text: '$9.90', description: 'Fees may apply' }}
       />
     </div>
   )
@@ -326,14 +326,14 @@ export const H5: React.FC = () => {
 export const DragAndDrops: React.FC = () => {
   const [arr, setArr] = React.useState<React.Key[]>(['red', 'green', 'blue'])
   return (
-    <div style={{width: 400}}>
+    <div style={{ width: 400 }}>
       <DragAndDropList onReorderByKeys={(a) => setArr(a)}>
         {arr.map((a) => (
           <DragAndDropList.Item key={a}>
             <ListCard
               title={String(a)}
               description='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-              style={{background: 'white'}}
+              style={{ background: 'white' }}
             />
           </DragAndDropList.Item>
         ))}

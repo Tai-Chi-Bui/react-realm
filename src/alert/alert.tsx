@@ -9,7 +9,6 @@ interface Props {
   icon?: false | React.ReactNode
   dismissible?: boolean
   onDismiss?: () => void
-  css?: unknown
   color?: 'info' | 'success' | 'warning' | 'danger'
 }
 
@@ -18,8 +17,6 @@ export type AlertProps = Props &
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const {
-    // StyledComponentProps
-    css = {},
     // ComponentProps
     icon,
     dismissible,

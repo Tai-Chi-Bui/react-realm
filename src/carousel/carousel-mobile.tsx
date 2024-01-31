@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '../button'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import CarouselSlider from './carousel-slider'
 import {
   CarouselOptions,
@@ -33,7 +32,6 @@ const CarouselMobile = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     useNavigation = false,
     useDotIndicator = true,
     navigationButtonType = 'icon',
-    css = {},
     onSwitchSlide = () => null,
     ...htmlProps
   } = props
@@ -59,114 +57,108 @@ const CarouselMobile = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   }
 
   return (
-    <CssInjection css={css} childrenRef={wrapperRef}>
-      <div
-        {...htmlProps}
-        className={`content-slider-mobile-mode${
-          floatingContent ? ' floating-content' : ''
+    <div
+      {...htmlProps}
+      className={`content-slider-mobile-mode${floatingContent ? ' floating-content' : ''
         } ${styles.contentSliderMobileMode}`}
+    >
+      <CarouselSlider
+        onSwitchSlide={handleSwitchSlide}
+        socials={socials || []}
+        useNavigation={useNavigation}
+        autoSwitch={autoSwitch}
+        navigationButtonType={navigationButtonType}
+        useDotIndicator={useDotIndicator}
+        effect='slide'
+        className={`current-slide-buttons-${generateButtonRangeClassName()}`}
       >
-        <CarouselSlider
-          onSwitchSlide={handleSwitchSlide}
-          socials={socials || []}
-          useNavigation={useNavigation}
-          autoSwitch={autoSwitch}
-          navigationButtonType={navigationButtonType}
-          useDotIndicator={useDotIndicator}
-          effect='slide'
-          className={`current-slide-buttons-${generateButtonRangeClassName()}`}
-        >
-          {data.map((dataItem: CarouselSliderItem, index: number) => (
-            <CarouselSlide
-              key={index}
-              className={`slider-slide mobile-mode${
-                activeIndex === index ? ' active' : ''
+        {data.map((dataItem: CarouselSliderItem, index: number) => (
+          <CarouselSlide
+            key={index}
+            className={`slider-slide mobile-mode${activeIndex === index ? ' active' : ''
               } ${styles.mobileModeSlide}`}
-              active={activeIndex === index}
-            >
-              {dataItem.mask && (
-                <div
-                  className={`slide-mask ${styles.slideMask}`}
-                  style={{background: `rgba(0,0,0,${dataItem.mask})`}}
-                />
-              )}
+            active={activeIndex === index}
+          >
+            {dataItem.mask && (
               <div
-                className={`carousel-mobile-inner-content ${styles.mobileInnerContent}`}
-              >
-                <img
-                  className='slide-background'
-                  src={dataItem.image}
-                  draggable={false}
-                />
-                {floatingContent ? (
-                  <div
-                    className={`slide-body ${styles.slideBody} ${
-                      floatingContent ? dataItem.alignment || '' : ''
+                className={`slide-mask ${styles.slideMask}`}
+                style={{ background: `rgba(0,0,0,${dataItem.mask})` }}
+              />
+            )}
+            <div
+              className={`carousel-mobile-inner-content ${styles.mobileInnerContent}`}
+            >
+              <img
+                className='slide-background'
+                src={dataItem.image}
+                draggable={false}
+              />
+              {floatingContent ? (
+                <div
+                  className={`slide-body ${styles.slideBody} ${floatingContent ? dataItem.alignment || '' : ''
                     } ${styles.floatingContent}`}
-                  >
-                    <div
-                      className={`content-slider-title ${styles.contentSliderTitle}`}
-                    >
-                      {dataItem.title}
-                    </div>
-                    <div
-                      className={`content-slider-description ${styles.contentSliderDescription}`}
-                    >
-                      {dataItem.description}
-                    </div>
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-            </CarouselSlide>
-          ))}
-        </CarouselSlider>
-
-        {!floatingContent ? (
-          <div
-            className={`slide-body ${styles.slideBody} ${styles.noneFloatingSlideBody}`}
-          >
-            <div
-              className={`content-slider-title ${styles.contentSliderTitle} ${styles.mobileContentSliderTitle}`}
-            >
-              {slideTitle()}
-            </div>
-            <div
-              className={`content-slider-description ${styles.contentSliderDescription} ${styles.mobileContentSliderDescription}`}
-            >
-              {slideDescription()}
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
-        {buttons && (
-          <div
-            className={`slide-mobile-buttons ${styles.slideButtonRow} ${styles.slideMobileButtonRow}`}
-          >
-            {buttons.map((button, index) => {
-              return (
-                <Button
-                  key={index}
-                  variant={button.type}
-                  className={`${button.type} ${
-                    styles['mobile-' + button.type]
-                  }`}
-                  onPress={() => {
-                    if (button.callback) {
-                      button.callback()
-                    }
-                  }}
                 >
-                  {button.label}
-                </Button>
-              )
-            })}
+                  <div
+                    className={`content-slider-title ${styles.contentSliderTitle}`}
+                  >
+                    {dataItem.title}
+                  </div>
+                  <div
+                    className={`content-slider-description ${styles.contentSliderDescription}`}
+                  >
+                    {dataItem.description}
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+          </CarouselSlide>
+        ))}
+      </CarouselSlider>
+
+      {!floatingContent ? (
+        <div
+          className={`slide-body ${styles.slideBody} ${styles.noneFloatingSlideBody}`}
+        >
+          <div
+            className={`content-slider-title ${styles.contentSliderTitle} ${styles.mobileContentSliderTitle}`}
+          >
+            {slideTitle()}
           </div>
-        )}
-      </div>
-    </CssInjection>
+          <div
+            className={`content-slider-description ${styles.contentSliderDescription} ${styles.mobileContentSliderDescription}`}
+          >
+            {slideDescription()}
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+      {buttons && (
+        <div
+          className={`slide-mobile-buttons ${styles.slideButtonRow} ${styles.slideMobileButtonRow}`}
+        >
+          {buttons.map((button, index) => {
+            return (
+              <Button
+                key={index}
+                variant={button.type}
+                className={`${button.type} ${styles['mobile-' + button.type]
+                  }`}
+                onPress={() => {
+                  if (button.callback) {
+                    button.callback()
+                  }
+                }}
+              >
+                {button.label}
+              </Button>
+            )
+          })}
+        </div>
+      )}
+    </div>
   )
 })
 

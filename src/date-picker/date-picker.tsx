@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/unbound-method */
-import React, {useRef} from 'react'
-import {ButtonProps} from '../button'
-import Calendar, {CalendarProps} from '../calendar/calendar'
+import React, { useRef } from 'react'
+import { ButtonProps } from '../button'
+import Calendar, { CalendarProps } from '../calendar/calendar'
 import DateField from '../calendar/components/date-field'
 import Dialog from '../calendar/components/dialog'
 import Popover from '../calendar/components/popover'
-import {useDatePicker} from '../calendar/hooks/useDatePicker'
-import {useDatePickerState} from '../calendar/hooks/useDatePickerState'
+import { useDatePicker } from '../calendar/hooks/useDatePicker'
+import { useDatePickerState } from '../calendar/hooks/useDatePickerState'
 import {
   AriaDatePickerProps,
   AriaDialogProps,
@@ -15,13 +13,11 @@ import {
   DOMAttributes,
   SpectrumDatePickerProps,
 } from '../calendar/types'
-import {DateValue, parseDate} from '../internationalized/date'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { DateValue, parseDate } from '../internationalized/date'
+import { useDOMRef } from '../utils/use-dom-ref'
 import DatePickerProvider from './date-picker-context'
 import styles from './styles/date-picker.module.css'
 interface Props extends SpectrumDatePickerProps<DateValue> {
-  css?: unknown
   children?: React.ReactNode
   label?: string | React.ReactNode
   isInvalid?: boolean
@@ -36,7 +32,7 @@ interface Props extends SpectrumDatePickerProps<DateValue> {
 export type DatePickerProps = Props
 
 const DatePicker = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const {css = {}, maxValue = parseDate('2999-03-10'), ctaButtonRender} = props
+  const { maxValue = parseDate('2999-03-10'), ctaButtonRender } = props
   const state = useDatePickerState({
     ...props,
     // mobile styles: prevent date field from user input, click on any place in date field will open calendar
@@ -49,7 +45,7 @@ const DatePicker = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
 
   const calendarRef = useDOMRef(ref)
 
-  const {groupProps, fieldProps, buttonProps, dialogProps, calendarProps} =
+  const { groupProps, fieldProps, buttonProps, dialogProps, calendarProps } =
     useDatePicker(
       {
         ...props,
@@ -85,33 +81,30 @@ const DatePicker = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const datePickerRef = useRef(null)
 
   return (
-    <CssInjection css={css} childrenRef={datePickerRef}>
-      <div ref={datePickerRef} className={styles.datePicker}>
-        <DatePickerProvider>
-          <DatePickerFieldWrapper
-            ref={calendarRef}
-            groupProps={groupProps}
-            fieldProps={extendedFieldProps}
-            buttonProps={buttonProps as unknown as ButtonProps}
-            isInvalid={props.isInvalid}
-            isReadOnly={props.isReadOnly}
-            isMobile={props.isMobile}
-            label={props.label}
-            errorMessage={props.errorMessage}
-            helperText={props.helperText}
-          />
-          <DatePickerCalendarWrapper
-            maxValue={maxValue}
-            state={state}
-            calendarProps={calendarProps}
-            calendarRef={calendarRef}
-            dialogProps={dialogProps}
-            css={props.calendarCSS}
-            ctaButtonRender={ctaButtonRender}
-          />
-        </DatePickerProvider>
-      </div>
-    </CssInjection>
+    <div ref={datePickerRef} className={styles.datePicker}>
+      <DatePickerProvider>
+        <DatePickerFieldWrapper
+          ref={calendarRef}
+          groupProps={groupProps}
+          fieldProps={extendedFieldProps}
+          buttonProps={buttonProps as unknown as ButtonProps}
+          isInvalid={props.isInvalid}
+          isReadOnly={props.isReadOnly}
+          isMobile={props.isMobile}
+          label={props.label}
+          errorMessage={props.errorMessage}
+          helperText={props.helperText}
+        />
+        <DatePickerCalendarWrapper
+          maxValue={maxValue}
+          state={state}
+          calendarProps={calendarProps}
+          calendarRef={calendarRef}
+          dialogProps={dialogProps}
+          ctaButtonRender={ctaButtonRender}
+        />
+      </DatePickerProvider>
+    </div>
   )
 })
 
@@ -168,7 +161,6 @@ interface DatePickerCalendarWrapperProps {
   onCancel?: (() => void) | undefined
   maxValue?: DateValue | null | undefined
   ctaButtonRender?: React.ReactNode
-  css?: unknown | undefined
 }
 
 const DatePickerCalendarWrapper = (props: DatePickerCalendarWrapperProps) => {
@@ -179,7 +171,6 @@ const DatePickerCalendarWrapper = (props: DatePickerCalendarWrapperProps) => {
     calendarProps,
     maxValue = parseDate('2999-03-10'),
     ctaButtonRender,
-    css = {},
   } = props
 
   return (
@@ -202,7 +193,6 @@ const DatePickerCalendarWrapper = (props: DatePickerCalendarWrapperProps) => {
               hasFooter={true}
               {...calendarProps}
               maxValue={maxValue}
-              css={css}
               ctaButtonRender={ctaButtonRender}
             />
           </Dialog>

@@ -1,4 +1,4 @@
-import type {Meta} from '@storybook/react'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import Chip from './index'
 
@@ -22,7 +22,7 @@ const style: {
 
 export const Basic: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Basic Chip</h3>
       <Chip>Basic Chip</Chip>
     </div>
@@ -31,7 +31,7 @@ export const Basic: React.FC = () => {
 
 export const Variants: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Close button</h3>
       <Chip
         hasCloseButton
@@ -49,7 +49,7 @@ export const Variants: React.FC = () => {
         Errored Chip
       </Chip>
       <h3>Large content</h3>
-      <Chip hasCloseButton css={{maxWidth: '350px'}}>
+      <Chip hasCloseButton>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
         mollitia, molestiae quas vel sint commodi repudiandae consequuntur
         voluptatum laborum numquam blanditiis harum quisquam eius sed odit
@@ -68,23 +68,11 @@ export const Variants: React.FC = () => {
 
 export const CustomStyling: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Custom Styling</h3>
       <Chip
         hasCloseButton
-        css={{
-          border: '1px solid purple',
-          '&:hover': {color: '$success'},
-          '& > div:first-child': {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            '& svg': {
-              height: '2rem',
-              width: '2rem',
-            },
-          },
-        }}
+
       >
         Close button
       </Chip>

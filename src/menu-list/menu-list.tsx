@@ -1,9 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/menu-list.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
 }
 
@@ -16,8 +14,6 @@ const MenuList = React.forwardRef<HTMLDivElement, MenuListProps>(
       // ComponentProps
       children,
       className = '',
-      // StyledComponentProps
-      css = {},
       // HTML Div props
       ...htmlProps
     } = props
@@ -27,11 +23,9 @@ const MenuList = React.forwardRef<HTMLDivElement, MenuListProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div className={rootClasses} ref={ref} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div className={rootClasses} ref={ref} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

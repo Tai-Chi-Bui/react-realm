@@ -1,11 +1,9 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/error.module.css'
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
   className?: string
   variant?: 'primary' | 'secondary'
 }
@@ -17,7 +15,6 @@ const ErrorImage = React.forwardRef<HTMLDivElement, ErrorImageProps>(
   (props, ref) => {
     const {
       children,
-      css = {},
       variant = 'primary',
       className = '',
       ...htmlProps
@@ -34,11 +31,9 @@ const ErrorImage = React.forwardRef<HTMLDivElement, ErrorImageProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={errorImageRef}>
-        <div className={errorImageClasses} ref={errorImageRef} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div className={errorImageClasses} ref={errorImageRef} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

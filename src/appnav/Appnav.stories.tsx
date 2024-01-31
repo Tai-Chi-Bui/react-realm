@@ -6,14 +6,14 @@ import Home from '@comfortdelgro/compass-icons/react/home'
 import Notification from '@comfortdelgro/compass-icons/react/notification-filled'
 import NotificationOutlined from '@comfortdelgro/compass-icons/react/notification-outlined'
 import User from '@comfortdelgro/compass-icons/react/user-duotone'
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import AppNav from '.'
 
 export const FourSections = () => {
   const [index, setIndex] = React.useState<number>(0)
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h3>Bottom app nav with four sections</h3>
       <div
         style={{
@@ -28,9 +28,6 @@ export const FourSections = () => {
           index={index}
           onChange={(newIndex) => {
             setIndex(newIndex)
-          }}
-          css={{
-            position: 'absolute',
           }}
         >
           <AppNav.Section
@@ -63,7 +60,7 @@ export const FourSections = () => {
 export const FiveSections = () => {
   const [index, setIndex] = React.useState<number>(1)
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h3>Top app nav with five sections</h3>
       <div
         style={{
@@ -78,9 +75,6 @@ export const FiveSections = () => {
           index={index}
           onChange={(newIndex) => {
             setIndex(newIndex)
-          }}
-          css={{
-            position: 'absolute',
           }}
         >
           <AppNav.Section

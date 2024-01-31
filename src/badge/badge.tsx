@@ -1,16 +1,14 @@
-import {toUpper} from 'lodash'
+import { toUpper } from 'lodash'
 import React from 'react'
-import {getIconFromColor} from '../utils/get-icon-from-color'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { getIconFromColor } from '../utils/get-icon-from-color'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/badge.module.css'
 
 interface Props {
   label?: string
   icon?: boolean | React.ReactNode
   destination?: string
-  css?: unknown
   variant?: 'outline' | 'h5' | 'primary' | 'secondary' | 'rounded'
   color?: 'info' | 'danger' | 'success' | 'warning'
   status?: 'online' | 'away' | 'busy' | 'offline'
@@ -25,7 +23,6 @@ export type BadgeProps = Omit<Props, 'children'> &
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
-    css = {},
     label,
     icon = false,
     destination,
@@ -48,9 +45,9 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     color && styles[color],
     color && variant && styles[`${color}${capitalizeFirstLetter(variant)}`],
     color &&
-      variant &&
-      isDisabled &&
-      styles[`${color}${capitalizeFirstLetter(variant)}isDisabled}`],
+    variant &&
+    isDisabled &&
+    styles[`${color}${capitalizeFirstLetter(variant)}isDisabled}`],
     status && styles[status],
     status && variant && styles[`${status}${capitalizeFirstLetter(variant)}`],
     statusSize && styles[`statusSize${statusSize}`],
@@ -73,27 +70,24 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
 
   return (
     <>
-      <CssInjection css={css}>
-        <div ref={badgeRef} className={classNames} {...htmlProps}>
-          {icon ? (
-            <div className={iconClassNames}>
-              {typeof icon === 'boolean' ? getIconFromColor(color) : icon}
-            </div>
-          ) : null}
-          {destination ? (
-            <span className={variant ? styles[variant + 'Destination'] : ''}>
-              {toUpper(destination)}
-            </span>
-          ) : null}
-          <span
-            className={`${styles.label} ${
-              variant ? styles[variant + 'Label'] : ''
-            }`}
-          >
-            {label}
+      <div ref={badgeRef} className={classNames} {...htmlProps}>
+        {icon ? (
+          <div className={iconClassNames}>
+            {typeof icon === 'boolean' ? getIconFromColor(color) : icon}
+          </div>
+        ) : null}
+        {destination ? (
+          <span className={variant ? styles[variant + 'Destination'] : ''}>
+            {toUpper(destination)}
           </span>
-        </div>
-      </CssInjection>
+        ) : null}
+        <span
+          className={`${styles.label} ${variant ? styles[variant + 'Label'] : ''
+            }`}
+        >
+          {label}
+        </span>
+      </div>
     </>
   )
 })

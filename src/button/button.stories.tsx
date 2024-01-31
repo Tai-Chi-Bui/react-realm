@@ -7,7 +7,7 @@ import {
   faMapMarkerAlt,
   faUserEdit,
 } from '@fortawesome/free-solid-svg-icons'
-import type {Meta} from '@storybook/react'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import Icon from '../icon'
 import Button from './index'
@@ -23,9 +23,9 @@ const Style = {
 }
 
 export const Variations: React.FC = () => (
-  <div style={{width: '100%', height: '100%', padding: '2rem'}}>
+  <div style={{ width: '100%', height: '100%', padding: '2rem' }}>
     <h3>1. Variants</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' onPress={() => console.log('pressed')}>
         Primary
       </Button>
@@ -35,7 +35,7 @@ export const Variations: React.FC = () => (
       <Button isDisabled>Disabled</Button>
     </div>
     <h4>Disabled state</h4>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' isDisabled>
         Primary
       </Button>
@@ -50,22 +50,9 @@ export const Variations: React.FC = () => (
       </Button>
     </div>
     <h4>Custom style</h4>
-    <h5>Custom style using css prop</h5>
-    <div style={{...Style}}>
-      <Button
-        css={{
-          width: 250,
-          opacity: 0.9,
-          backgroundColor: 'red',
-          '.cdg-button-content-children': {color: 'purple'},
-        }}
-        onClick={(e) => console.log('click', e)}
-      >
-        Custom width and background color
-      </Button>
-    </div>
+
     <h5>Custom style using css module</h5>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button
         onClick={(e) => console.log('click', e)}
         className={styles.myButton}
@@ -74,25 +61,25 @@ export const Variations: React.FC = () => (
       </Button>
     </div>
     <h3>2. Sizes</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button size='lg'>Large</Button>
       <Button size='md'>Medium (Default)</Button>
       <Button size='sm'>Small</Button>
 
-      <div style={{width: '300px', flexShrink: 0}}>
+      <div style={{ width: '300px', flexShrink: 0 }}>
         <Button size='md' fullWidth>
           Medium (Block)
         </Button>
       </div>
     </div>
     <h4>Full width</h4>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button fullWidth onClick={(e) => console.log('click', e)}>
         Full Width (100%)
       </Button>
     </div>
     <h3>3. Ripple effect when being clicked</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button
         ripple
         type='submit'
@@ -113,7 +100,7 @@ export const Variations: React.FC = () => (
       </Button>
     </div>
     <h3>4. Left Icons</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' leftIcon={<Icon icon={faChevronDown} />}>
         Primary
       </Button>
@@ -132,7 +119,7 @@ export const Variations: React.FC = () => (
     </div>
 
     <h3>5. Right Icons</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' rightIcon={<Icon icon={faChevronDown} />}>
         Primary
       </Button>
@@ -151,7 +138,7 @@ export const Variations: React.FC = () => (
     </div>
 
     <h3>6. both Left & Right Icons</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button
         variant='primary'
         leftIcon={<Icon icon={faChevronDown} />}
@@ -190,7 +177,7 @@ export const Variations: React.FC = () => (
     </div>
 
     <h3>7. With only Icons</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary'>
         <Icon icon={faBars} />
       </Button>
@@ -208,7 +195,7 @@ export const Variations: React.FC = () => (
       </Button>
     </div>
     <h3>8. Loading</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button loading variant='primary' />
       <Button loading variant='secondary' />
       <Button loading variant='danger' />
@@ -217,7 +204,7 @@ export const Variations: React.FC = () => (
     </div>
 
     <h3>9. Act as a link</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button
         href='/#page'
         variant='primary'
@@ -237,7 +224,7 @@ export const Variations: React.FC = () => (
     </div>
 
     <h3>10. H5</h3>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' h5 onPress={() => console.log('pressed')}>
         Primary
       </Button>
@@ -252,7 +239,7 @@ export const Variations: React.FC = () => (
       </Button>
     </div>
     <h4>Square button</h4>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button
         variant='primary'
         onPress={() => console.log('pressed')}
@@ -270,7 +257,7 @@ export const Variations: React.FC = () => (
         Disabled
       </Button>
     </div>
-    <div style={{...Style}}>
+    <div style={{ ...Style }}>
       <Button variant='primary' isSquare={true}>
         <Icon icon={faBars} />
       </Button>

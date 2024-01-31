@@ -1,6 +1,5 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/error.module.css'
 
 interface Props {
@@ -36,15 +35,13 @@ const ErrorDescription = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={errorDescriptionRef}>
-      <p
-        className={ErrorDescriptionClasses}
-        ref={errorDescriptionRef}
-        {...htmlProps}
-      >
-        {children}
-      </p>
-    </CssInjection>
+    <p
+      className={ErrorDescriptionClasses}
+      ref={errorDescriptionRef}
+      {...htmlProps}
+    >
+      {children}
+    </p>
   )
 })
 

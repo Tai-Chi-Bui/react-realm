@@ -1,10 +1,8 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/divider.module.css'
 
 interface Props {
-  css?: unknown
   color?: string
   flexItem?: boolean
   absolute?: boolean
@@ -21,7 +19,6 @@ export type DividerProps = Props &
 const Divider = React.forwardRef<HTMLElement, DividerProps>((props, ref) => {
   const {
     children,
-    css = {},
     className,
     absolute = false,
     flexItem = false,
@@ -44,26 +41,26 @@ const Divider = React.forwardRef<HTMLElement, DividerProps>((props, ref) => {
       variant === 'inset' && styles.variantInset,
       orientation === 'vertical' && styles.orientationVertical,
       variant === 'middle' &&
-        orientation === 'horizontal' &&
-        styles.variantMiddleOrientationHorizontal,
+      orientation === 'horizontal' &&
+      styles.variantMiddleOrientationHorizontal,
       variant === 'middle' &&
-        orientation === 'vertical' &&
-        styles.variantMiddleOrientationVertical,
+      orientation === 'vertical' &&
+      styles.variantMiddleOrientationVertical,
       children &&
-        orientation === 'vertical' &&
-        styles.hasChildrenOrientationVertical,
+      orientation === 'vertical' &&
+      styles.hasChildrenOrientationVertical,
       textAlign === 'right' &&
-        orientation === 'horizontal' &&
-        styles.textAlignRightOrientationHorizontal,
+      orientation === 'horizontal' &&
+      styles.textAlignRightOrientationHorizontal,
       textAlign === 'left' &&
-        orientation === 'horizontal' &&
-        styles.textAlignLeftOrientationHorizontal,
+      orientation === 'horizontal' &&
+      styles.textAlignLeftOrientationHorizontal,
       textAlign === 'top' &&
-        orientation === 'vertical' &&
-        styles.textAlignTopOrientationVertical,
+      orientation === 'vertical' &&
+      styles.textAlignTopOrientationVertical,
       textAlign === 'bottom' &&
-        orientation === 'vertical' &&
-        styles.textAlignBottomOrientationVertical,
+      orientation === 'vertical' &&
+      styles.textAlignBottomOrientationVertical,
       'cdg-divider',
       className,
     ]
@@ -82,18 +79,18 @@ const Divider = React.forwardRef<HTMLElement, DividerProps>((props, ref) => {
   }, [orientation])
 
   return (
-    <CssInjection css={css} childrenRef={dividerRef}>
-      {React.createElement(
+    {
+      React.createElement(
         component,
         {
           ...htmlProps,
           className: dividerClass,
-          style: {'--divider-color': color},
+          style: { '--divider-color': color },
           ref: dividerRef,
         },
         children && <span className={bodyClass}>{children}</span>,
-      )}
-    </CssInjection>
+      )
+    }
   )
 })
 

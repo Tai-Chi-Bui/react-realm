@@ -1,10 +1,8 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/dashboardSidecard.module.css'
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
 }
 
 export type DashboardSidecardHeaderProps = Props &
@@ -14,14 +12,12 @@ const DashboardSidecardHeader = React.forwardRef<
   HTMLDivElement,
   DashboardSidecardHeaderProps
 >((props, ref) => {
-  const {children, css = {}, ...htmlProps} = props
+  const { children, ...htmlProps } = props
 
   return (
-    <CssInjection css={css}>
-      <div ref={ref} className={`${styles.header}`} {...htmlProps}>
-        {children}
-      </div>
-    </CssInjection>
+    <div ref={ref} className={`${styles.header}`} {...htmlProps}>
+      {children}
+    </div>
   )
 })
 

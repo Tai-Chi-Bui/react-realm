@@ -4,12 +4,12 @@ export type AccordionContextType = {
   expand: boolean
   setExpand: () => void
   onExpandChange?:
-    | ((
-        e?:
-          | React.MouseEvent<HTMLElement, MouseEvent>
-          | React.KeyboardEvent<HTMLElement>,
-      ) => void)
-    | undefined
+  | ((
+    e?:
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLElement>,
+  ) => void)
+  | undefined
 }
 
 const AccordionContext = React.createContext<

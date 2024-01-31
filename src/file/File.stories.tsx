@@ -1,11 +1,11 @@
-import type {Meta} from '@storybook/react'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import File from './index'
 
 export const State: React.FC = () => (
   <>
     <h4>Close</h4>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.State
         fileName='Filename.png'
         icon={
@@ -19,7 +19,7 @@ export const State: React.FC = () => (
       />
     </div>
     <h4>Error</h4>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.State
         fileName='Filename.png'
         icon={
@@ -33,7 +33,7 @@ export const State: React.FC = () => (
       />
     </div>
     <h4>Success</h4>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.State
         fileName='Filename.png'
         icon={
@@ -47,7 +47,7 @@ export const State: React.FC = () => (
       />
     </div>
     <h4>Download</h4>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.State
         fileName='Filename.png'
         icon={
@@ -61,7 +61,7 @@ export const State: React.FC = () => (
       />
     </div>
     <h4>Loading</h4>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.State
         fileName='Filename.png'
         icon={
@@ -80,19 +80,14 @@ export const State: React.FC = () => (
 
 export const Preview: React.FC = () => (
   <>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.Preview
-        css={{
-          '.cdg-file-preview-image': {
-            background: 'red',
-          },
-        }}
         imageSrc='https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg'
       />
     </div>
 
     <h3>With File.State</h3>
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <File.Preview imageSrc='https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg'>
         <File.State
           fileName='Filename.png'

@@ -1,9 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/list-image.module.css'
 
 interface Props {
-  css?: unknown
   isRounded?: boolean
   children?: React.ReactNode
   variant?: 'item' | 'interactive' | 'h5'
@@ -16,7 +14,6 @@ const ListImage = React.forwardRef<HTMLImageElement, ListImageProps>(
   (props, ref) => {
     const {
       isRounded = false,
-      css = {},
       className,
       variant,
       ...htmlProps
@@ -35,9 +32,7 @@ const ListImage = React.forwardRef<HTMLImageElement, ListImageProps>(
     }, [className, isRounded, variant])
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <img ref={ref} className={rootClass} {...htmlProps} />
-      </CssInjection>
+      <img ref={ref} className={rootClass} {...htmlProps} />
     )
   },
 )

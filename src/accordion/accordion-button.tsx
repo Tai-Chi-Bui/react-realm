@@ -1,9 +1,8 @@
 import React from 'react'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/accordion-button.module.css'
 
 interface Props {
-  css: unknown
   children?: React.ReactNode
   className?: string
   expand?: boolean
@@ -22,7 +21,6 @@ const AccordionButton = React.forwardRef<
     children,
     expand,
     className,
-    css = {},
     onMouseDown,
     onKeyDown,
     ...htmlProps
@@ -31,20 +29,19 @@ const AccordionButton = React.forwardRef<
   const buttonRef = useDOMRef<HTMLButtonElement>(ref)
 
   return (
-      <button
-        aria-expanded={expand}
-        aria-controls={props['aria-controls']}
-        ref={buttonRef}
-        className={`${styles.accordionButton} ${
-          expand ? styles.open : styles.close
+    <button
+      aria-expanded={expand}
+      aria-controls={props['aria-controls']}
+      ref={buttonRef}
+      className={`${styles.accordionButton} ${expand ? styles.open : styles.close
         } ${className}`}
-        onPointerDown={onMouseDown}
-        onKeyDown={onKeyDown}
-        type='button'
-        {...htmlProps}
-      >
-        {children}
-      </button>
+      onPointerDown={onMouseDown}
+      onKeyDown={onKeyDown}
+      type='button'
+      {...htmlProps}
+    >
+      {children}
+    </button>
   )
 })
 

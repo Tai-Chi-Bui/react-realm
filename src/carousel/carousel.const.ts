@@ -41,6 +41,5 @@ export interface CarouselOptions {
   useNavigation?: boolean
   useDotIndicator?: boolean
   navigationButtonType?: NavigationButtonType
-  css?: unknown
   onSwitchSlide?: (index: number) => void
 }

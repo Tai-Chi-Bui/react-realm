@@ -1,8 +1,8 @@
 import PersonOutlined from '@comfortdelgro/compass-icons/react/outlined/person-outlined'
 import Phone from '@comfortdelgro/compass-icons/react/phone'
-import {faBug} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import type {Meta} from '@storybook/react'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import Dropdown from '.'
 import ADFlag from './flags/ad'
@@ -45,7 +45,7 @@ function generateRandomName() {
   const firstName =
     firstNames[Math.floor(Math.random() * firstNames.length)] ?? ''
   const lastName = lastNames[Math.floor(Math.random() * lastNames.length)] ?? ''
-  return {name: `${firstName} ${lastName}`, firstName, lastName}
+  return { name: `${firstName} ${lastName}`, firstName, lastName }
 }
 
 function generateRandomData(numData: number, startNumber = 1): SampleData[] {
@@ -138,7 +138,7 @@ export const Select: React.FC = () => {
   }
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Controlled</h3>
       <Dropdown.Select
         isRequired
@@ -492,13 +492,12 @@ export const Select: React.FC = () => {
         isRequired
         label='Favorite Animal'
         placeholder='Choose an animal'
-        css={{width: '250px'}}
-        popoverCSS={{width: 'auto'}}
+        style={{ width: '250px' }}
+        popoverCSS={{ width: 'auto' }}
       >
         <Dropdown.Item
           checkmark='tick'
           value='panda'
-          css={{textWrap: 'nowrap'}}
         >
           Red Panda Red Panda Red Panda Red Panda Red Panda
         </Dropdown.Item>
@@ -511,30 +510,6 @@ export const Select: React.FC = () => {
         >
           Cat
         </Dropdown.Item>
-        <Dropdown.Item value='dog'>Dog</Dropdown.Item>
-        <Dropdown.Item value='aardvark'>Aardvark</Dropdown.Item>
-        <Dropdown.Item value='kangaroo'>Kangaroo</Dropdown.Item>
-        <Dropdown.Item value='snakessss'>Snake</Dropdown.Item>
-      </Dropdown.Select>
-      <h3>Custom CSS</h3>
-      <Dropdown.Select
-        isRequired
-        label='Favorite Animal'
-        placeholder='Choose an animal'
-        css={{
-          '& .cdg-dropdown-button': {span: {color: '$whiteText'}},
-          '& .cdg-dropdown-input': {
-            borderColor: '$warning',
-            borderWidth: '3px',
-            backgroundColor: '$cdgBlue100',
-            '& .cdg-dropdown-button-icon': {
-              color: '$whiteText',
-            },
-          },
-        }}
-      >
-        <Dropdown.Item value='panda'>Panda</Dropdown.Item>
-        <Dropdown.Item value='cat'>Cat</Dropdown.Item>
         <Dropdown.Item value='dog'>Dog</Dropdown.Item>
         <Dropdown.Item value='aardvark'>Aardvark</Dropdown.Item>
         <Dropdown.Item value='kangaroo'>Kangaroo</Dropdown.Item>
@@ -578,7 +553,7 @@ export const Combobox: React.FC = () => {
   const [customValue, setCustomValue] = React.useState<string>('kangaroo')
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Controlled</h3>
       <Dropdown.ComboBox
         isRequired
@@ -869,7 +844,7 @@ export const Combobox: React.FC = () => {
 
 export const ForH5 = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <Dropdown.Select
         label='Favorite Animal'
         placeholder='Choose an animal'

@@ -1,10 +1,10 @@
-import {faPlus} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import Avatar, {AvatarProps} from '.'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {AvatarSize, OFFSET_LEFT_MAP} from './avatar.const'
+import Avatar, { AvatarProps } from '.'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { AvatarSize, OFFSET_LEFT_MAP } from './avatar.const'
 import styles from './styles/avatar.module.css'
 
 interface Props {
@@ -13,7 +13,6 @@ interface Props {
   size?: AvatarSize
   disabledAnimation?: boolean
   useAddMore?: boolean
-  css?: unknown
   onAddMoreClick?: () => void
 }
 
@@ -23,8 +22,6 @@ export type AvatarGroupProps = Props &
 const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       // ComponentProps
       display = 4,
       children,
@@ -66,9 +63,8 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
         )}
         {useAddMore && (
           <button
-            className={`${styles.avatarAddMore} ${
-              styles['addMoreSize' + capitalizeFirstLetter(size)]
-            }`}
+            className={`${styles.avatarAddMore} ${styles['addMoreSize' + capitalizeFirstLetter(size)]
+              }`}
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>

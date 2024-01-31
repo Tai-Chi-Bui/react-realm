@@ -1,13 +1,12 @@
-import React, {useContext, useEffect, useMemo} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {DropdownContext} from './dropdown-context'
+import React, { useContext, useEffect, useMemo } from 'react'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { DropdownContext } from './dropdown-context'
 import DropdownLoading from './dropdown-loading'
 import DropdownHeader from './dropdown.header'
-import {useIsInViewport} from './hooks/useInViewport'
+import { useIsInViewport } from './hooks/useInViewport'
 import styles from './styles/dropdown.module.css'
-import {getDistanceBetweenElements, textContent} from './utils'
+import { getDistanceBetweenElements, textContent } from './utils'
 
 interface Props {
   searchValue?: string
@@ -15,23 +14,22 @@ interface Props {
   children?: React.ReactNode
   noDataMessage?: string
   onLoadMore?: () => void
-  css?: unknown
 }
 
-export type DropdownItemListProps = Props
+export type DropdownItemListProps = Props & Omit<React.HTMLAttributes<HTMLUListElement>, keyof Props>
 
 const DropdownList: React.FC<DropdownItemListProps> = (
   props: DropdownItemListProps,
 ) => {
-  const {children, isLoading, css = {}, noDataMessage, onLoadMore} = props
+  const { children, isLoading, noDataMessage, onLoadMore } = props
 
   const lastEl = useDOMRef<HTMLDivElement>(null)
   const standEl = useDOMRef<HTMLDivElement>(null)
 
   const isInViewport = useIsInViewport(lastEl)
-  const {searchValue, labelId, isLoadingMore} = useContext(DropdownContext)
+  const { searchValue, labelId, isLoadingMore } = useContext(DropdownContext)
 
-  const {child: DropdownHeaderElement, rest: dropdownItems} = pickChild<
+  const { child: DropdownHeaderElement, rest: dropdownItems } = pickChild<
     typeof DropdownHeader
   >(children, DropdownHeader)
 
@@ -63,7 +61,7 @@ const DropdownList: React.FC<DropdownItemListProps> = (
 
   return useMemo(
     () => (
-      <CssInjection css={css}>
+      <>
         {DropdownHeaderElement && DropdownHeaderElement}
         <ul
           role='listbox'
@@ -84,10 +82,9 @@ const DropdownList: React.FC<DropdownItemListProps> = (
           )}
           <div className={`${styles.dropdownListItem}`} ref={standEl} />
         </ul>
-      </CssInjection>
+      </>
     ),
     [
-      css,
       DropdownHeaderElement,
       labelId,
       isLoading,

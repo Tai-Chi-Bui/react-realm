@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, {CSSProperties, useEffect} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { CSSProperties, useEffect } from 'react'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/gutter.module.css'
 import Icon from './utils/Icon'
 import useGutter from './utils/useGutter'
@@ -12,7 +11,6 @@ export enum GutterSide {
 }
 
 export interface Props {
-  css?: unknown
   isExpand?: boolean
   side?: `${GutterSide}`
   hasExpandButton?: boolean
@@ -27,7 +25,6 @@ export type GutterProps = Props &
 
 const Gutter = React.forwardRef<HTMLDivElement, GutterProps>((props, ref) => {
   const {
-    css = {},
     onChange,
     className,
     hasExpandButton,
@@ -35,7 +32,7 @@ const Gutter = React.forwardRef<HTMLDivElement, GutterProps>((props, ref) => {
   } = props
 
   const gutterRef = useDOMRef<HTMLDivElement>(ref)
-  const {width, isExpand, toggleExpand, handlePointerDown} = useGutter(
+  const { width, isExpand, toggleExpand, handlePointerDown } = useGutter(
     props,
     gutterRef,
   )
@@ -55,26 +52,24 @@ const Gutter = React.forwardRef<HTMLDivElement, GutterProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection css={css}>
-      <div
-        ref={gutterRef}
-        className={gutterClasses}
-        onPointerDown={handlePointerDown}
-      >
-        {hasExpandButton && (
-          <button
-            type='button'
-            onClick={(e) => {
-              e.stopPropagation()
-              toggleExpand()
-            }}
-            className={`${styles.collapse} cdg-gutter-collapse-button`}
-          >
-            <Icon side={side} isExpand={isExpand} />
-          </button>
-        )}
-      </div>
-    </CssInjection>
+    <div
+      ref={gutterRef}
+      className={gutterClasses}
+      onPointerDown={handlePointerDown}
+    >
+      {hasExpandButton && (
+        <button
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleExpand()
+          }}
+          className={`${styles.collapse} cdg-gutter-collapse-button`}
+        >
+          <Icon side={side} isExpand={isExpand} />
+        </button>
+      )}
+    </div>
   )
 })
 

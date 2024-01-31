@@ -1,9 +1,9 @@
 import Clock from '@comfortdelgro/compass-icons/react/clock-outlined'
 import Tick from '@comfortdelgro/compass-icons/react/tick'
-import {faBug} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Badge from './index'
 
@@ -86,7 +86,7 @@ export const Variants: React.FC = () => (
       <Badge label='Secondary' variant='secondary' icon />
       <Badge label='Outline' variant='outline' icon />
       <Badge
-        css={{maxWidth: 210}}
+        style={{ maxWidth: 210 }}
         label='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
         variant='h5'
         destination='A'

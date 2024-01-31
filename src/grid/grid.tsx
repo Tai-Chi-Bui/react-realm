@@ -1,7 +1,6 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import GridItem from './grid-item'
 import styles from './styles/grid.module.css'
 
@@ -10,12 +9,12 @@ interface Props {
   css?: unknown
   spacing?: 'sm' | 'md' | 'lg'
   justifyContent?:
-    | 'flexStart'
-    | 'flexEnd'
-    | 'center'
-    | 'spaceBetween'
-    | 'spaceAround'
-    | 'spaceEvenly'
+  | 'flexStart'
+  | 'flexEnd'
+  | 'center'
+  | 'spaceBetween'
+  | 'spaceAround'
+  | 'spaceEvenly'
   alignItems?: 'flexStart' | 'flexEnd' | 'center' | 'stretch' | 'baseline'
 }
 
@@ -42,11 +41,11 @@ const Grid = React.forwardRef<HTMLDivElement, GridContainerProps>(
       styles.container,
       spacing && styles[`containerSpacing${capitalizeFirstLetter(spacing)}`],
       justifyContent &&
-        styles[
-          `containerJustifyContent${capitalizeFirstLetter(justifyContent)}`
-        ],
+      styles[
+      `containerJustifyContent${capitalizeFirstLetter(justifyContent)}`
+      ],
       alignItems &&
-        styles[`containerAlignItems${capitalizeFirstLetter(alignItems)}`],
+      styles[`containerAlignItems${capitalizeFirstLetter(alignItems)}`],
     ]
       .filter(Boolean)
       .join(' ')
@@ -59,11 +58,9 @@ const Grid = React.forwardRef<HTMLDivElement, GridContainerProps>(
     })
 
     return (
-      <CssInjection css={css}>
-        <div ref={gridContainerRef} className={classNames} {...htmlProps}>
-          {clonedChildren}
-        </div>
-      </CssInjection>
+      <div ref={gridContainerRef} className={classNames} {...htmlProps}>
+        {clonedChildren}
+      </div>
     )
   },
 )

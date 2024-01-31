@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Box from './index'
 
@@ -40,16 +40,7 @@ export const DynamicStyling: React.FC = () => {
         1. Styling with 'css' prop, giving you much more power than the regular
         'style' prop. But it is suitable for client side rendering only.
       </h3>
-      <Box
-        css={{
-          backgroundColor: 'grey',
-          width: '8rem',
-          textAlign: 'center',
-          '& p': {
-            color: 'white',
-          },
-        }}
-      >
+      <Box>
         <p>My box</p>
       </Box>
       <h3>1. Styling with 'style' prop</h3>

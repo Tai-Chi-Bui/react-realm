@@ -1,12 +1,10 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react'
 import Button from '../button'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import ListCardDetail, {ListCardDetailProps} from './list-card-detail'
+import ListCardDetail, { ListCardDetailProps } from './list-card-detail'
 import styles from './styles/list-card.module.css'
 
 interface Props {
-  css?: unknown
   title?: string
   isDisabled?: boolean
   description?: string
@@ -27,7 +25,6 @@ const ListCard = React.forwardRef<HTMLDivElement, ListCardProps>(
       description,
       isDisabled = false,
       showActionButton = false,
-      css = {},
       ...htmlProps
     } = props
 
@@ -36,7 +33,7 @@ const ListCard = React.forwardRef<HTMLDivElement, ListCardProps>(
         ListCardDetailProps,
         HTMLElement
       >
-      return React.cloneElement(typedChild, {isDisabled})
+      return React.cloneElement(typedChild, { isDisabled })
     })
 
     const rootClass = React.useMemo(() => {
@@ -51,48 +48,22 @@ const ListCard = React.forwardRef<HTMLDivElement, ListCardProps>(
     }, [className, isDisabled])
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div ref={ref} className={rootClass} {...htmlProps}>
-          <div className={`${styles.listCardHeader} cdg-list-card-header`}>
-            {title && (
-              <h2 className={`${styles.listCardTitle} cdg-list-card-title`}>
-                {title}
-              </h2>
-            )}
-            <div
-              className={`${styles.listCardHeaderRight} cdg-list-card-header-right`}
-            >
-              {badge ? badge : null}
-              {!children && showActionButton ? (
-                <Button
-                  isDisabled={!!isDisabled}
-                  variant='ghost'
-                  aria-label='Action Header'
-                >
-                  <svg className={styles.listCardIcon} viewBox='0 0 128 512'>
-                    <path
-                      fill='currentColor'
-                      d='M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z'
-                    />
-                  </svg>
-                </Button>
-              ) : null}
-            </div>
-          </div>
+      <div ref={ref} className={rootClass} {...htmlProps}>
+        <div className={`${styles.listCardHeader} cdg-list-card-header`}>
+          {title && (
+            <h2 className={`${styles.listCardTitle} cdg-list-card-title`}>
+              {title}
+            </h2>
+          )}
           <div
-            className={`${styles.listCardDescription} cdg-list-card-description`}
+            className={`${styles.listCardHeaderRight} cdg-list-card-header-right`}
           >
-            {description && <span>{description}</span>}
-          </div>
-          <div className={`${styles.listCardFooter} cdg-list-card-footer`}>
-            <div className={`${styles.listCardContent} cdg-list-card-content`}>
-              {clonedChildren.map((child) => child)}
-            </div>
-            {children && showActionButton ? (
+            {badge ? badge : null}
+            {!children && showActionButton ? (
               <Button
                 isDisabled={!!isDisabled}
                 variant='ghost'
-                aria-label='Action Footer'
+                aria-label='Action Header'
               >
                 <svg className={styles.listCardIcon} viewBox='0 0 128 512'>
                   <path
@@ -104,9 +75,33 @@ const ListCard = React.forwardRef<HTMLDivElement, ListCardProps>(
             ) : null}
           </div>
         </div>
-      </CssInjection>
+        <div
+          className={`${styles.listCardDescription} cdg-list-card-description`}
+        >
+          {description && <span>{description}</span>}
+        </div>
+        <div className={`${styles.listCardFooter} cdg-list-card-footer`}>
+          <div className={`${styles.listCardContent} cdg-list-card-content`}>
+            {clonedChildren.map((child) => child)}
+          </div>
+          {children && showActionButton ? (
+            <Button
+              isDisabled={!!isDisabled}
+              variant='ghost'
+              aria-label='Action Footer'
+            >
+              <svg className={styles.listCardIcon} viewBox='0 0 128 512'>
+                <path
+                  fill='currentColor'
+                  d='M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z'
+                />
+              </svg>
+            </Button>
+          ) : null}
+        </div>
+      </div>
     )
   },
 )
 
-export default ListCard as typeof ListCard & {Detail: typeof ListCardDetail}
+export default ListCard as typeof ListCard & { Detail: typeof ListCardDetail }

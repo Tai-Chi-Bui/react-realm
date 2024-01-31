@@ -1,7 +1,6 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import Popover from '../popover'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/autoComplete.module.css'
 
 // Define the props interface
@@ -13,7 +12,6 @@ interface Props {
   searchedValue?: string
   notFoundContent?: string
   debounce?: number
-  css?: unknown
   onLoadMore?: () => unknown // Add the onLoadMore prop for loading more data
   isLoadingMore?: boolean // Add the isLoadingMore prop for loading more data
 }
@@ -34,7 +32,6 @@ const AutoComplete = React.forwardRef<HTMLDivElement, AutoCompleteProps>(
       searchedValue,
       debounce,
       notFoundContent = 'No Results Found',
-      css = {},
       onLoadMore,
       isLoadingMore,
       className,
@@ -288,58 +285,56 @@ const AutoComplete = React.forwardRef<HTMLDivElement, AutoCompleteProps>(
 
     return (
       <>
-        <CssInjection css={css}>
-          <div
-            className={`${styles.autoComplete} ${className} cdg-auto-complete`}
-            ref={containerRef}
-            {...htmlProps}
-            aria-haspopup='true'
-            aria-expanded={isOpenPopover ? 'true' : 'false'}
-            aria-controls='autocomplete-popover'
-            tabIndex={-1}
+        <div
+          className={`${styles.autoComplete} ${className} cdg-auto-complete`}
+          ref={containerRef}
+          {...htmlProps}
+          aria-haspopup='true'
+          aria-expanded={isOpenPopover ? 'true' : 'false'}
+          aria-controls='autocomplete-popover'
+          tabIndex={-1}
+        >
+          <Popover
+            isOpen={isOpenPopover}
+            anchor={clonedChildren}
+            direction='bottom-center'
+            isFloatingPortal={false}
+            attachToElement={
+              containerRef.current && containerRef.current.parentElement
+            }
           >
-            <Popover
-              isOpen={isOpenPopover}
-              anchor={clonedChildren}
-              direction='bottom-center'
-              isFloatingPortal={false}
-              attachToElement={
-                containerRef.current && containerRef.current.parentElement
-              }
+            <div
+              className={`${styles.popover} cdg-auto-complete-popover`}
+              ref={popoverContentRef}
+              style={{
+                width: popoverWidth ? `${popoverWidth}px` : 'auto',
+              }}
+              onScroll={handleScroll}
+              tabIndex={-1} // Allow the popover to be focused programmatically
             >
-              <div
-                className={`${styles.popover} cdg-auto-complete-popover`}
-                ref={popoverContentRef}
-                style={{
-                  width: popoverWidth ? `${popoverWidth}px` : 'auto',
-                }}
-                onScroll={handleScroll}
-                tabIndex={-1} // Allow the popover to be focused programmatically
-              >
-                {options?.length === 0 ? (
+              {options?.length === 0 ? (
+                <div
+                  className={`${styles.emptyMessage} cdg-auto-complete-empty-message`}
+                >
+                  {notFoundContent}
+                </div>
+              ) : (
+                options?.map((option) => (
                   <div
-                    className={`${styles.emptyMessage} cdg-auto-complete-empty-message`}
+                    className={`${styles.option} cdg-auto-complete-option`}
+                    key={option}
+                    data-value={option}
+                    onClick={() => handleSelectOption(option)}
+                    tabIndex={0} // Allow each option to be focused
+                    role='option'
                   >
-                    {notFoundContent}
+                    {option}
                   </div>
-                ) : (
-                  options?.map((option) => (
-                    <div
-                      className={`${styles.option} cdg-auto-complete-option`}
-                      key={option}
-                      data-value={option}
-                      onClick={() => handleSelectOption(option)}
-                      tabIndex={0} // Allow each option to be focused
-                      role='option'
-                    >
-                      {option}
-                    </div>
-                  ))
-                )}
-              </div>
-            </Popover>
-          </div>
-        </CssInjection>
+                ))
+              )}
+            </div>
+          </Popover>
+        </div>
       </>
     )
   },

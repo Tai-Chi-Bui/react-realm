@@ -1,7 +1,7 @@
-import {faCamera, faGlobe} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
-import {Button} from '..'
+import { faCamera, faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
+import { Button } from '..'
 import Footer from './footer'
 import FooterHeader from './footer-header'
 import FooterInfo from './footer-info'
@@ -42,53 +42,53 @@ export const Basic = () => {
     {
       title: 'About us',
       children: [
-        {link: '*', name: 'Profile'},
-        {link: '*', name: 'Milestones'},
-        {link: '*', name: 'Sustainability'},
-        {link: '*', name: 'ConfortUnited'},
-        {link: '*', name: 'Careers'},
+        { link: '*', name: 'Profile' },
+        { link: '*', name: 'Milestones' },
+        { link: '*', name: 'Sustainability' },
+        { link: '*', name: 'ConfortUnited' },
+        { link: '*', name: 'Careers' },
       ],
     },
     {
       title: 'Promotions',
       children: [
-        {link: '*', name: 'Latest Promotions'},
-        {link: '*', name: 'Latest Promotions'},
-        {link: '*', name: 'Latest Promotions'},
+        { link: '*', name: 'Latest Promotions' },
+        { link: '*', name: 'Latest Promotions' },
+        { link: '*', name: 'Latest Promotions' },
       ],
     },
     {
       title: 'Drive with us',
       children: [
-        {link: '*', name: 'Register As A Cabby'},
-        {link: '*', name: 'Cabby Portal'},
-        {link: '*', name: 'Useful Links'},
+        { link: '*', name: 'Register As A Cabby' },
+        { link: '*', name: 'Cabby Portal' },
+        { link: '*', name: 'Useful Links' },
       ],
     },
     {
       title: 'News & Media',
       children: [
-        {link: '*', name: 'Register As A Cabby'},
-        {link: '*', name: 'Cabby Portal'},
+        { link: '*', name: 'Register As A Cabby' },
+        { link: '*', name: 'Cabby Portal' },
       ],
     },
     {
       title: 'Ride with us',
       children: [
-        {link: '*', name: 'App Features'},
-        {link: '*', name: 'ComfortPoints'},
-        {link: '*', name: 'Fares'},
-        {link: '*', name: 'Cabcharge'},
-        {link: '*', name: 'Seating Capacity'},
-        {link: '*', name: 'Cabcharge'},
+        { link: '*', name: 'App Features' },
+        { link: '*', name: 'ComfortPoints' },
+        { link: '*', name: 'Fares' },
+        { link: '*', name: 'Cabcharge' },
+        { link: '*', name: 'Seating Capacity' },
+        { link: '*', name: 'Cabcharge' },
       ],
     },
     {
       title: 'Train with us',
       children: [
-        {link: '*', name: 'Apply Now'},
-        {link: '*', name: 'TDVL / PDVL Courses'},
-        {link: '*', name: 'Taxi Refresher Course'},
+        { link: '*', name: 'Apply Now' },
+        { link: '*', name: 'TDVL / PDVL Courses' },
+        { link: '*', name: 'Taxi Refresher Course' },
       ],
     },
   ]
@@ -116,19 +116,12 @@ export const Basic = () => {
       >
         <FooterHeader
           className='top-items'
-          css={{
-            '& .logo': {
-              fontSize: '60px',
-              color: 'var(--cdg-color-cdgBlue)',
-              margin: '0px',
-            },
-          }}
         >
           <h1 className='logo'>{zigLogo}</h1>
           <p>
             <FontAwesomeIcon
               icon={faGlobe}
-              style={{marginRight: '8px'}}
+              style={{ marginRight: '8px' }}
             ></FontAwesomeIcon>
             English
           </p>
@@ -136,13 +129,6 @@ export const Basic = () => {
         <FooterNavigation
           className='center-items'
           gridNumber={navLinks.length}
-          css={{
-            '& .footer-nav-title': {
-              fontSize: '16px',
-              fontWeight: '500',
-              margin: '0px',
-            },
-          }}
         >
           {navLinks.map((navItem) => {
             return (
@@ -155,7 +141,7 @@ export const Basic = () => {
                   gap: '24px',
                 }}
               >
-                <h2 className='footer-nav-title' style={{fontWeight: 'bold'}}>
+                <h2 className='footer-nav-title' style={{ fontWeight: 'bold' }}>
                   {navItem.title}
                 </h2>
                 {navItem.children.map((child) => {
@@ -167,7 +153,7 @@ export const Basic = () => {
         </FooterNavigation>
         <FooterInfo
           css={{
-            '& span': {fontSize: '14px', fontWeight: '600', lineHeight: '21px'},
+            '& span': { fontSize: '14px', fontWeight: '600', lineHeight: '21px' },
           }}
         >
           <div>
@@ -181,18 +167,18 @@ export const Basic = () => {
             <span>Singapore 575717</span>
           </div>
           <FooterInfoDownload>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Appstore
             </Button>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Google Play
             </Button>
           </FooterInfoDownload>
         </FooterInfo>
         <FooterPolicy>
-          <p style={{margin: '0px', lineHeight: '21px'}}>
+          <p style={{ margin: '0px', lineHeight: '21px' }}>
             2022 ComfortDelGroTaxi. All rights reserved
           </p>
           <div
@@ -224,19 +210,12 @@ export const Basic = () => {
       >
         <FooterHeader
           className='top-items'
-          css={{
-            '& .logo': {
-              fontSize: '60px',
-              color: '$whiteText',
-              margin: '0px',
-            },
-          }}
         >
           <h1 className='logo'>{zigLogo}</h1>
           <p>
             <FontAwesomeIcon
               icon={faGlobe}
-              style={{marginRight: '8px'}}
+              style={{ marginRight: '8px' }}
             ></FontAwesomeIcon>
             English
           </p>
@@ -244,13 +223,6 @@ export const Basic = () => {
         <FooterNavigation
           className='center-items'
           gridNumber={navLinks.length}
-          css={{
-            '& .footer-nav-title': {
-              fontSize: '16px',
-              fontWeight: '500',
-              margin: '0px',
-            },
-          }}
         >
           {navLinks.map((navItem) => {
             return (
@@ -263,7 +235,7 @@ export const Basic = () => {
                   gap: '24px',
                 }}
               >
-                <h3 className='footer-nav-title' style={{fontWeight: 'bold'}}>
+                <h3 className='footer-nav-title' style={{ fontWeight: 'bold' }}>
                   {navItem.title}
                 </h3>
                 {navItem.children.map((child) => {
@@ -275,7 +247,7 @@ export const Basic = () => {
         </FooterNavigation>
         <FooterInfo
           css={{
-            '& span': {fontSize: '14px', fontWeight: '600', lineHeight: '21px'},
+            '& span': { fontSize: '14px', fontWeight: '600', lineHeight: '21px' },
           }}
         >
           <div>
@@ -289,18 +261,18 @@ export const Basic = () => {
             <span>Singapore 575717</span>
           </div>
           <FooterInfoDownload>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Appstore
             </Button>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Google Play
             </Button>
           </FooterInfoDownload>
         </FooterInfo>
         <FooterPolicy>
-          <p style={{margin: '0px', lineHeight: '21px'}}>
+          <p style={{ margin: '0px', lineHeight: '21px' }}>
             2022 ComfortDelGroTaxi. All rights reserved
           </p>
           <div
@@ -332,19 +304,12 @@ export const Basic = () => {
       >
         <FooterHeader
           className='top-items'
-          css={{
-            '& .logo': {
-              fontSize: '60px',
-              color: '$whiteText',
-              margin: '0px',
-            },
-          }}
         >
           <h1 className='logo'>{zigLogo}</h1>
           <p>
             <FontAwesomeIcon
               icon={faGlobe}
-              style={{marginRight: '8px'}}
+              style={{ marginRight: '8px' }}
             ></FontAwesomeIcon>
             English
           </p>
@@ -352,13 +317,6 @@ export const Basic = () => {
         <FooterNavigation
           className='center-items'
           gridNumber={navLinks.length}
-          css={{
-            '& .footer-nav-title': {
-              fontSize: '16px',
-              fontWeight: '500',
-              margin: '0px',
-            },
-          }}
         >
           {navLinks.map((navItem) => {
             return (
@@ -371,7 +329,7 @@ export const Basic = () => {
                   gap: '24px',
                 }}
               >
-                <h2 className='footer-nav-title' style={{fontWeight: 'bold'}}>
+                <h2 className='footer-nav-title' style={{ fontWeight: 'bold' }}>
                   {navItem.title}
                 </h2>
                 {navItem.children.map((child) => {
@@ -383,7 +341,7 @@ export const Basic = () => {
         </FooterNavigation>
         <FooterInfo
           css={{
-            '& span': {fontSize: '14px', fontWeight: '600', lineHeight: '21px'},
+            '& span': { fontSize: '14px', fontWeight: '600', lineHeight: '21px' },
           }}
         >
           <div>
@@ -397,18 +355,18 @@ export const Basic = () => {
             <span>Singapore 575717</span>
           </div>
           <FooterInfoDownload>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Appstore
             </Button>
-            <Button css={{width: '136px', background: 'black'}}>
+            <Button style={{ width: '136px', background: 'black' }}>
               {' '}
               Google Play
             </Button>
           </FooterInfoDownload>
         </FooterInfo>
         <FooterPolicy>
-          <p style={{margin: '0px', lineHeight: '21px'}}>
+          <p style={{ margin: '0px', lineHeight: '21px' }}>
             2022 ComfortDelGroTaxi. All rights reserved
           </p>
           <div

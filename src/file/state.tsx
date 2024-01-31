@@ -1,11 +1,10 @@
 import React from 'react'
 import Spinner from '../spinner'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/state.module.css'
 
 interface Props {
-  css?: unknown
   fileName: string
   imageIcon?: React.ReactNode
   onIconPress?: () => void
@@ -19,7 +18,6 @@ export type FileStateProps = Props &
 const FileState = React.forwardRef<HTMLDivElement, FileStateProps>(
   (props, ref) => {
     const {
-      css = {},
       icon = <Close />,
       imageIcon,
       isLoading,
@@ -36,7 +34,7 @@ const FileState = React.forwardRef<HTMLDivElement, FileStateProps>(
     )
 
     return (
-      <CssInjection css={css} childrenRef={stateRef}>
+      <CssInjection childrenRef={stateRef}>
         <div ref={stateRef} className={stateClasses}>
           <div className={`${styles.name} cdg-file-state-name`}>
             {imageIcon && (

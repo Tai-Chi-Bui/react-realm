@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import Ripple from './ripple'
 import styles from './styles/button.module.css'
 
@@ -43,7 +42,6 @@ interface Props {
   enableEventsOnDisabled?: boolean
   enableEventsOnLoading?: boolean
   isSquare?: boolean
-  css?: unknown
   variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger'
   size?: 'sm' | 'md' | 'lg'
   fullWidth?: boolean
@@ -67,8 +65,6 @@ const Button = React.forwardRef<
     href,
     hrefTarget,
     hrefExternal,
-    // StyledComponentProps
-    css = {},
     // ComponentProps
     children,
     className,
@@ -192,85 +188,83 @@ const Button = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css}>
-      <Button
-        ref={
-          buttonRef as React.RefObject<HTMLButtonElement> &
-            React.RefObject<HTMLAnchorElement>
-        }
-        href={href}
-        target={hrefTarget || (hrefExternal ? '_blank' : undefined)}
-        rel={
-          hrefTarget === '_blank' || hrefExternal
-            ? 'noopener noreferrer'
-            : undefined
-        }
-        // only allow onClick and onTouchEnd to be passed to the button
-        // reserve onMouseDown and onTouchStart for ripple effect
-        disabled={isDisabled}
-        aria-controls={ariaControls}
-        aria-expanded={ariaExpanded}
-        aria-haspopup={ariaHaspopup}
-        aria-pressed={ariaPressed}
-        tabIndex={tabIndex}
-        role={href ? 'link' : 'button'}
-        onClick={handleEvents}
-        onTouchEnd={handleEvents}
-        onBlur={handleEvents}
-        onDragStart={handleEvents}
-        onFocus={handleEvents}
-        onKeyDown={handleEvents}
-        onKeyUp={handleEvents}
-        onPointerDown={handleEvents}
-        onPointerUp={handleEvents}
-        type={type}
-        className={buttonClasses}
-        {...htmlProps}
-      >
-        {loading ? (
-          <Ripple isEnabled={ripple}>
-            <span
-              // make sure the loading indicator isn't visible to screen readers
-              hidden={!loading}
-              aria-hidden={!loading}
-              className={contentClasses}
-            >
-              <span className={styles.loadingDots}>
-                <span
-                  className={`${styles.loadingDot} ${styles.firstLoadingDot}`}
-                />
-                <span
-                  className={`${styles.loadingDot} ${styles.secondLoadingDot}`}
-                />
-                <span
-                  className={`${styles.loadingDot} ${styles.thirdLoadingDot}`}
-                />
-              </span>
-            </span>
-          </Ripple>
-        ) : (
-          <Ripple isEnabled={ripple}>
-            <span className={contentClasses}>
-              {leftIcon || (fullWidth && rightIcon) ? (
-                <span className={`${styles.leftIcon} cdg-button-left-icon`}>
-                  {leftIcon}
-                </span>
-              ) : null}
+    <Button
+      ref={
+        buttonRef as React.RefObject<HTMLButtonElement> &
+        React.RefObject<HTMLAnchorElement>
+      }
+      href={href}
+      target={hrefTarget || (hrefExternal ? '_blank' : undefined)}
+      rel={
+        hrefTarget === '_blank' || hrefExternal
+          ? 'noopener noreferrer'
+          : undefined
+      }
+      // only allow onClick and onTouchEnd to be passed to the button
+      // reserve onMouseDown and onTouchStart for ripple effect
+      disabled={isDisabled}
+      aria-controls={ariaControls}
+      aria-expanded={ariaExpanded}
+      aria-haspopup={ariaHaspopup}
+      aria-pressed={ariaPressed}
+      tabIndex={tabIndex}
+      role={href ? 'link' : 'button'}
+      onClick={handleEvents}
+      onTouchEnd={handleEvents}
+      onBlur={handleEvents}
+      onDragStart={handleEvents}
+      onFocus={handleEvents}
+      onKeyDown={handleEvents}
+      onKeyUp={handleEvents}
+      onPointerDown={handleEvents}
+      onPointerUp={handleEvents}
+      type={type}
+      className={buttonClasses}
+      {...htmlProps}
+    >
+      {loading ? (
+        <Ripple isEnabled={ripple}>
+          <span
+            // make sure the loading indicator isn't visible to screen readers
+            hidden={!loading}
+            aria-hidden={!loading}
+            className={contentClasses}
+          >
+            <span className={styles.loadingDots}>
               <span
-                className={`cdg-button-content-children ${styles.children}`}
-              >
-                {children}
-              </span>
-              {rightIcon || (fullWidth && leftIcon) ? (
-                <span className={`${styles.rightIcon} cdg-button-right-icon`}>
-                  {rightIcon}
-                </span>
-              ) : null}
+                className={`${styles.loadingDot} ${styles.firstLoadingDot}`}
+              />
+              <span
+                className={`${styles.loadingDot} ${styles.secondLoadingDot}`}
+              />
+              <span
+                className={`${styles.loadingDot} ${styles.thirdLoadingDot}`}
+              />
             </span>
-          </Ripple>
-        )}
-      </Button>
-    </CssInjection>
+          </span>
+        </Ripple>
+      ) : (
+        <Ripple isEnabled={ripple}>
+          <span className={contentClasses}>
+            {leftIcon || (fullWidth && rightIcon) ? (
+              <span className={`${styles.leftIcon} cdg-button-left-icon`}>
+                {leftIcon}
+              </span>
+            ) : null}
+            <span
+              className={`cdg-button-content-children ${styles.children}`}
+            >
+              {children}
+            </span>
+            {rightIcon || (fullWidth && leftIcon) ? (
+              <span className={`${styles.rightIcon} cdg-button-right-icon`}>
+                {rightIcon}
+              </span>
+            ) : null}
+          </span>
+        </Ripple>
+      )}
+    </Button>
   )
 })
 

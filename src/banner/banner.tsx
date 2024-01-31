@@ -1,10 +1,9 @@
 'use client'
 
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import BannerDescription from './banner-description'
 import BannerImage from './banner-image'
 import BannerTitle from './banner-title'
@@ -13,7 +12,6 @@ import styles from './styles/banner.module.css'
 interface Props {
   children?: React.ReactNode
   size?: 'sm' | 'md' | 'lg' | 'full'
-  css?: unknown
   className?: string
 }
 
@@ -24,8 +22,6 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   const {
     // children props
     children,
-    // styled component props
-    css = {},
     className = '',
     // VariantProps
     size = 'md',
@@ -34,39 +30,36 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   } = props
 
   const bannerRef = useDOMRef<HTMLDivElement>(ref)
-  const {child: BannerImageElement} = pickChild<typeof BannerImage>(
+  const { child: BannerImageElement } = pickChild<typeof BannerImage>(
     children,
     BannerImage,
   )
 
-  const {child: BannerTitleElement} = pickChild<typeof BannerTitle>(
+  const { child: BannerTitleElement } = pickChild<typeof BannerTitle>(
     children,
     BannerTitle,
   )
 
-  const {child: BannerDescriptionElement} = pickChild<typeof BannerDescription>(
+  const { child: BannerDescriptionElement } = pickChild<typeof BannerDescription>(
     children,
     BannerDescription,
   )
 
   return (
-    <CssInjection css={css} childrenRef={bannerRef}>
-      <div
-        className={`cdg-banner ${className} ${styles.banner} ${
-          styles[`bannerSize${capitalizeFirstLetter(size)}`]
+    <div
+      className={`cdg-banner ${className} ${styles.banner} ${styles[`bannerSize${capitalizeFirstLetter(size)}`]
         }`}
-        ref={bannerRef}
-        {...htmlProps}
+      ref={bannerRef}
+      {...htmlProps}
+    >
+      <BannerImageElement />
+      <div
+        className={`cdg-banner-content-container ${styles.contentContainer}`}
       >
-        {BannerImageElement}
-        <div
-          className={`cdg-banner-content-container ${styles.contentContainer}`}
-        >
-          {BannerTitleElement}
-          {BannerDescriptionElement}
-        </div>
+        <BannerTitleElement />
+        <BannerDescriptionElement />
       </div>
-    </CssInjection>
+    </div>
   )
 })
 

@@ -1,9 +1,9 @@
-import type {Meta} from '@storybook/react'
-import React, {PropsWithChildren, useState} from 'react'
+import type { Meta } from '@storybook/react'
+import React, { PropsWithChildren, useState } from 'react'
 
-import {faBug} from '@fortawesome/free-solid-svg-icons'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
 import Accordion from '.'
-import {Button, Icon} from '..'
+import { Button, Icon } from '..'
 
 const lorem = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi,
   officiis corporis magnam quo expedita nostrum temporibus quibusdam ipsa
@@ -65,7 +65,7 @@ export const Basic: React.FC = () => {
       <Content>
         <h3>Content height change</h3>
         <Button
-          style={{width: '20%'}}
+          style={{ width: '20%' }}
           onPress={() => setContent(generateRandomString(1000) + lorem)}
         >
           Change content
@@ -136,15 +136,8 @@ export const Basic: React.FC = () => {
 
         <Accordion
           defaultExpand={true}
-          css={{background: 'Wheat', color: 'SaddleBrown'}}
         >
-          <Accordion.Title
-            css={{
-              background: 'burlywood',
-              textAlign: 'center',
-              color: 'currentColor',
-            }}
-          >
+          <Accordion.Title>
             <p>{lorem}</p>
           </Accordion.Title>
           {lorem}
@@ -191,13 +184,13 @@ export const Basic: React.FC = () => {
 
 export const AccordionTable = () => {
   const data = [
-    {id: 1, leftData: 'Job ID', rightData: 'CDG180-1120'},
-    {id: 2, leftData: 'Status', rightData: 'Ended'},
-    {id: 3, leftData: 'Job Title', rightData: 'Demo 8'},
-    {id: 4, leftData: 'Number of Pax', rightData: '4'},
-    {id: 5, leftData: 'Job Type', rightData: 'One-way Transfer'},
-    {id: 6, leftData: 'Date/Time', rightData: '10/10/2022, 04:10 PM'},
-    {id: 7, leftData: 'Pick-up Location', rightData: 'Comfort Building'},
+    { id: 1, leftData: 'Job ID', rightData: 'CDG180-1120' },
+    { id: 2, leftData: 'Status', rightData: 'Ended' },
+    { id: 3, leftData: 'Job Title', rightData: 'Demo 8' },
+    { id: 4, leftData: 'Number of Pax', rightData: '4' },
+    { id: 5, leftData: 'Job Type', rightData: 'One-way Transfer' },
+    { id: 6, leftData: 'Date/Time', rightData: '10/10/2022, 04:10 PM' },
+    { id: 7, leftData: 'Pick-up Location', rightData: 'Comfort Building' },
   ]
 
   const renderAccordionTableItems = () => {
@@ -207,7 +200,7 @@ export const AccordionTable = () => {
           <p>
             <b>{eachData.leftData}</b>
           </p>
-          <p style={{textAlign: 'left'}}>{eachData.rightData}</p>
+          <p style={{ textAlign: 'left' }}>{eachData.rightData}</p>
         </div>
       )
     })

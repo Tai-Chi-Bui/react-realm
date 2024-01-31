@@ -1,11 +1,10 @@
-import React, {SyntheticEvent, useContext} from 'react'
+import React, { SyntheticEvent, useContext } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {MenuListContext} from './menu-list-context'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { MenuListContext } from './menu-list-context'
 import styles from './styles/menu-list-dropdown-item.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   leftIcon?: React.ReactNode | false
   rightIcon?: React.ReactNode | true
@@ -26,13 +25,11 @@ const MenuListDropdownHeader = React.forwardRef<
     rightIcon,
     onPress: onPressProp,
     className = '',
-    // StyledComponentProps
-    css = {},
     // Html props
     ...htmlProps
   } = props
 
-  const {isOpen, toggleOpen} = useContext(MenuListContext)
+  const { isOpen, toggleOpen } = useContext(MenuListContext)
 
   const buttonRef = useDOMRef<HTMLButtonElement>(ref)
 
@@ -112,19 +109,17 @@ const MenuListDropdownHeader = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={buttonRef}>
-      <button
-        className={rootClasses}
-        ref={buttonRef}
-        onClick={handleOnClick}
-        aria-expanded={isOpen}
-        {...htmlProps}
-      >
-        {renderLeftIcon()}
-        {renderTitle()}
-        {renderRightIcon()}
-      </button>
-    </CssInjection>
+    <button
+      className={rootClasses}
+      ref={buttonRef}
+      onClick={handleOnClick}
+      aria-expanded={isOpen}
+      {...htmlProps}
+    >
+      {renderLeftIcon()}
+      {renderTitle()}
+      {renderRightIcon()}
+    </button>
   )
 })
 

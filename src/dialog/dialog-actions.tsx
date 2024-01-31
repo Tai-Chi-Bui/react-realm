@@ -1,12 +1,10 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/dialog.module.css'
 
 interface Props {
   children?: React.ReactNode
   isMobile?: boolean
-  css?: unknown
 }
 
 export type DialogActionsProps = Props &
@@ -16,7 +14,6 @@ const DialogActions = React.forwardRef<HTMLDivElement, DialogActionsProps>(
   (props, ref) => {
     const {
       children,
-      css = {},
       isMobile = false,
       className,
       ...htmlProps
@@ -31,11 +28,9 @@ const DialogActions = React.forwardRef<HTMLDivElement, DialogActionsProps>(
       .filter(Boolean)
       .join(' ')
     return (
-      <CssInjection css={css}>
-        <div className={classNames} ref={dialogActionRef} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div className={classNames} ref={dialogActionRef} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

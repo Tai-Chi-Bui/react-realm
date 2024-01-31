@@ -1,8 +1,6 @@
 'use client'
-
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/banner.module.css'
 interface Props {
   children?: React.ReactNode
@@ -17,18 +15,16 @@ const BannerDescription = React.forwardRef<
   HTMLDivElement,
   BannerDescriptionProps
 >((props, ref) => {
-  const {children, css = {}, className = '', ...htmlProps} = props
+  const { children, css = {}, className = '', ...htmlProps } = props
   const bannerDescriptionRef = useDOMRef<HTMLParagraphElement>(ref)
   return (
-    <CssInjection css={css} childrenRef={bannerDescriptionRef}>
-      <div
-        className={`cdg-banner-description ${styles.bannerDescription} ${className}`}
-        ref={bannerDescriptionRef}
-        {...htmlProps}
-      >
-        {children}
-      </div>
-    </CssInjection>
+    <div
+      className={`cdg-banner-description ${styles.bannerDescription} ${className}`}
+      ref={bannerDescriptionRef}
+      {...htmlProps}
+    >
+      {children}
+    </div>
   )
 })
 

@@ -3,7 +3,6 @@ import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/footer-nav.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   gridNumber?: number
   tabletGridNumber?: number
@@ -19,35 +18,22 @@ const FooterNavigation = React.forwardRef<
 >((props, ref) => {
   const {
     children,
-    // gridNumber,
-    // tablet grid column number will be 3 by default if grid column number is greater than 3
-    // tabletGridNumber = gridNumber >= 3 ? 3 : gridNumber,
-    css = {},
     ...htmlProps
   } = props
 
-  // const cssProps = {
-  //   $$gridNumber: gridNumber,
-  //   $$tabletGridNumber: tabletGridNumber,
-  //   ...css as object,
-  // }
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
+    <>
       {React.createElement(
         'div',
         {
           ...htmlProps,
           className: `${styles.footerNav} cdg-footer-nav`,
-          style: {
-            // '--gridNumber': gridNumber,
-            // '--tabletGridNumber': tabletGridNumber,
-          },
           ref: ref,
         },
         children,
       )}
-    </CssInjection>
+    </>
   )
 })
 

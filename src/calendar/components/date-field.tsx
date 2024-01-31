@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
-import {ButtonProps} from '../../button'
-import {createCalendar} from '../../internationalized/date'
-import {useLocale} from '../../internationalized/i18n'
-import {useDOMRef} from '../../utils/use-dom-ref'
-import {useDateField} from '../hooks/useDateField'
-import {useDateFieldState} from '../hooks/useDateFieldState'
-import {DateFieldState} from '../types'
-// import {
-//   StyledDateField,
-//   StyledExpandButton,
-//   StyledIcon,
-//   StyledLabelNecessity,
-//   StyledTextFieldHelperText,
-// } from './date-field.style'
+import { ButtonProps } from '../../button'
+import { createCalendar } from '../../internationalized/date'
+import { useLocale } from '../../internationalized/i18n'
+import { useDOMRef } from '../../utils/use-dom-ref'
+import { useDateField } from '../hooks/useDateField'
+import { useDateFieldState } from '../hooks/useDateFieldState'
+import { DateFieldState } from '../types'
 import DateSegment from './date-segment'
 import styles from './styles/date-field.module.css'
 
@@ -46,7 +39,7 @@ const Icon = () => (
 )
 
 const DateField = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const {locale} = useLocale()
+  const { locale } = useLocale()
   const expandButtonRef = useDOMRef<HTMLButtonElement>(null)
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -59,7 +52,7 @@ const DateField = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
 
   const dateFieldRef = useDOMRef(ref)
 
-  const {labelProps, fieldProps} = useDateField(
+  const { labelProps, fieldProps } = useDateField(
     // @ts-ignore
     {
       ...props,
@@ -96,14 +89,13 @@ const DateField = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     return ''
   }
 
-  const {onPress, ...buttonProps} = props.buttonProps
+  const { onPress, ...buttonProps } = props.buttonProps
 
   return (
     <div>
       <div
-        className={`cdg-date-field ${styles.dateField} ${
-          isDisabled ? styles.disabled : ''
-        } ${isInvalid ? styles.invalid : ''}`}
+        className={`cdg-date-field ${styles.dateField} ${isDisabled ? styles.disabled : ''
+          } ${isInvalid ? styles.invalid : ''}`}
       >
         {typeof props.label === 'string' ? (
           <span
@@ -118,9 +110,8 @@ const DateField = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         <div
           {...fieldProps}
           ref={dateFieldRef}
-          className={`date-field-input ${styles.dateFieldInput} ${
-            isDisabled || isReadOnly ? '' : props.isMobile ? styles.mobile : ''
-          }`}
+          className={`date-field-input ${styles.dateFieldInput} ${isDisabled || isReadOnly ? '' : props.isMobile ? styles.mobile : ''
+            }`}
           onClick={() => {
             if (isDisabled || isReadOnly) {
               return

@@ -1,10 +1,8 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/dashboardSidecard.module.css'
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
 }
 
 export type DashboardSidecardContentProps = Props &
@@ -14,18 +12,16 @@ const DashboardSidecardContent = React.forwardRef<
   HTMLDivElement,
   DashboardSidecardContentProps
 >((props, ref) => {
-  const {children, css = {}, ...htmlProps} = props
+  const { children, ...htmlProps } = props
 
   return (
-    <CssInjection css={css}>
-      <div
-        ref={ref}
-        className={`${styles.content} cdg-dashboard-sidecard-content`}
-        {...htmlProps}
-      >
-        {children}
-      </div>
-    </CssInjection>
+    <div
+      ref={ref}
+      className={`${styles.content} cdg-dashboard-sidecard-content`}
+      {...htmlProps}
+    >
+      {children}
+    </div>
   )
 })
 

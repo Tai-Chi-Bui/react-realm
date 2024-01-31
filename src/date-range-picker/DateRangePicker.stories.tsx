@@ -1,13 +1,13 @@
-import {Meta} from '@storybook/react'
-import React, {useState} from 'react'
-import {Button, CalendarProps, RangeCalendarShorcutItem, RangeValue} from '..'
+import { Meta } from '@storybook/react'
+import React, { useState } from 'react'
+import { Button, CalendarProps, RangeCalendarShorcutItem, RangeValue } from '..'
 import {
   DateValue,
   getLocalTimeZone,
   parseDate,
   today,
 } from '../internationalized/date'
-import {I18nProvider, useDateFormatter} from '../internationalized/i18n'
+import { I18nProvider, useDateFormatter } from '../internationalized/i18n'
 import DateRangePicker from './date-range-picker'
 
 export const Basic = () => {
@@ -15,25 +15,23 @@ export const Basic = () => {
     start: parseDate('2020-02-03'),
     end: parseDate('2020-02-08'),
   })
-  const formatter = useDateFormatter({dateStyle: 'long'})
+  const formatter = useDateFormatter({ dateStyle: 'long' })
 
   return (
-    <div style={{padding: '1rem', backgroundColor: 'var(--cdg-color-gray20)'}}>
+    <div style={{ padding: '1rem', backgroundColor: 'var(--cdg-color-gray20)' }}>
       <I18nProvider locale='en-SG'>
         <h3>Controlled</h3>
         <p>
           {range.start && range.end
             ? formatter.formatRange(
-                range.start.toDate(getLocalTimeZone()),
-                range.end.toDate(getLocalTimeZone()),
-              )
-            : `${
-                range.start &&
-                formatter.format(range.start.toDate(getLocalTimeZone()))
-              } - ${
-                range.end &&
-                formatter.format(range.end.toDate(getLocalTimeZone()))
-              }`}
+              range.start.toDate(getLocalTimeZone()),
+              range.end.toDate(getLocalTimeZone()),
+            )
+            : `${range.start &&
+            formatter.format(range.start.toDate(getLocalTimeZone()))
+            } - ${range.end &&
+            formatter.format(range.end.toDate(getLocalTimeZone()))
+            }`}
         </p>
         <DateRangePicker
           value={range}
@@ -49,9 +47,9 @@ export const Basic = () => {
 
 export const Variants = () => {
   return (
-    <div style={{padding: '1rem', backgroundColor: 'var(--cdg-color-gray20)'}}>
+    <div style={{ padding: '1rem', backgroundColor: 'var(--cdg-color-gray20)' }}>
       <I18nProvider locale='en-SG'>
-        <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h3>Basic</h3>
           <DateRangePicker
             startDateLabel='Start date'
@@ -80,8 +78,8 @@ export const Variants = () => {
           <DateRangePicker
             startDateLabel='Start date'
             endDateLabel='End date'
-            minValue={today(getLocalTimeZone()).add({days: 1})}
-            maxValue={today(getLocalTimeZone()).add({days: 7})}
+            minValue={today(getLocalTimeZone()).add({ days: 1 })}
+            maxValue={today(getLocalTimeZone()).add({ days: 7 })}
           />
           <h3>Max range on first chosen date</h3>
           <MaxDateFirstChosenRangePicker />
@@ -116,7 +114,7 @@ export const Variants = () => {
                 {
                   label: 'Custom Shortcut',
                   getValue: () => {
-                    return {start: null, end: null}
+                    return { start: null, end: null }
                   },
                 },
               ]
@@ -145,7 +143,7 @@ const MaxDateFirstChosenRangePicker = () => {
   const onChange = (value: RangeValue<DateValue | null> | null) => {
     setValue(value)
     if (value && value.start && !value.end && 30) {
-      setMaxValue(value.start.subtract({days: -30}))
+      setMaxValue(value.start.subtract({ days: -30 }))
     }
   }
 
@@ -165,27 +163,6 @@ const MaxDateFirstChosenRangePicker = () => {
         }
       }}
     />
-  )
-}
-
-export const Custom = () => {
-  return (
-    <div style={{padding: '1rem', backgroundColor: 'var(--cdg-color-gray20)'}}>
-      <DateRangePicker
-        css={{
-          '& .cdg-date-field > div': {
-            backgroundColor: 'var(--cdg-color-cdgBlue20)',
-          },
-          '& .date-field-input > div': {
-            color: 'var(--cdg-color-cdgBlue100)',
-          },
-          '& .date-field-input > div:focus-visible': {
-            color: 'var(--cdg-color-cdgBlue100)',
-            backgroundColor: 'white',
-          },
-        }}
-      />
-    </div>
   )
 }
 

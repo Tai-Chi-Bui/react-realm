@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {Pointer, Position} from '../utils/pointer'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { useEffect, useState } from 'react'
+import { Pointer, Position } from '../utils/pointer'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import CarouselImageSlide from './carousel-image-slide'
 import CarouselMobile from './carousel-mobile'
 import CarouselPromotion from './carousel-promotion'
@@ -16,7 +15,6 @@ import {
 import styles from './styles/carousel.module.css'
 
 interface Props {
-  css?: unknown
   style?: React.CSSProperties
   children: React.ReactNode[]
   autoSwitch?: boolean
@@ -36,7 +34,6 @@ export type CarouselSliderProps = Props &
 const CarouselSlider = React.forwardRef<HTMLDivElement, CarouselSliderProps>(
   (props, ref) => {
     const {
-      css = {},
       children,
       autoSwitch = true,
       useNavigation = true,
@@ -166,121 +163,111 @@ const CarouselSlider = React.forwardRef<HTMLDivElement, CarouselSliderProps>(
     }
 
     return (
-      <CssInjection css={css} childrenRef={hostRef}>
-        <div
-          className={`content-slider ${
-            styles['effect' + capitalizeFirstLetter(effect)]
+      <div
+        className={`content-slider ${styles['effect' + capitalizeFirstLetter(effect)]
           } ${styles.carousel} ${className ? ' ' + className : ''}`}
-          ref={sliderRef}
-          style={style}
-          {...htmlProps}
-        >
-          <div
-            className={`content-slider-container ${
-              styles.contentSliderContainer
+        ref={sliderRef}
+        style={style}
+        {...htmlProps}
+      >
+        <div
+          className={`content-slider-container ${styles.contentSliderContainer
             } ${styles[effect + 'ContentSliderContainer']}`}
-          >
-            {effect === 'slide' ? (
-              <div
-                ref={scroller}
-                className={`slider-scroller ${styles.sliderScroller} ${
-                  styles[effect + 'SliderScroller']
-                }`}
-                style={{
-                  width: `${viewWidth}px`,
-                  transform: `translate3d(-${xPosition}px, 0, 0)`,
-                }}
-                onPointerDown={handlePointerDown}
-              >
-                {children}
-              </div>
-            ) : (
-              children
-            )}
-          </div>
-          {useNavigation && pageCount > 1 && (
+        >
+          {effect === 'slide' ? (
             <div
-              className={`content-slider-controls ${styles.contentSliderControls}`}
+              ref={scroller}
+              className={`slider-scroller ${styles.sliderScroller} ${styles[effect + 'SliderScroller']
+                }`}
+              style={{
+                width: `${viewWidth}px`,
+                transform: `translate3d(-${xPosition}px, 0, 0)`,
+              }}
+              onPointerDown={handlePointerDown}
             >
-              <div
-                onClick={prev}
-                className={`${styles.sliderNavButton} ${
-                  styles.sliderPrevButton
-                } ${styles[navigationButtonType]} ${
-                  styles[
-                    'sliderPrevButton' +
-                      capitalizeFirstLetter(navigationButtonType)
-                  ]
-                }`}
-              >
-                {navigationButtonType === 'icon' ? (
-                  <svg viewBox='0 0 320 512'>
-                    <path
-                      fill='currentColor'
-                      d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'
-                    ></path>
-                  </svg>
-                ) : (
-                  'Prev'
-                )}
-              </div>
-              <div
-                onClick={next}
-                className={`${styles.sliderNavButton} ${
-                  styles.sliderNextButton
-                } ${styles[navigationButtonType]} ${
-                  styles[
-                    'sliderNextButton' +
-                      capitalizeFirstLetter(navigationButtonType)
-                  ]
-                }`}
-              >
-                {navigationButtonType === 'icon' ? (
-                  <svg viewBox='0 0 320 512'>
-                    <path
-                      fill='currentColor'
-                      d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'
-                    ></path>
-                  </svg>
-                ) : (
-                  'Next'
-                )}
-              </div>
+              {children}
             </div>
+          ) : (
+            children
           )}
-          <div
-            className={`content-slider-bottom-nav ${
-              styles.contentSliderBottomNav
-            } ${socials && socials.length ? styles.useSocials : ''}`}
-          >
-            {useDotIndicator && pageCount > 1 && (
-              <CarouselSliderDots
-                length={pageCount}
-                current={current}
-                dotClick={setCurrentIndex}
-              />
-            )}
-            {socials && socials.length ? (
-              <div className={styles.sliderSocials}>
-                {socials.map((social, index) => {
-                  return (
-                    <a
-                      className={styles.socialLink}
-                      href={social.url}
-                      target='_blank'
-                      key={index}
-                    >
-                      {social.icon}
-                    </a>
-                  )
-                })}
-              </div>
-            ) : (
-              ''
-            )}
-          </div>
         </div>
-      </CssInjection>
+        {useNavigation && pageCount > 1 && (
+          <div
+            className={`content-slider-controls ${styles.contentSliderControls}`}
+          >
+            <div
+              onClick={prev}
+              className={`${styles.sliderNavButton} ${styles.sliderPrevButton
+                } ${styles[navigationButtonType]} ${styles[
+                'sliderPrevButton' +
+                capitalizeFirstLetter(navigationButtonType)
+                ]
+                }`}
+            >
+              {navigationButtonType === 'icon' ? (
+                <svg viewBox='0 0 320 512'>
+                  <path
+                    fill='currentColor'
+                    d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'
+                  ></path>
+                </svg>
+              ) : (
+                'Prev'
+              )}
+            </div>
+            <div
+              onClick={next}
+              className={`${styles.sliderNavButton} ${styles.sliderNextButton
+                } ${styles[navigationButtonType]} ${styles[
+                'sliderNextButton' +
+                capitalizeFirstLetter(navigationButtonType)
+                ]
+                }`}
+            >
+              {navigationButtonType === 'icon' ? (
+                <svg viewBox='0 0 320 512'>
+                  <path
+                    fill='currentColor'
+                    d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'
+                  ></path>
+                </svg>
+              ) : (
+                'Next'
+              )}
+            </div>
+          </div>
+        )}
+        <div
+          className={`content-slider-bottom-nav ${styles.contentSliderBottomNav
+            } ${socials && socials.length ? styles.useSocials : ''}`}
+        >
+          {useDotIndicator && pageCount > 1 && (
+            <CarouselSliderDots
+              length={pageCount}
+              current={current}
+              dotClick={setCurrentIndex}
+            />
+          )}
+          {socials && socials.length ? (
+            <div className={styles.sliderSocials}>
+              {socials.map((social, index) => {
+                return (
+                  <a
+                    className={styles.socialLink}
+                    href={social.url}
+                    target='_blank'
+                    key={index}
+                  >
+                    {social.icon}
+                  </a>
+                )
+              })}
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
     )
   },
 )

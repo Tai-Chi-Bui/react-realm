@@ -1,7 +1,6 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/grid.module.css'
 
 interface Props {
@@ -53,11 +52,9 @@ const GridItem = React.forwardRef<HTMLDivElement, GridItemProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css}>
-        <div ref={gridItemRef} className={classNames} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div ref={gridItemRef} className={classNames} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

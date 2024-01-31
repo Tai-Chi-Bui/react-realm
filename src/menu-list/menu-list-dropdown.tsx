@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {MenuListContext} from './menu-list-context'
+import { MenuListContext } from './menu-list-context'
 import MenuListDropdownHeader from './menu-list-dropdown-header'
 import MenuListDropdownItem from './menu-list-dropdown-item'
 import styles from './styles/menu-list-dropdown.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   isOpen?: boolean
   defaultOpen?: boolean
@@ -33,8 +32,6 @@ const MenuListDropdown = React.forwardRef<
     onMenuListChange,
     defaultOpen = true,
     className = '',
-    // StyledComponentProps
-    css = {},
     // HTML Div props
     ...htmlProps
   } = props
@@ -74,14 +71,12 @@ const MenuListDropdown = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div className={rootClasses} ref={ref} {...htmlProps}>
-        <MenuListContext.Provider value={{isOpen: isOpen, toggleOpen}}>
-          {title}
-          <div className={bodyClasses}>{body}</div>
-        </MenuListContext.Provider>
-      </div>
-    </CssInjection>
+    <div className={rootClasses} ref={ref} {...htmlProps}>
+      <MenuListContext.Provider value={{ isOpen: isOpen, toggleOpen }}>
+        {title}
+        <div className={bodyClasses}>{body}</div>
+      </MenuListContext.Provider>
+    </div>
   )
 })
 

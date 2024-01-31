@@ -1,24 +1,22 @@
-import React, {useCallback, useMemo} from 'react'
+import React, { useCallback, useMemo } from 'react'
 import Button from '../button'
-import {useDatePickerContext} from '../date-picker/date-picker-context'
+import { useDatePickerContext } from '../date-picker/date-picker-context'
 import * as InternationalizedDate from '../internationalized/date'
-import {DateValue, createCalendar, parseDate} from '../internationalized/date'
+import { DateValue, createCalendar, parseDate } from '../internationalized/date'
 import * as i18n from '../internationalized/i18n'
-import {useLocale} from '../internationalized/i18n'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useLocale } from '../internationalized/i18n'
+import { useDOMRef } from '../utils/use-dom-ref'
 import CalendarGrid from './calendar-grid'
 import CalendarHeader from './calendar-header'
 import CalendarMonthGrid from './calendar-month-grid'
 import CalendarYearGrid from './calendar-year-grid'
-import {useCalendar} from './hooks/useCalendar'
-import {useCalendarState} from './hooks/useCalendarState'
-import {MONTH_YEAR_STATE, useMonthYearCalendar} from './hooks/useMonthYearState'
+import { useCalendar } from './hooks/useCalendar'
+import { useCalendarState } from './hooks/useCalendarState'
+import { MONTH_YEAR_STATE, useMonthYearCalendar } from './hooks/useMonthYearState'
 import styles from './styles/calendar.module.css'
-import {DatePickerState, ValueBase} from './types'
-import {isInvalid} from './utils'
+import { DatePickerState, ValueBase } from './types'
+import { isInvalid } from './utils'
 interface Props extends ValueBase<DateValue> {
-  css?: unknown
   children?: React.ReactNode
   state?: DatePickerState
   hasFooter?: boolean
@@ -37,7 +35,6 @@ const Calendar = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
     state: pickerState,
     hasFooter = false,
-    css = {},
     maxValue = parseDate('2999-02-17'),
     isDisabled = false,
     ctaButtonRender,
@@ -46,7 +43,7 @@ const Calendar = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     ...htmlProps
   } = props
 
-  const {locale} = useLocale()
+  const { locale } = useLocale()
 
   const calendarRef = useDOMRef(ref)
 
@@ -58,16 +55,16 @@ const Calendar = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     value: props.state ? props.state?.value : (props.value as DateValue),
   })
 
-  const monthYearState = useMonthYearCalendar({state, maxValue})
+  const monthYearState = useMonthYearCalendar({ state, maxValue })
 
-  const {calendarProps, prevButtonProps, nextButtonProps} = useCalendar(
+  const { calendarProps, prevButtonProps, nextButtonProps } = useCalendar(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    {isDisabled, ...htmlProps},
+    { isDisabled, ...htmlProps },
     state,
   )
 
-  const {setIsReset} = useDatePickerContext()
+  const { setIsReset } = useDatePickerContext()
 
   const handleClearButtonClick = () => {
     if (!setIsReset) {
@@ -143,40 +140,38 @@ const Calendar = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   }, [ctaButtonRender])
 
   return (
-    <CssInjection css={css} childrenRef={calendarRef}>
-      <div
-        className={styles.calendar}
-        ref={calendarRef}
-        role='Calendar'
-        aria-label='Calendar'
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-      >
-        <CalendarHeader
-          state={state}
-          calendarProps={calendarProps}
-          prevButtonProps={prevButtonProps}
-          nextButtonProps={nextButtonProps}
-          middleButtonProps={monthYearState}
-        />
-        {renderBody()}
-        {hasFooter && (
-          <div className={`calendar-footer ${styles.calendarFooter}`}>
-            <Button
-              className='cdg-calendar-clear-btn'
-              variant='ghost'
-              onPress={() => {
-                monthYearState.setMonthYearState(MONTH_YEAR_STATE.DATE)
-                handleClearButtonClick()
-              }}
-            >
-              Clear
-            </Button>
-            {renderCTAButton()}
-          </div>
-        )}
-      </div>
-    </CssInjection>
+    <div
+      className={styles.calendar}
+      ref={calendarRef}
+      role='Calendar'
+      aria-label='Calendar'
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+    >
+      <CalendarHeader
+        state={state}
+        calendarProps={calendarProps}
+        prevButtonProps={prevButtonProps}
+        nextButtonProps={nextButtonProps}
+        middleButtonProps={monthYearState}
+      />
+      {renderBody()}
+      {hasFooter && (
+        <div className={`calendar-footer ${styles.calendarFooter}`}>
+          <Button
+            className='cdg-calendar-clear-btn'
+            variant='ghost'
+            onPress={() => {
+              monthYearState.setMonthYearState(MONTH_YEAR_STATE.DATE)
+              handleClearButtonClick()
+            }}
+          >
+            Clear
+          </Button>
+          {renderCTAButton()}
+        </div>
+      )}
+    </div>
   )
 })
 

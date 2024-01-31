@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import {
   AriaPopoverProps,
   DismissButton,
@@ -6,8 +5,8 @@ import {
   usePopover,
 } from '@react-aria/overlays'
 import React from 'react'
-import {useDOMRef} from '../../utils/use-dom-ref'
-import {OverlayTriggerState} from '../types'
+import { useDOMRef } from '../../utils/use-dom-ref'
+import { OverlayTriggerState } from '../types'
 
 interface Props {
   children?: React.ReactNode
@@ -18,9 +17,9 @@ interface Props {
 export type PopoverProps = Props & Omit<AriaPopoverProps, keyof Props>
 
 const Popover = React.forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
-  const {children, state} = props
+  const { children, state } = props
   const popoverRef = useDOMRef(ref)
-  const {popoverProps, underlayProps} = usePopover(
+  const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
       popoverRef,

@@ -1,5 +1,4 @@
 import React from 'react'
-
 export interface DropdownMenuContextType {
   open: boolean
   setOpen: (value: boolean) => void

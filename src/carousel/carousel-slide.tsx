@@ -1,14 +1,11 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/carousel.module.css'
 
 interface Props {
   children?: React.ReactNode
-  css?: unknown
   active: boolean
   className?: string
-  style?: React.CSSProperties
 }
 
 export type CarouselSlideProps = Props &
@@ -17,7 +14,6 @@ export type CarouselSlideProps = Props &
 const CarouselSlide = React.forwardRef<HTMLDivElement, CarouselSlideProps>(
   (props, ref) => {
     const {
-      css = {},
       children,
       active,
       className = '',
@@ -28,17 +24,14 @@ const CarouselSlide = React.forwardRef<HTMLDivElement, CarouselSlideProps>(
     const slideRef = useDOMRef<HTMLDivElement>(ref)
 
     return (
-      <CssInjection css={css} childrenRef={slideRef}>
-        <div
-          className={`${className} slider-slide ${styles.sliderSlide} ${
-            active ? styles.sliderSlideActive : ''
+      <div
+        className={`${className} slider-slide ${styles.sliderSlide} ${active ? styles.sliderSlideActive : ''
           }`}
-          {...htmlProps}
-          style={style}
-        >
-          {children}
-        </div>
-      </CssInjection>
+        {...htmlProps}
+        style={style}
+      >
+        {children}
+      </div>
     )
   },
 )

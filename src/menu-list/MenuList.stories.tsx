@@ -1,12 +1,12 @@
-import {faUser} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
-import MenuList, {MenuListDropdown} from './index'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
+import MenuList, { MenuListDropdown } from './index'
 
 export const Basic = () => {
   return (
     <div>
-      <MenuList css={{height: '800px'}}>
+      <MenuList style={{ height: '800px' }}>
         <MenuListDropdown>
           <MenuListDropdown.Header>Dashboard</MenuListDropdown.Header>
           <MenuListDropdown.Item>Menu</MenuListDropdown.Item>

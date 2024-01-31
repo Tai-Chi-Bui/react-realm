@@ -1,10 +1,10 @@
 'use client'
-import React, {useCallback, useContext, useEffect, useState} from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import DropdownMenuContext from './dropdown-menu-context'
-import {MULTILEVEL_MENU_CLASS_NAME} from './dropdown-menu-menu'
+import { MULTILEVEL_MENU_CLASS_NAME } from './dropdown-menu-menu'
 import DropdownMenuSubmenu, {
   MULTILEVEL_SUBMENU_CLASS_NAME,
 } from './dropdown-menu-submenu'
@@ -16,7 +16,6 @@ interface Props {
   isActived?: boolean
   eventKey?: string
   onSelect?: (event: React.MouseEvent<HTMLLIElement>, eventKey?: string) => void
-  css?: unknown
 }
 export const MULTILEVEL_ITEM_CLASS_NAME = 'cdg-dropdown-multilevel-item'
 
@@ -101,7 +100,6 @@ const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItemProps>(
   (props, ref) => {
     const {
       children,
-      css = {},
       className,
       isDisabled = false,
       isActived = false,
@@ -115,13 +113,13 @@ const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItemProps>(
 
     const [focusing, setFocusing] = useState(false)
 
-    const {child: subMenuChild} = pickChild<typeof DropdownMenuSubmenu>(
+    const { child: subMenuChild } = pickChild<typeof DropdownMenuSubmenu>(
       children,
       DropdownMenuSubmenu,
     )
     const dropdownMenuItemRef = useDOMRef<HTMLLIElement>(ref)
 
-    const {refs} = useContext(DropdownMenuContext)
+    const { refs } = useContext(DropdownMenuContext)
 
     useEffect(() => {
       if (refs?.current) {
@@ -252,14 +250,12 @@ const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItemProps>(
     )
 
     return (
-      <CssInjection css={css} childrenRef={dropdownMenuItemRef}>
+      <CssInjection childrenRef={dropdownMenuItemRef}>
         <li
           ref={dropdownMenuItemRef}
-          className={`${MULTILEVEL_ITEM_CLASS_NAME} ${className ?? ''} ${
-            styles.dropdownMenuItem
-          } ${isDisabled ? styles.isDisabled : ''} ${
-            isActived ? styles.isActived : ''
-          }`}
+          className={`${MULTILEVEL_ITEM_CLASS_NAME} ${className ?? ''} ${styles.dropdownMenuItem
+            } ${isDisabled ? styles.isDisabled : ''} ${isActived ? styles.isActived : ''
+            }`}
           tabIndex={-1}
           role={subMenuChild ? 'none presentation' : 'menuitem'}
           aria-haspopup={!!subMenuChild}

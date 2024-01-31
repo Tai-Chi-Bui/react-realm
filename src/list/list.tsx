@@ -1,11 +1,9 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
 import ListH5 from './h5'
 import ListImage from './list-image'
 import styles from './styles/list.module.css'
 interface Props {
-  css?: unknown
   variant?: 'item' | 'interactive' | 'h5'
   isDisabled?: boolean
   size?: 'sm' | 'md'
@@ -34,7 +32,6 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
     variant = 'interactive',
     isDisabled = false,
     size = 'md',
-    css = {},
     className = '',
     descriptionIcon,
     ...htmlProps
@@ -59,21 +56,21 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
       isDisabled && styles.listIsDisabled,
       size == 'sm' && styles.listSizeSM,
       variant === 'interactive' &&
-        !isPressed &&
-        !isDisabled &&
-        styles.listVariantInteractive,
+      !isPressed &&
+      !isDisabled &&
+      styles.listVariantInteractive,
       variant === 'item' && !isPressed && !isDisabled && styles.listVariantItem,
       variant === 'interactive' &&
-        isPressed &&
-        !isDisabled &&
-        styles.listVariantInteractiveIsPressed,
+      isPressed &&
+      !isDisabled &&
+      styles.listVariantInteractiveIsPressed,
       variant === 'item' &&
-        isPressed &&
-        !isDisabled &&
-        styles.listVariantItemIsPressed,
+      isPressed &&
+      !isDisabled &&
+      styles.listVariantItemIsPressed,
       variant === 'interactive' &&
-        isDisabled &&
-        styles.listVariantInteractiveIsDisabled,
+      isDisabled &&
+      styles.listVariantInteractiveIsDisabled,
       variant === 'item' && isDisabled && styles.listVariantItemIsDisabled,
       'cdg-list',
       className,
@@ -89,8 +86,8 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
       variant === 'interactive' && styles.lefttDescriptionVariantInteractive,
       size == 'sm' && isPressed && styles.leftDescriptionSizeSMIsPressed,
       variant === 'interactive' &&
-        isDisabled &&
-        styles.leftDescriptionVariantInteractiveIsDisabled,
+      isDisabled &&
+      styles.leftDescriptionVariantInteractiveIsDisabled,
       'cdg-list-description',
     ]
       .filter(Boolean)
@@ -134,8 +131,8 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
     return [
       styles.rightText,
       variant === 'interactive' &&
-        isDisabled &&
-        styles.rightTextVariantInteractiveIsDisabled,
+      isDisabled &&
+      styles.rightTextVariantInteractiveIsDisabled,
       'cdg-list-right-text',
     ]
       .filter(Boolean)
@@ -145,42 +142,40 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
   if (variant === 'h5') return <ListH5 {...props} />
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div
-        ref={ref}
-        tabIndex={0}
-        role='button'
-        className={listClass}
-        onClick={handleClick}
-        onMouseDown={() => onMouse(true)}
-        onMouseUp={() => onMouse(false)}
-        {...htmlProps}
-      >
-        <div className={styles.left}>
-          {leftInfo && <div className={leftInfoClass}>{leftInfo}</div>}
-          {(title || description) && (
-            <div className={leftTextClass}>
-              {title && <h2 className={leftTitleClass}>{title}</h2>}
-              <div>
-                {description && (
-                  <span className={leftDescriptionClass}>{description}</span>
-                )}
-                {descriptionIcon && descriptionIcon}
-              </div>
+    <div
+      ref={ref}
+      tabIndex={0}
+      role='button'
+      className={listClass}
+      onClick={handleClick}
+      onMouseDown={() => onMouse(true)}
+      onMouseUp={() => onMouse(false)}
+      {...htmlProps}
+    >
+      <div className={styles.left}>
+        {leftInfo && <div className={leftInfoClass}>{leftInfo}</div>}
+        {(title || description) && (
+          <div className={leftTextClass}>
+            {title && <h2 className={leftTitleClass}>{title}</h2>}
+            <div>
+              {description && (
+                <span className={leftDescriptionClass}>{description}</span>
+              )}
+              {descriptionIcon && descriptionIcon}
             </div>
-          )}
-        </div>
-        {rightInfo && !rightContent && (
-          <div className={styles.right}>
-            {rightInfo.text && (
-              <span className={rightTextClass}>{rightInfo?.text}</span>
-            )}
-            {rightInfo?.icon}
           </div>
         )}
       </div>
-    </CssInjection>
+      {rightInfo && !rightContent && (
+        <div className={styles.right}>
+          {rightInfo.text && (
+            <span className={rightTextClass}>{rightInfo?.text}</span>
+          )}
+          {rightInfo?.icon}
+        </div>
+      )}
+    </div>
   )
 })
 
-export default List as typeof List & {Image: typeof ListImage}
+export default List as typeof List & { Image: typeof ListImage }

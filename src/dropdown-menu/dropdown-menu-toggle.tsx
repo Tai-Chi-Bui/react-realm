@@ -1,13 +1,11 @@
 'use client'
-import React, {useContext} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { useContext } from 'react'
+import { useDOMRef } from '../utils/use-dom-ref'
 import DropdownMenuContext from './dropdown-menu-context'
 
 interface Props {
   children?: React.ReactNode
   'aria-haspopup'?: boolean
-  css?: unknown
 }
 
 export type DropdownMenuToggleProps = Props &
@@ -17,10 +15,10 @@ const DropdownMenuToggle = React.forwardRef<
   HTMLDivElement,
   DropdownMenuToggleProps
 >((props, ref) => {
-  const {children, css = {}, onClick, ...htmlProps} = props
+  const { children, onClick, ...htmlProps } = props
   const DropdownMenuToggleRef = useDOMRef<HTMLDivElement>(ref)
 
-  const {open, setOpen, onClose, onOpenChange} = useContext(DropdownMenuContext)
+  const { open, setOpen, onClose, onOpenChange } = useContext(DropdownMenuContext)
 
   const handleButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (open) {
@@ -32,16 +30,14 @@ const DropdownMenuToggle = React.forwardRef<
   }
 
   return (
-    <CssInjection css={css} childrenRef={DropdownMenuToggleRef}>
-      <div
-        ref={DropdownMenuToggleRef}
-        onClick={handleButtonClick}
-        aria-haspopup={props['aria-haspopup']}
-        {...htmlProps}
-      >
-        {children}
-      </div>
-    </CssInjection>
+    <div
+      ref={DropdownMenuToggleRef}
+      onClick={handleButtonClick}
+      aria-haspopup={props['aria-haspopup']}
+      {...htmlProps}
+    >
+      {children}
+    </div>
   )
 })
 

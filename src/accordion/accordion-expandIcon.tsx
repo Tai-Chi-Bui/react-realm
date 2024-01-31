@@ -1,9 +1,8 @@
 import React from 'react'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/accordion-title.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
 }
 
@@ -18,7 +17,7 @@ const AccordionExpandIcon = React.forwardRef<
   HTMLDivElement,
   AccordionExpandIconProps
 >((props: AccordionExpandIconProps, ref) => {
-  const {children, css = {}} = props
+  const { children } = props
 
   const expandRef = useDOMRef<HTMLDivElement>(ref)
 
@@ -27,7 +26,6 @@ const AccordionExpandIcon = React.forwardRef<
       return React.cloneElement(children, {
         className: styles.accordionChevronIcon,
         ref: expandRef,
-        css: css,
       } as CustomComponentProps)
     }
     return (

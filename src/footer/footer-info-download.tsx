@@ -1,9 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/footer-info-download.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
 }
 
@@ -14,8 +12,7 @@ const FooterInfoDownload = React.forwardRef<
   HTMLDivElement,
   FooterInfoDownloadProps
 >((props, ref) => {
-  const {children, css = {}, className, ...htmlProps} = props
-
+  const { children, className, ...htmlProps } = props
   const rootClasses = [
     styles.footerInfoDownload,
     className,
@@ -25,11 +22,9 @@ const FooterInfoDownload = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div className={rootClasses} ref={ref} {...htmlProps}>
-        {children}
-      </div>
-    </CssInjection>
+    <div className={rootClasses} ref={ref} {...htmlProps}>
+      {children}
+    </div>
   )
 })
 

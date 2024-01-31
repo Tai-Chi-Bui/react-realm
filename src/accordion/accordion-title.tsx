@@ -1,7 +1,7 @@
-import React, {useContext} from 'react'
-import {EKeyboardKey} from '../utils/keyboard.enum'
+import React, { useContext } from 'react'
+import { EKeyboardKey } from '../utils/keyboard.enum'
 import AccordionButton from './accordion-button'
-import AccordionContext, {AccordionContextType} from './accordion-context'
+import AccordionContext, { AccordionContextType } from './accordion-context'
 import styles from './styles/accordion-title.module.css'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -22,7 +22,6 @@ const AccordionTitle = React.forwardRef<HTMLButtonElement, AccordionTitleProps>(
       icon = <DefaultIcon />,
       children,
       expandIcon,
-      css = {},
       className,
       'aria-controls': ariaControls,
       ...htmlProps
@@ -30,7 +29,7 @@ const AccordionTitle = React.forwardRef<HTMLButtonElement, AccordionTitleProps>(
 
     const contextValue = useContext(AccordionContext) as AccordionContextType
 
-    const {expand, onExpandChange, setExpand} = contextValue
+    const { expand, onExpandChange, setExpand } = contextValue
 
     const renderTitle = () => {
       //render title as h1 if it is a string
@@ -42,7 +41,7 @@ const AccordionTitle = React.forwardRef<HTMLButtonElement, AccordionTitleProps>(
 
     const handleKeyDown = (e?: unknown) => {
       const event = e as React.KeyboardEvent<HTMLElement>
-      const {key} = event
+      const { key } = event
       switch (key) {
         case EKeyboardKey.Spacebar:
         case EKeyboardKey.Enter:
@@ -76,10 +75,8 @@ const AccordionTitle = React.forwardRef<HTMLButtonElement, AccordionTitleProps>(
       <AccordionButton
         aria-controls={ariaControls}
         ref={ref}
-        css={css}
-        className={`accordion-title-container ${
-          expand ? styles.open : ''
-        } ${className}`}
+        className={`accordion-title-container ${expand ? styles.open : ''
+          } ${className}`}
         expand={expand}
         onMouseDown={(e) => handleOnClick(e)}
         onKeyDown={(e) => handleKeyDown(e)}

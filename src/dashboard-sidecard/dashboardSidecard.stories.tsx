@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Box from '../box'
 import Button from '../button'
@@ -8,9 +8,9 @@ import DashboardSidecard from './index'
 export const Default: React.FC = () => {
   const Card = (
     <Box
-      css={{
-        backgroundColor: '$background',
-        color: '$primaryText',
+      style={{
+        backgroundColor: 'white',
+        color: 'blue',
         borderRadius: '8px',
         width: '100%',
         height: '11rem',
@@ -20,7 +20,7 @@ export const Default: React.FC = () => {
         justifyContent: 'space-between',
       }}
     >
-      <div style={{fontWeight: '500', fontSize: '1.2em'}}>Title</div>
+      <div style={{ fontWeight: '500', fontSize: '1.2em' }}>Title</div>
       <div
         style={{
           fontSize: '0.8em',
@@ -48,8 +48,8 @@ export const Default: React.FC = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Button css={{width: '48%'}}>Action</Button>
-            <Button variant='danger' css={{width: '48%'}}>
+            <Button style={{ width: '48%' }}>Action</Button>
+            <Button variant='danger' style={{ width: '48%' }}>
               Warning
             </Button>
           </div>

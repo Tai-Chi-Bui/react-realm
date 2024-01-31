@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '../button'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import CarouselSlider from './carousel-slider'
 import {
   CarouselOptions,
@@ -11,7 +10,7 @@ import {
   SocicalIcon,
 } from './carousel.const'
 
-import {capitalizeFirstLetter} from '../utils/string'
+import { capitalizeFirstLetter } from '../utils/string'
 import CarouselSlide from './carousel-slide'
 import styles from './styles/carousel.module.css'
 
@@ -35,7 +34,6 @@ const CarouselPromotion = React.forwardRef<
     autoSwitch = true,
     navigationButtonType = 'icon',
     effect = 'slide',
-    css = {},
     onSwitchSlide = () => null,
     ...htmlProps
   } = props
@@ -60,75 +58,70 @@ const CarouselPromotion = React.forwardRef<
   }
 
   return (
-    <CssInjection css={css} childrenRef={buttonRef}>
-      <CarouselSlider
-        onSwitchSlide={handleSwitchSlide}
-        socials={socials || []}
-        useNavigation={useNavigation}
-        autoSwitch={autoSwitch}
-        navigationButtonType={navigationButtonType}
-        effect={effect}
-        ref={carouselRef}
-        css={css}
-        {...htmlProps}
-        className={`current-slide-buttons-${generateButtonRangeClassName()}`}
-      >
-        {data.map((dataItem: CarouselSliderItem, index: number) => (
-          <CarouselSlide
-            key={index}
-            className={`slider-slide${activeIndex === index ? ' active' : ''}`}
-            active={activeIndex === index}
-          >
-            <img
-              className={`slide-background ${styles.slideBackground}`}
-              src={dataItem.image}
-              draggable={false}
-            />
-            {dataItem.mask && (
-              <div
-                className={`slide-mask ${styles.slideMask}`}
-                style={{background: `rgba(0,0,0,${dataItem.mask})`}}
-              />
-            )}
+    <CarouselSlider
+      onSwitchSlide={handleSwitchSlide}
+      socials={socials || []}
+      useNavigation={useNavigation}
+      autoSwitch={autoSwitch}
+      navigationButtonType={navigationButtonType}
+      effect={effect}
+      ref={carouselRef}
+      {...htmlProps}
+      className={`current-slide-buttons-${generateButtonRangeClassName()}`}
+    >
+      {data.map((dataItem: CarouselSliderItem, index: number) => (
+        <CarouselSlide
+          key={index}
+          className={`slider-slide${activeIndex === index ? ' active' : ''}`}
+          active={activeIndex === index}
+        >
+          <img
+            className={`slide-background ${styles.slideBackground}`}
+            src={dataItem.image}
+            draggable={false}
+          />
+          {dataItem.mask && (
             <div
-              className={`slide-body ${styles.slideBody} ${
-                dataItem.alignment || ''
-              } ${
-                dataItem.alignment
-                  ? styles[toCamelCase(dataItem.alignment)]
-                  : ''
+              className={`slide-mask ${styles.slideMask}`}
+              style={{ background: `rgba(0,0,0,${dataItem.mask})` }}
+            />
+          )}
+          <div
+            className={`slide-body ${styles.slideBody} ${dataItem.alignment || ''
+              } ${dataItem.alignment
+                ? styles[toCamelCase(dataItem.alignment)]
+                : ''
               }`}
+          >
+            <h4
+              className={`content-slider-title ${styles.contentSliderTitle}`}
             >
-              <h4
-                className={`content-slider-title ${styles.contentSliderTitle}`}
-              >
-                {dataItem.title}
-              </h4>
-              <p
-                className={`content-slider-description ${styles.contentSliderDescription}`}
-              >
-                {dataItem.description}
-              </p>
-              {dataItem.buttons && (
-                <div className={`slide-button-row ${styles.slideButtonRow}`}>
-                  {dataItem.buttons.map((button, index) => {
-                    return (
-                      <Button
-                        key={index}
-                        variant={button.type}
-                        className={`${button.type} ${styles[button.type]}`}
-                      >
-                        {button.label}
-                      </Button>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
-          </CarouselSlide>
-        ))}
-      </CarouselSlider>
-    </CssInjection>
+              {dataItem.title}
+            </h4>
+            <p
+              className={`content-slider-description ${styles.contentSliderDescription}`}
+            >
+              {dataItem.description}
+            </p>
+            {dataItem.buttons && (
+              <div className={`slide-button-row ${styles.slideButtonRow}`}>
+                {dataItem.buttons.map((button, index) => {
+                  return (
+                    <Button
+                      key={index}
+                      variant={button.type}
+                      className={`${button.type} ${styles[button.type]}`}
+                    >
+                      {button.label}
+                    </Button>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </CarouselSlide>
+      ))}
+    </CarouselSlider>
   )
 })
 

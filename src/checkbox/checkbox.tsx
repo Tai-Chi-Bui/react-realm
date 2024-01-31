@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { useEffect, useState } from 'react'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/checkbox.module.css'
 
 interface Props {
   id?: string
-  css?: unknown
   name?: string
   value?: string
   autoFocus?: boolean
@@ -14,7 +12,6 @@ interface Props {
   isSelected?: boolean
   defaultSelected?: boolean
   isIndeterminate?: boolean
-  cssCheckBoxInput?: unknown
   children?: React.ReactNode
   validationState?: 'valid' | 'invalid'
   variant?: 'default' | 'rounded' | 'h5'
@@ -27,7 +24,6 @@ export type CheckboxProps = Props &
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const {
-      css = {},
       children,
       className,
       isSelected,
@@ -37,7 +33,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       variant = 'default',
       isIndeterminate = false,
       defaultSelected = false,
-      cssCheckBoxInput = {},
       onChange,
       ...ariaSafeProps
     } = props
@@ -46,7 +41,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       isSelected || defaultSelected,
     )
     const checkboxRef = useDOMRef<HTMLInputElement>(ref)
-    const htmlProps = {...ariaSafeProps} as Omit<
+    const htmlProps = { ...ariaSafeProps } as Omit<
       React.HTMLAttributes<HTMLDivElement>,
       keyof Props
     >
@@ -101,42 +96,38 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     }, [variant])
 
     return (
-      <CssInjection css={css} childrenRef={checkboxRef}>
-        <div className={rootClass} {...htmlProps}>
-          <label className={labelClass}>
-            <CssInjection css={cssCheckBoxInput} childrenRef={checkboxRef}>
-              <input
-                tabIndex={-1}
-                type='checkbox'
-                ref={checkboxRef}
-                checked={checked}
-                disabled={isDisabled}
-                readOnly={isReadOnly}
-                className={`${styles.input} cdg-checkbox-input`}
-                aria-readonly={isReadOnly === true ? 'true' : undefined}
-                aria-invalid={
-                  validationState === 'invalid' ? 'true' : undefined
-                }
-                onChange={handleCheckboxChange}
-              />
-            </CssInjection>
+      <div className={rootClass} {...htmlProps}>
+        <label className={labelClass}>
+          <input
+            tabIndex={-1}
+            type='checkbox'
+            ref={checkboxRef}
+            checked={checked}
+            disabled={isDisabled}
+            readOnly={isReadOnly}
+            className={`${styles.input} cdg-checkbox-input`}
+            aria-readonly={isReadOnly === true ? 'true' : undefined}
+            aria-invalid={
+              validationState === 'invalid' ? 'true' : undefined
+            }
+            onChange={handleCheckboxChange}
+          />
 
-            <div
-              tabIndex={0}
-              role='checkbox'
-              className={boxClass}
-              aria-checked={checked}
-              onKeyDown={handleKeyDown}
-            >
-              <span className={`${styles.checkmark} cdg-checkbox-checkmark`}>
-                {isIndeterminate ? <InterminateIcon /> : <TickIcon />}
-              </span>
-            </div>
+          <div
+            tabIndex={0}
+            role='checkbox'
+            className={boxClass}
+            aria-checked={checked}
+            onKeyDown={handleKeyDown}
+          >
+            <span className={`${styles.checkmark} cdg-checkbox-checkmark`}>
+              {isIndeterminate ? <InterminateIcon /> : <TickIcon />}
+            </span>
+          </div>
 
-            {children && <span>{children}</span>}
-          </label>
-        </div>
-      </CssInjection>
+          {children && <span>{children}</span>}
+        </label>
+      </div>
     )
   },
 )

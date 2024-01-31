@@ -1,10 +1,8 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/breadscrumbs-item.module.css'
 
 interface Props {
-  css?: unknown
   href?: string
   target?: string
   isCurrent?: boolean
@@ -21,7 +19,6 @@ const BreadcrumbItem = React.forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
       href,
       target,
       children,
-      css = {},
       isCurrent = false,
       isDisabled = false,
       className,
@@ -43,21 +40,19 @@ const BreadcrumbItem = React.forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
     }, [isCurrent, isDisabled, className])
 
     return (
-      <CssInjection css={css} childrenRef={linkRef}>
-        <li>
-          {React.createElement(
-            isCurrent || isDisabled ? 'span' : 'a',
-            {
-              ...htmlProps,
-              href: href,
-              ref: linkRef,
-              target: target,
-              className: itemClass,
-            },
-            children,
-          )}
-        </li>
-      </CssInjection>
+      <li>
+        {React.createElement(
+          isCurrent || isDisabled ? 'span' : 'a',
+          {
+            ...htmlProps,
+            href: href,
+            ref: linkRef,
+            target: target,
+            className: itemClass,
+          },
+          children,
+        )}
+      </li>
     )
   },
 )

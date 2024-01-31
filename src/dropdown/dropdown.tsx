@@ -6,13 +6,13 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   DropdownContext,
   DropdownItemKey,
   SelectedItemDropdown,
 } from './dropdown-context'
-import DropdownItem, {DropdownItemProps} from './dropdown-item'
+import DropdownItem, { DropdownItemProps } from './dropdown-item'
 import DropdownList from './dropdown-list'
 import DropdownHeader from './dropdown.header'
 import {
@@ -25,8 +25,7 @@ import {
 } from './utils'
 
 import Popover from '../popover'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useId} from '../utils/useId'
+import { useId } from '../utils/useId'
 import DropdownComboBox from './dropdown.combobox'
 import DropdownSection from './dropdown.section'
 import DropdownSelect from './dropdown.select'
@@ -63,7 +62,6 @@ export interface Props {
   isCloseOnSelect?: boolean
   isLoadingMore?: boolean
   popoverCSS?: React.CSSProperties
-  css?: unknown
   inputRef?: React.RefObject<HTMLInputElement>
   buttonRef?: React.RefObject<HTMLButtonElement>
   onBlur?: (event: React.FocusEvent) => void
@@ -135,7 +133,6 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
   // ====================================== Define ======================================
   const {
     id,
-    css,
     className,
     popoverCSS = {},
     children,
@@ -193,7 +190,7 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
 
   const dropdownId = useId(id)
 
-  const htmlProps = {...ariaSafeProps} as Omit<
+  const htmlProps = { ...ariaSafeProps } as Omit<
     React.HTMLAttributes<HTMLDivElement>,
     keyof Props
   >
@@ -353,8 +350,8 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
                     focusedItem.props.children as React.ReactElement,
                   )
                 }
-                onSelectionChange?.(focusedItem?.props?.value as Key)
-                onValueChange?.(focusedItem?.props?.value as Key)
+                onSelectionChange?.(focusedItem?.props?.value as string | number)
+                onValueChange?.(focusedItem?.props?.value as string | number)
               }
             }
 
@@ -798,92 +795,90 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={selectRef}>
-      <div
-        {...htmlProps}
-        className={rootClasses}
-        ref={selectRef}
-        onKeyDown={handleKeyDown}
-      >
-        {label && (
-          <label
-            htmlFor={dropdownId}
-            id={`${dropdownId}-label`}
-            className={`${styles.dropdownLabel} cdg-dropdown-label`}
-          >
-            {label}
-            {isRequired && (
-              <span className={styles.dropdownLabelAsterisk}>*</span>
-            )}
-          </label>
-        )}
-        <DropdownContext.Provider
-          value={{
-            isLoadingMore,
-            isPositioned,
-            open,
-            focusKey: focusKey,
-            selectedKey: valueDropdown,
-            defaultSelectedKey: defaultValueDropdown,
-            disabledKeys: disabledValues ?? disabledKeys ?? [],
-            searchValue,
-            labelId: `${dropdownId}-label`,
-            selectedItem,
-            setSelectedItem,
-            dropdownItemKeys,
-            setDropdownItemKeys,
-            onItemClick: handleDropdownItemClick,
-            onHeaderClick: handleDropdownHeaderClick,
-          }}
+    <div
+      {...htmlProps}
+      className={rootClasses}
+      ref={selectRef}
+      onKeyDown={handleKeyDown}
+    >
+      {label && (
+        <label
+          htmlFor={dropdownId}
+          id={`${dropdownId}-label`}
+          className={`${styles.dropdownLabel} cdg-dropdown-label`}
         >
-          <Popover
-            isOpen={open}
-            anchor={contentElement}
-            css={{width: '100%'}}
-            direction='bottom-left'
-            onClose={handleClosePopover}
-            onPositionedChange={handlePositionedChange}
+          {label}
+          {isRequired && (
+            <span className={styles.dropdownLabelAsterisk}>*</span>
+          )}
+        </label>
+      )}
+      <DropdownContext.Provider
+        value={{
+          isLoadingMore,
+          isPositioned,
+          open,
+          focusKey: focusKey,
+          selectedKey: valueDropdown,
+          defaultSelectedKey: defaultValueDropdown,
+          disabledKeys: disabledValues ?? disabledKeys ?? [],
+          searchValue,
+          labelId: `${dropdownId}-label`,
+          selectedItem,
+          setSelectedItem,
+          dropdownItemKeys,
+          setDropdownItemKeys,
+          onItemClick: handleDropdownItemClick,
+          onHeaderClick: handleDropdownHeaderClick,
+        }}
+      >
+        <Popover
+          isOpen={open}
+          anchor={contentElement}
+          style={{ width: '100%' }}
+          direction='bottom-left'
+          onClose={handleClosePopover}
+          onPositionedChange={handlePositionedChange}
+        >
+          <div
+            className={`${styles.dropdownPopover} cdg-dropdown-popover`}
+            onClick={handleDropdownHeaderClick}
+            style={{
+              ...popoverCSS,
+              width: popoverCSS.width ?? triggerElementWidth,
+            }}
           >
-            <div
-              className={`${styles.dropdownPopover} cdg-dropdown-popover`}
-              onClick={handleDropdownHeaderClick}
+            <DropdownList
+              searchValue={searchValue}
+              isLoading={isLoading}
               style={{
-                ...popoverCSS,
-                width: popoverCSS.width ?? triggerElementWidth,
+                maxHeight: numberOfRows
+                  ? `${numberOfRows * ITEM_HEIGHT}px`
+                  : '16rem',
               }}
+              onLoadMore={onLoadMore}
+              noDataMessage={noDataMessage}
             >
-              <DropdownList
-                searchValue={searchValue}
-                isLoading={isLoading}
-                css={{
-                  maxHeight: numberOfRows
-                    ? `${numberOfRows * ITEM_HEIGHT}px`
-                    : '16rem',
-                }}
-                onLoadMore={onLoadMore}
-                noDataMessage={noDataMessage}
-              >
-                {clonedChildren}
-              </DropdownList>
-            </div>
-          </Popover>
-        </DropdownContext.Provider>
-        {isErrored && errorMessage && (
-          <div
-            className={`${styles.dropdownHelperText} ${styles.dropdownHelperIsErrored} cdg-dropdown-error-message`}
-          >
-            {errorMessage}
+              {clonedChildren}
+            </DropdownList>
           </div>
-        )}
-        {helperText && (
-          <div
-            className={`${styles.dropdownHelperText} cdg-dropdown-helper-text`}
-          >
-            {helperText}
-          </div>
-        )}
-      </div>
-    </CssInjection>
+        </Popover>
+      </DropdownContext.Provider>
+      {isErrored && errorMessage && (
+        <div
+          className={`${styles.dropdownHelperText} ${styles.dropdownHelperIsErrored} cdg-dropdown-error-message`}
+        >
+          {errorMessage}
+        </div>
+      )}
+      {helperText && (
+        <div
+          className={`${styles.dropdownHelperText} cdg-dropdown-helper-text`}
+        >
+          {helperText}
+        </div>
+      )}
+    </div>
   )
 })
 

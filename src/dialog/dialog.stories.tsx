@@ -1,6 +1,6 @@
-import {faBug} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Button from '../button'
 import Checkbox from '../checkbox'
@@ -18,7 +18,7 @@ export const Default: React.FC = () => {
   return (
     <div>
       <h3>Default dialog is confirmation variant</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setDefaultOpen(true)}>
+      <Button onPress={() => setDefaultOpen(true)}>
         Open Dialog
       </Button>
       <Dialog.Trigger
@@ -55,7 +55,7 @@ const Child: React.FC = () => {
     <>
       <Button
         variant='secondary'
-        css={{width: '7.8rem'}}
+        style={{ width: '7.8rem' }}
         onPress={() => setDefaultOpen(true)}
       >
         Open Child
@@ -64,7 +64,7 @@ const Child: React.FC = () => {
         isOpen={defaultOpen}
         handleClose={() => setDefaultOpen(false)}
       >
-        <Dialog css={{width: '20rem'}}>
+        <Dialog style={{ width: '20rem' }}>
           <Dialog.Title>My Child dialog</Dialog.Title>
           <Dialog.Description>{lorem}</Dialog.Description>
           <Dialog.Actions>
@@ -88,7 +88,7 @@ export const NestedDialog: React.FC = () => {
       <h3>Nested Dialog</h3>
       <Button
         variant='secondary'
-        css={{width: '7.8rem'}}
+        style={{ width: '7.8rem' }}
         onPress={() => setDefaultOpen(true)}
         data-target='parent-dialog' // this is required for the focus trap to work
       >
@@ -124,7 +124,7 @@ export const Variants: React.FC = () => {
   return (
     <div>
       <h3>Confirmation dialog</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setConfirmationOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setConfirmationOpen(true)}>
         Open Dialog
       </Button>
       <Dialog.Trigger
@@ -143,7 +143,7 @@ export const Variants: React.FC = () => {
       </Dialog.Trigger>
 
       <h3>Alert dialog</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setAlertOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setAlertOpen(true)}>
         Open Dialog
       </Button>
       <Dialog.Trigger
@@ -164,30 +164,21 @@ export const Variants: React.FC = () => {
       </Dialog.Trigger>
 
       <h3>Custom & Large Content Dialog</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setCustomOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setCustomOpen(true)}>
         Open Dialog
       </Button>
       <Dialog.Trigger
         isOpen={customOpen}
         handleClose={() => setCustomOpen(false)}
       >
-        <Dialog
-          css={{
-            overflow: 'hidden',
-            '.cdg-dialog-content': {height: '40rem'},
-          }}
-        >
+        <Dialog>
           {/* css above is to set the border-radius of the scroll bar  */}
           <Dialog.Title>My title</Dialog.Title>
           <Dialog.Description>
-            <div style={{gap: '$4'}}>
-              <DatePicker css={{width: '100%'}} label='Date picker' />
+            <div style={{ gap: '$4' }}>
+              <DatePicker label='Date picker' />
               <TextField label='Text field' />
               <Textarea
-                css={{
-                  width: '100%',
-                  textarea: {width: '100%', minHeight: '120px'},
-                }}
                 label='Text area'
               />
               <Checkbox>I agree to this term and condition</Checkbox>

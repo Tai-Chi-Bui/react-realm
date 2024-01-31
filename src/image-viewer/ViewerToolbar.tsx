@@ -9,13 +9,13 @@ import {
   faRotateRight,
   faUpDown,
 } from '@fortawesome/free-solid-svg-icons'
-import {useCallback} from 'react'
+import { useCallback } from 'react'
 import Button from '../button'
 import Icon from '../icon'
-import {useColors} from '../theme'
-import {ActionTypeEnum} from './Icon'
+import { useColors } from '../theme'
+import { ActionTypeEnum } from './Icon'
 import styles from './styles/image-viewer.module.css'
-import {ToolbarConfig} from './types'
+import { ToolbarConfig } from './types'
 
 export interface ViewerToolbarProps {
   onAction: (config: ToolbarConfig) => void
@@ -99,11 +99,6 @@ export default function ViewerToolbar(props: ViewerToolbarProps) {
           handleAction(config)
         }}
         data-key={config.key}
-        css={{
-          '&:hover': {
-            background: '$cdgBlue100 !important',
-          },
-        }}
       >
         {config.icon ? (
           <Icon icon={config.icon} color={colors.white} />
