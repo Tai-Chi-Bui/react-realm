@@ -1,13 +1,13 @@
 import { Meta } from '@storybook/react'
 import React from 'react'
-import Box from '../box'
+// import Box from '../box'
 import Button from '../button'
 import SearchField from '../searchfield'
 import DashboardSidecard from './index'
 
 export const Default: React.FC = () => {
   const Card = (
-    <Box
+    <div
       style={{
         backgroundColor: 'white',
         color: 'blue',
@@ -30,7 +30,7 @@ export const Default: React.FC = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic quae,
         adipisci tempore minus beatae itaque tenetur.
       </div>
-    </Box>
+    </div>
   )
   return (
     <div>

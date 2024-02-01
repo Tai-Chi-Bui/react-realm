@@ -60,16 +60,12 @@ export { default as Checkbox } from './checkbox'
 export type { CheckboxProps } from './checkbox'
 export { default as Chip } from './chip'
 export type { ChipProps } from './chip'
-export { default as ConfirmPUPoint } from './confirm-pickup'
-export type { ConfirmPUPointProps } from './confirm-pickup'
 export { default as DashboardSidecard } from './dashboard-sidecard'
 export type {
   DashboardSidecardContentProps,
   DashboardSidecardHeaderProps,
   DashboardSidecardProps,
 } from './dashboard-sidecard'
-export { default as Divider } from './divider'
-export type { DividerProps } from './divider'
 export { default as File } from './file'
 export type { FilePreviewProps, FileStateProps } from './file'
 export { Footer, FooterInfo } from './footer'

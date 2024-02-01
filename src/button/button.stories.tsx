@@ -9,7 +9,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import type { Meta } from '@storybook/react'
 import React from 'react'
-import Icon from '../icon'
 import Button from './index'
 import styles from './styles/stories.module.css'
 
@@ -99,9 +98,9 @@ export const Variations: React.FC = () => (
         Ghost
       </Button>
     </div>
-    <h3>4. Left Icons</h3>
+    {/* <h3>4. Left Icons</h3>
     <div style={{ ...Style }}>
-      <Button variant='primary' leftIcon={<Icon icon={faChevronDown} />}>
+      <Button variant='primary' leftIcon={<faChevronDown />}>
         Primary
       </Button>
       <Button variant='secondary' leftIcon={<Icon icon={faChevronDown} />}>
@@ -116,9 +115,9 @@ export const Variations: React.FC = () => (
       <Button isDisabled leftIcon={<Icon icon={faChevronDown} />}>
         Disabled
       </Button>
-    </div>
+    </div> */}
 
-    <h3>5. Right Icons</h3>
+    {/* <h3>5. Right Icons</h3>
     <div style={{ ...Style }}>
       <Button variant='primary' rightIcon={<Icon icon={faChevronDown} />}>
         Primary
@@ -193,7 +192,7 @@ export const Variations: React.FC = () => (
       <Button isDisabled>
         <Icon icon={faUserEdit} />
       </Button>
-    </div>
+    </div> */}
     <h3>8. Loading</h3>
     <div style={{ ...Style }}>
       <Button loading variant='primary' />
@@ -205,13 +204,13 @@ export const Variations: React.FC = () => (
 
     <h3>9. Act as a link</h3>
     <div style={{ ...Style }}>
-      <Button
+      {/* <Button
         href='/#page'
         variant='primary'
         leftIcon={<Icon icon={faChevronDown} />}
       >
         Click me
-      </Button>
+      </Button> */}
       <Button href='https://google.com' hrefExternal variant='secondary'>
         Google
       </Button>
@@ -257,7 +256,7 @@ export const Variations: React.FC = () => (
         Disabled
       </Button>
     </div>
-    <div style={{ ...Style }}>
+    {/* <div style={{ ...Style }}>
       <Button variant='primary' isSquare={true}>
         <Icon icon={faBars} />
       </Button>
@@ -273,7 +272,7 @@ export const Variations: React.FC = () => (
       <Button isDisabled isSquare={true}>
         <Icon icon={faUserEdit} />
       </Button>
-    </div>
+    </div> */}
   </div>
 )
 

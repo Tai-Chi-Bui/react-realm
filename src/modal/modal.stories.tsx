@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Meta } from '@storybook/react'
 import React from 'react'
 import Button from '../button'
-import Icon from '../icon'
 import Modal from './index'
 
 export const Default: React.FC = () => {
@@ -253,11 +252,11 @@ export const H5: React.FC = () => {
           <Modal h5>
             <Modal.Title h5>Feedback</Modal.Title>
             <Modal.CloseIcon>
-              <Icon
+              {/* <Icon
                 onClick={() => setIsOpenModal2(false)}
                 icon={faXmark}
                 style={{ width: 25, height: 25, paddingTop: 24 }}
-              />
+              /> */}
             </Modal.CloseIcon>
             <Modal.Description h5>{lorem}</Modal.Description>
           </Modal>
