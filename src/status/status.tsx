@@ -1,7 +1,6 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {STATUS_SIZE_MAP, StatusSize, StatusType} from './status.const'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { STATUS_SIZE_MAP, StatusSize, StatusType } from './status.const'
 import Offline from './status/offline'
 import Online from './status/online'
 import Verified from './status/verified'
@@ -10,7 +9,6 @@ import styles from './styles/status.module.css'
 
 interface Props {
   label?: boolean | string
-  css?: unknown
   className?: string
   size?: StatusSize
   type?: StatusType
@@ -23,8 +21,6 @@ export type StatusProps = Props &
 
 const Status = React.forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
   const {
-    // StyledComponentProps
-    css = {},
     // ComponentProps
     label = true,
     type = '',
@@ -61,17 +57,15 @@ const Status = React.forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
   }
 
   return (
-    <CssInjection css={css} childrenRef={spinnerRef}>
-      <div
-        tabIndex={-1}
-        ref={spinnerRef}
-        className={`${styles.status} ${STATUS_SIZE_MAP[size]} ${className}`}
-        style={style}
-        {...htmlProps}
-      >
-        {toStatusElement()}
-      </div>
-    </CssInjection>
+    <div
+      tabIndex={-1}
+      ref={spinnerRef}
+      className={`${styles.status} ${STATUS_SIZE_MAP[size]} ${className}`}
+      style={style}
+      {...htmlProps}
+    >
+      {toStatusElement()}
+    </div>
   )
 })
 

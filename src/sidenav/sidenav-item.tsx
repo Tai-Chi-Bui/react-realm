@@ -1,14 +1,13 @@
 'use client'
 
-import {ExtendedRefs, ReferenceType} from '@floating-ui/react'
-import React, {useState} from 'react'
+import { ExtendedRefs, ReferenceType } from '@floating-ui/react'
+import React, { useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/sidenav-item.module.css'
 
 interface Props {
   children: React.ReactNode
   isActive?: boolean
-  css?: unknown
   className?: string
 }
 
@@ -22,8 +21,6 @@ const SidenavItem = React.forwardRef<HTMLDivElement, SidenavItemProps>(
       children,
       isActive,
       className = '',
-      // StyledComponentProps
-      css = {},
       // HTML Div props
       ...htmlProps
     } = props
@@ -45,7 +42,7 @@ const SidenavItem = React.forwardRef<HTMLDivElement, SidenavItemProps>(
         userProps?: React.HTMLProps<Element> | undefined,
       ) => Record<string, unknown>,
     ) => {
-      setMenuParentProps({ref, getReferenceProps})
+      setMenuParentProps({ ref, getReferenceProps })
     }
 
     const clonedMenu = menu ? (
@@ -68,35 +65,31 @@ const SidenavItem = React.forwardRef<HTMLDivElement, SidenavItemProps>(
     }
 
     return (
-      <CssInjection css={css} childrenRef={mergeRefs}>
-        <div
-          ref={mergeRefs}
-          className={`cdg-sidenav-item ${className} ${styles.sidenavItem} ${
-            isActive
-              ? `${styles.sidenavItemActive} sidenav-item-active`
-              : 'default'
+      <div
+        ref={mergeRefs}
+        className={`cdg-sidenav-item ${className} ${styles.sidenavItem} ${isActive
+          ? `${styles.sidenavItemActive} sidenav-item-active`
+          : 'default'
           }`}
-          onMouseEnter={() => {
-            setOpenMenu(true)
-          }}
-          {...htmlProps}
-          {...menuParenProps?.getReferenceProps()}
-        >
-          <div
-            className={`cdg-sidenav-item-icon ${styles.cdgSidenavItemIcon} ${
-              isActive ? `${styles.cdgSidenavItemActiveIcon}` : ''
+        onMouseEnter={() => {
+          setOpenMenu(true)
+        }}
+        {...htmlProps}
+        {...menuParenProps?.getReferenceProps()}
+      >
+        <div
+          className={`cdg-sidenav-item-icon ${styles.cdgSidenavItemIcon} ${isActive ? `${styles.cdgSidenavItemActiveIcon}` : ''
             }`}
-          >
-            {icon}
-          </div>
-          <div
-            className={`cdg-sidenav-item-title ${styles.cdgSidenavItemTitle}`}
-          >
-            {title}
-          </div>
-          {clonedMenu}
+        >
+          {icon}
         </div>
-      </CssInjection>
+        <div
+          className={`cdg-sidenav-item-title ${styles.cdgSidenavItemTitle}`}
+        >
+          {title}
+        </div>
+        {clonedMenu}
+      </div>
     )
   },
 )

@@ -1,19 +1,18 @@
 import React from 'react'
 import CssInjection from '../../utils/objectToCss/CssInjection'
-import {Component} from '../utils'
+import { Component } from '../utils'
 import styles from './header.module.css'
 
 interface Props {
   variant?:
-    | 'header0'
-    | 'header1'
-    | 'header2'
-    | 'header3'
-    | 'header4'
-    | 'header5'
+  | 'header0'
+  | 'header1'
+  | 'header2'
+  | 'header3'
+  | 'header4'
+  | 'header5'
   component?: Component
   children: React.ReactNode
-  css?: unknown
   weight?: 'semibold' | 'bold'
 }
 
@@ -22,7 +21,6 @@ export type headerTypographyProps = Props &
 
 const Header: React.FC<headerTypographyProps> = (props) => {
   const {
-    css = {},
     children,
     variant = 'header1',
     weight = 'semibold',
@@ -62,11 +60,9 @@ const Header: React.FC<headerTypographyProps> = (props) => {
   }, [className, variant, weight])
   return (
     <>
-      <CssInjection css={css}>
-        <Component {...htmlProps} className={classNames}>
-          {children}
-        </Component>
-      </CssInjection>
+      <Component {...htmlProps} className={classNames}>
+        {children}
+      </Component>
     </>
   )
 }

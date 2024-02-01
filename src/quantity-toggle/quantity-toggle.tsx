@@ -1,15 +1,14 @@
 'use client'
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {useId} from '../utils/useId'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { useId } from '../utils/useId'
 import styles from './styles/quantity-toggle.module.css'
-import {AriaNumberFieldProps} from './utils/types'
+import { AriaNumberFieldProps } from './utils/types'
 import useNumberField from './utils/useNumberField'
 import useNumberFieldState from './utils/useNumberFieldState'
 
 interface Props extends AriaNumberFieldProps {
-  css?: unknown
   helperText?: string
   isErrored?: boolean
   isReadOnly?: boolean
@@ -33,7 +32,6 @@ const QuantityToggle = React.forwardRef<HTMLInputElement, QuantityToggleProps>(
     const {
       id,
       label,
-      css = {},
       onUpdate,
       className,
       isRequired,
@@ -45,7 +43,7 @@ const QuantityToggle = React.forwardRef<HTMLInputElement, QuantityToggleProps>(
     const quantityToggleRef = useDOMRef<HTMLInputElement>(ref)
 
     const state = useNumberFieldState(ariaSafeProps)
-    const {inputProps, incrementButtonProps, decrementButtonProps} =
+    const { inputProps, incrementButtonProps, decrementButtonProps } =
       useNumberField(props, state, quantityToggleRef)
 
     React.useEffect(() => {
@@ -112,49 +110,47 @@ const QuantityToggle = React.forwardRef<HTMLInputElement, QuantityToggleProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css}>
-        <div className={rootClass}>
-          {props.label && (
-            <label
-              htmlFor={toggleId}
-              className={`${styles.label} cdg-quantity-toggle-label`}
-            >
-              {label}
-              {isRequired && (
-                <span
-                  className={`${styles.asterix} cdg-quantity-toggle-asterix`}
-                >
-                  *
-                </span>
-              )}
-            </label>
-          )}
-          <div className={quantityToggleClass}>
-            <button className={buttonClass} {...decrementButtonProps}>
-              -
-            </button>
-            <input
-              id={toggleId}
-              className={inputClass}
-              ref={quantityToggleRef}
-              {...inputProps}
-            />
-            <button className={buttonClass} {...incrementButtonProps}>
-              +
-            </button>
-          </div>
-          {isErrored && props.errorMessage && (
-            <div className={errorMessageClass}>{props.errorMessage}</div>
-          )}
-          {props.helperText && (
-            <div
-              className={`${styles.quantityToggleHelperText} cdg-quantity-toggle-helper-text`}
-            >
-              {props.helperText}
-            </div>
-          )}
+      <div className={rootClass}>
+        {props.label && (
+          <label
+            htmlFor={toggleId}
+            className={`${styles.label} cdg-quantity-toggle-label`}
+          >
+            {label}
+            {isRequired && (
+              <span
+                className={`${styles.asterix} cdg-quantity-toggle-asterix`}
+              >
+                *
+              </span>
+            )}
+          </label>
+        )}
+        <div className={quantityToggleClass}>
+          <button className={buttonClass} {...decrementButtonProps}>
+            -
+          </button>
+          <input
+            id={toggleId}
+            className={inputClass}
+            ref={quantityToggleRef}
+            {...inputProps}
+          />
+          <button className={buttonClass} {...incrementButtonProps}>
+            +
+          </button>
         </div>
-      </CssInjection>
+        {isErrored && props.errorMessage && (
+          <div className={errorMessageClass}>{props.errorMessage}</div>
+        )}
+        {props.helperText && (
+          <div
+            className={`${styles.quantityToggleHelperText} cdg-quantity-toggle-helper-text`}
+          >
+            {props.helperText}
+          </div>
+        )}
+      </div>
     )
   },
 )

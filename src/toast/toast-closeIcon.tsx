@@ -1,12 +1,10 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/toast.module.css'
 
 interface Props {
   children?: React.ReactNode
   onClose?: () => void
-  css?: unknown
 }
 
 export type ToastCloseIconProps = Props &
@@ -14,19 +12,17 @@ export type ToastCloseIconProps = Props &
 
 const ToastCloseIcon = React.forwardRef<HTMLDivElement, ToastCloseIconProps>(
   (props, ref) => {
-    const {children, css = {}, className = '', onClose, ...htmlProps} = props
+    const { children, className = '', onClose, ...htmlProps } = props
     const toastCloseIconRef = useDOMRef<HTMLDivElement>(ref)
     return (
-      <CssInjection css={css} childrenRef={toastCloseIconRef}>
-        <div
-          ref={toastCloseIconRef}
-          className={`${className} ${styles.toastCloseIcon}`}
-          {...htmlProps}
-          onClick={() => onClose?.()}
-        >
-          {children}
-        </div>
-      </CssInjection>
+      <div
+        ref={toastCloseIconRef}
+        className={`${className} ${styles.toastCloseIcon}`}
+        {...htmlProps}
+        onClick={() => onClose?.()}
+      >
+        {children}
+      </div>
     )
   },
 )

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/sidebar.module.css'
 
 interface Props {
@@ -16,7 +16,7 @@ export type SidebarTitleProps = Props &
 
 const SidebarTitle = React.forwardRef<HTMLDivElement, SidebarTitleProps>(
   (props, ref) => {
-    const {children, css = {}, className = '', ...htmlProps} = props
+    const { children, className = '', ...htmlProps } = props
 
     const renderTitle = () => {
       if (typeof children === 'string') {
@@ -34,15 +34,13 @@ const SidebarTitle = React.forwardRef<HTMLDivElement, SidebarTitleProps>(
     }
     const sidebarTitleRef = useDOMRef<HTMLDivElement>(ref)
     return (
-      <CssInjection css={css} childrenRef={sidebarTitleRef}>
-        <div
-          className={`cdg-sidebar-title ${styles.sidebarTitle} ${className}`}
-          ref={sidebarTitleRef}
-          {...htmlProps}
-        >
-          {renderTitle()}
-        </div>
-      </CssInjection>
+      <div
+        className={`cdg-sidebar-title ${styles.sidebarTitle} ${className}`}
+        ref={sidebarTitleRef}
+        {...htmlProps}
+      >
+        {renderTitle()}
+      </div>
     )
   },
 )

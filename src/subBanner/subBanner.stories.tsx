@@ -1,6 +1,5 @@
 'use client'
-
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import SubBanner from './index'
 
@@ -30,7 +29,7 @@ const verticalBackgroundSrc =
 
 export const Default: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Default Sub-banner is primary variant</h3>
       <SubBanner>
         <SubBanner.Image src={horizontalBackgroundSrc} />
@@ -46,7 +45,7 @@ export const Default: React.FC = () => {
 
 export const Variant: React.FC = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Primary</h3>
       <SubBanner variant='primary'>
         <SubBanner.Image src={horizontalBackgroundSrc} />

@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '../button'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   FaceFrown,
   FaceMeh,
@@ -19,7 +19,6 @@ interface Props {
   value?: number
   readOnly?: boolean
   disabled?: boolean
-  css?: unknown
 }
 export type RatingProps = Props &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof Props>
@@ -27,7 +26,6 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
   const {
     useIcons = false,
     onChange,
-    css = {},
     value = null,
     readOnly = false,
     disabled = false,
@@ -52,45 +50,40 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
     return (
       <>
         <Button
-          className={`${styles.rating} ${
-            activeIndex === 0 ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === 0 ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(0)}
           isDisabled={disabled}
         >
           <FaceSadTear />
         </Button>
         <Button
-          className={`${styles.rating} ${
-            activeIndex === 1 ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === 1 ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(1)}
           isDisabled={disabled}
         >
           <FaceFrown />
         </Button>
         <Button
-          className={`${styles.rating} ${
-            activeIndex === 2 ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === 2 ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(2)}
           isDisabled={disabled}
         >
           <FaceMeh />
         </Button>
         <Button
-          className={`${styles.rating} ${
-            activeIndex === 3 ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === 3 ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(3)}
           isDisabled={disabled}
         >
           <FaceSmile />
         </Button>
         <Button
-          className={`${styles.rating} ${
-            activeIndex === 4 ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === 4 ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(4)}
           isDisabled={disabled}
         >
@@ -103,9 +96,8 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
     return [1, 2, 3, 4, 5].map((item, index) => {
       return (
         <Button
-          className={`${styles.rating} ${
-            activeIndex === index ? `${styles.active}` : ''
-          } ${styles.customButton}`}
+          className={`${styles.rating} ${activeIndex === index ? `${styles.active}` : ''
+            } ${styles.customButton}`}
           onPress={handleRatingBtnPress(index)}
           key={index}
           isDisabled={disabled}
@@ -116,15 +108,13 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
     })
   }
   return (
-    <CssInjection css={css} childrenRef={ratingRef}>
-      <div
-        ref={ratingRef}
-        {...htmlProps}
-        className={`cdg-rating ${styles.ratingWrapper} ${className}`}
-      >
-        {useIcons ? renderIconButtons() : renderNumberButtons()}
-      </div>
-    </CssInjection>
+    <div
+      ref={ratingRef}
+      {...htmlProps}
+      className={`cdg-rating ${styles.ratingWrapper} ${className}`}
+    >
+      {useIcons ? renderIconButtons() : renderNumberButtons()}
+    </div>
   )
 })
 

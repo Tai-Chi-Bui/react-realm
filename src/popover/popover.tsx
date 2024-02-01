@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   autoUpdate,
   flip,
@@ -14,38 +13,38 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react'
-import React, {HTMLAttributes, useState} from 'react'
+import React, { HTMLAttributes, useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/popover.module.css'
 
 type OffsetValue =
   | number
   | {
-      /**
-       * The axis that runs along the side of the floating element. Represents
-       * the distance (gutter or margin) between the reference and floating
-       * element.
-       * @default 0
-       */
-      mainAxis?: number
-      /**
-       * The axis that runs along the alignment of the floating element.
-       * Represents the skidding between the reference and floating element.
-       * @default 0
-       */
-      crossAxis?: number
-      /**
-       * The same axis as `crossAxis` but applies only to aligned placements
-       * and inverts the `end` alignment. When set to a number, it overrides the
-       * `crossAxis` value.
-       *
-       * A positive number will move the floating element in the direction of
-       * the opposite edge to the one that is aligned, while a negative number
-       * the reverse.
-       * @default null
-       */
-      alignmentAxis?: number | null
-    }
+    /**
+     * The axis that runs along the side of the floating element. Represents
+     * the distance (gutter or margin) between the reference and floating
+     * element.
+     * @default 0
+     */
+    mainAxis?: number
+    /**
+     * The axis that runs along the alignment of the floating element.
+     * Represents the skidding between the reference and floating element.
+     * @default 0
+     */
+    crossAxis?: number
+    /**
+     * The same axis as `crossAxis` but applies only to aligned placements
+     * and inverts the `end` alignment. When set to a number, it overrides the
+     * `crossAxis` value.
+     *
+     * A positive number will move the floating element in the direction of
+     * the opposite edge to the one that is aligned, while a negative number
+     * the reverse.
+     * @default null
+     */
+    alignmentAxis?: number | null
+  }
 
 // Legacy popover directions. Will be deprecated in the future
 export type LegacyPopoverDirection =
@@ -74,7 +73,6 @@ interface Props {
   isFloatingPortal?: boolean
   onPositionedChange?: (isPositioned: boolean) => void
   className?: string
-  css?: unknown
 }
 
 export type PopoverProps = Props &
@@ -97,7 +95,6 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     disableInteractive = false,
     defaultOpen = false,
     trigger = 'click',
-    css = {},
     isFloatingPortal = true,
     className = '',
   } = props
@@ -126,7 +123,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     }
   }, [direction])
 
-  const {x, y, refs, strategy, context, isPositioned} = useFloating({
+  const { x, y, refs, strategy, context, isPositioned } = useFloating({
     open: isOpen,
     onOpenChange: onOpenChange ? onOpenChange : setIsOpen,
     placement: placementProp,
@@ -149,10 +146,10 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   const click = useClick(context)
   const dismiss = useDismiss(context)
   // Role props for screen readers
-  const role = useRole(context, {role: 'dialog'})
+  const role = useRole(context, { role: 'dialog' })
 
   // Merge all the interactions into prop getters
-  const {getReferenceProps, getFloatingProps} = useInteractions([
+  const { getReferenceProps, getFloatingProps } = useInteractions([
     hover,
     click,
     dismiss,
@@ -197,15 +194,13 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   return (
     <>
-      <CssInjection css={css} ref={refs.setReference}>
-        <div
-          ref={refs.setReference}
-          {...getReferenceProps()}
-          className={styles.popoverWrapper}
-        >
-          {anchor}
-        </div>
-      </CssInjection>
+      <div
+        ref={refs.setReference}
+        {...getReferenceProps()}
+        className={styles.popoverWrapper}
+      >
+        {anchor}
+      </div>
       {/* anchorWrapper */}
 
       {isFloatingPortal ? (

@@ -1,10 +1,9 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/circular.module.css'
 
 interface Props {
-  css?: unknown
   size?: number
   color?: string
   value?: number
@@ -23,7 +22,6 @@ const CircularProgress = React.forwardRef<
   CircularProgressProps
 >((props, ref) => {
   const {
-    css = {},
     className,
     value = 0,
     size = 40,
@@ -37,7 +35,7 @@ const CircularProgress = React.forwardRef<
   const rootRef = useDOMRef<HTMLDivElement>(ref)
 
   const rootStyle = React.useMemo(() => {
-    return variant === 'determinate' ? {transform: 'rotate(-90deg)'} : {}
+    return variant === 'determinate' ? { transform: 'rotate(-90deg)' } : {}
   }, [variant])
 
   const circleStyle = React.useMemo(() => {
@@ -70,8 +68,8 @@ const CircularProgress = React.forwardRef<
         ? styles.svgCircleVariantDeterminate
         : styles.svgCircleVariantIndeterminate,
       variant === 'indeterminate' &&
-        !disableShrink &&
-        styles.svgCircleVariantDeterminateDisableShrink,
+      !disableShrink &&
+      styles.svgCircleVariantDeterminateDisableShrink,
       'cdg-progress-svgCircle',
     ]
       .filter(Boolean)
@@ -79,29 +77,27 @@ const CircularProgress = React.forwardRef<
   }, [variant, disableShrink])
 
   return (
-    <CssInjection css={css} childrenRef={rootRef}>
-      <div
-        {...htmlProps}
-        ref={rootRef}
-        className={circularClass}
-        style={{color: color, width: size, height: size, ...rootStyle}}
+    <div
+      {...htmlProps}
+      ref={rootRef}
+      className={circularClass}
+      style={{ color: color, width: size, height: size, ...rootStyle }}
+    >
+      <svg
+        className={`${styles.svg} cdg-progress-svg`}
+        viewBox={`${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`}
       >
-        <svg
-          className={`${styles.svg} cdg-progress-svg`}
-          viewBox={`${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`}
-        >
-          <circle
-            cx={SIZE}
-            cy={SIZE}
-            fill='none'
-            style={circleStyle}
-            strokeWidth={thickness}
-            r={(SIZE - thickness) / 2}
-            className={svgCircleClass}
-          />
-        </svg>
-      </div>
-    </CssInjection>
+        <circle
+          cx={SIZE}
+          cy={SIZE}
+          fill='none'
+          style={circleStyle}
+          strokeWidth={thickness}
+          r={(SIZE - thickness) / 2}
+          className={svgCircleClass}
+        />
+      </svg>
+    </div>
   )
 })
 

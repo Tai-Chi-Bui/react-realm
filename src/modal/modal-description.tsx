@@ -1,12 +1,11 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/modal.module.css'
 
 interface Props {
   h5?: boolean
   children?: React.ReactNode
-  css?: unknown
 }
 
 export type ModalDescriptionProps = Props &
@@ -16,7 +15,7 @@ const ModalDescription = React.forwardRef<
   HTMLDivElement,
   ModalDescriptionProps
 >((props, ref) => {
-  const {children, css = {}, h5 = false, className, ...htmlProps} = props
+  const { children, h5 = false, className, ...htmlProps } = props
   const modalDescriptionRef = useDOMRef<HTMLDivElement>(ref)
   const classNames = [
     className,
@@ -27,11 +26,9 @@ const ModalDescription = React.forwardRef<
     .filter(Boolean)
     .join(' ')
   return (
-    <CssInjection css={css}>
-      <div className={classNames} ref={modalDescriptionRef} {...htmlProps}>
-        {children}
-      </div>
-    </CssInjection>
+    <div className={classNames} ref={modalDescriptionRef} {...htmlProps}>
+      {children}
+    </div>
   )
 })
 

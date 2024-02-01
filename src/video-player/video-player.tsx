@@ -1,6 +1,6 @@
-import React, {SyntheticEvent, useState} from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import Slider from '../slider'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   NextIcon,
   PauseIcon,
@@ -30,7 +30,6 @@ interface Props {
   'aria-describedby'?: string
   'aria-details'?: string
   className?: string
-  css?: unknown
   onNext?: () => void
   onPrev?: () => void
   onSetting?: () => void
@@ -41,8 +40,6 @@ export type VideoPlayerProps = Props &
 
 const VideoPlayer = React.forwardRef<HTMLVideoElement, Props>((props, ref) => {
   const {
-    // StyledComponentProps
-    css = {},
     // children
     id,
     src,
@@ -196,26 +193,24 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, Props>((props, ref) => {
           Sorry, the video failed to load. Please try again later.
         </div>
       )}
-      <CssInjection css={css} childrenRef={videoRef}>
-        <video
-          className={`cdg-video ${styles.videoPlayerVideo} ${className}`}
-          {...ariaSafeProps}
-          src={src}
-          ref={videoRef}
-          loop={loop}
-          poster={poster}
-          preload={preload}
-          muted={muted}
-          controls={false}
-          autoPlay={autoPlay}
-          width={width}
-          height={height}
-          onLoadedData={onLoadedData}
-          onTimeUpdate={onTimeUpdate}
-          onClick={play}
-          onError={handleError}
-        />
-      </CssInjection>
+      <video
+        className={`cdg-video ${styles.videoPlayerVideo} ${className}`}
+        {...ariaSafeProps}
+        src={src}
+        ref={videoRef}
+        loop={loop}
+        poster={poster}
+        preload={preload}
+        muted={muted}
+        controls={false}
+        autoPlay={autoPlay}
+        width={width}
+        height={height}
+        onLoadedData={onLoadedData}
+        onTimeUpdate={onTimeUpdate}
+        onClick={play}
+        onError={handleError}
+      />
       {controls && (
         <>
           <div className={`cdg-volume ${styles.volume}`} tabIndex={0}>
@@ -235,10 +230,6 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, Props>((props, ref) => {
                 value={progress}
                 onChangeEnd={onToggleProgress}
                 tooltip={false}
-                css={{
-                  background: '#C8C6C4',
-                  '.range-slider': {background: '#fff'},
-                }}
               />
               <span className={styles.slideBarWrapperSpan}>
                 {formatTime(duration)}

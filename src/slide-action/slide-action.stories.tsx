@@ -1,7 +1,7 @@
-import {faPowerOff} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
-import {useState} from 'react'
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
+import { useState } from 'react'
 import Typography from '../typography'
 import SlideAction from './slide-action'
 import classes from './styles/stories.module.css'
@@ -59,7 +59,7 @@ export function Customize() {
     <div className={classes.sliderActionStories}>
       <Typography.Header variant='header3'>Default</Typography.Header>
       <pre>color: var(--cdg-color-dangerShades) // #E31617</pre>
-      <SlideAction css={{marginTop: 'var(--cdg-spacing-4)'}}>
+      <SlideAction>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque enim
         sint labore nesciunt
       </SlideAction>
@@ -80,7 +80,7 @@ export function Customize() {
             key={color}
             className={classes.colorPicker}
             title={color}
-            style={{backgroundColor: color}}
+            style={{ backgroundColor: color }}
             type='button'
             onClick={() => setColorBg(color)}
           />
@@ -104,7 +104,6 @@ export function Customize() {
       <SlideAction color={colorBg}>Slide background</SlideAction>
 
       <SlideAction
-        css={{marginTop: 'var(--cdg-spacing-4)'}}
         color={colorBg}
         slideType='static'
       >
@@ -126,7 +125,6 @@ export function Customize() {
         Default gradient background
       </Typography.Header>
       <SlideAction
-        css={{marginTop: 'var(--cdg-spacing-4)'}}
         color='#e11d48'
         slideColor='gradient'
       >
@@ -141,7 +139,7 @@ export function Customize() {
             .join(' ')}
         >
           <SlideAction
-            css={{
+            style={{
               border: 'none',
               backgroundColor: 'rgba(61, 127, 118, 0.5)',
             }}

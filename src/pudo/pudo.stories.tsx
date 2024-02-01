@@ -1,17 +1,17 @@
 import MapMarked from '@comfortdelgro/compass-icons/react/map-marked'
 import InfoOutlined from '@comfortdelgro/compass-icons/react/outlined/info-outlined'
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import debounce from 'lodash/debounce'
-import {useCallback, useState} from 'react'
-import {SlideAction} from '..'
+import { useCallback, useState } from 'react'
+import { SlideAction } from '..'
 import Button from '../button'
 import Typography from '../typography'
 import Pudo from './pudo'
-import {PudoItemProps, PudoValueChange} from './pudo.types'
+import { PudoItemProps, PudoValueChange } from './pudo.types'
 import classes from './styles/pudo-stories.module.css'
 
 const exampleItem = [
-  {name: 'item1', value: '', placeholder: 'item1'},
+  { name: 'item1', value: '', placeholder: 'item1' },
   {
     name: 'item2',
     value: '',
@@ -27,14 +27,14 @@ const exampleItem = [
 
 type PudoItemKeys = 'pickUp' | 'des1'
 const pudoItems: Array<PudoItemProps<PudoItemKeys>> = [
-  {name: 'pickUp', value: '', placeholder: 'Pick up from', maxLength: 255},
-  {name: 'des1', value: '', placeholder: 'Where to', allowSwap: true},
+  { name: 'pickUp', value: '', placeholder: 'Pick up from', maxLength: 255 },
+  { name: 'des1', value: '', placeholder: 'Where to', allowSwap: true },
 ]
 const pendingAddItems = [
-  {name: 'des2', value: '', placeholder: 'Where to', allowSwap: true},
+  { name: 'des2', value: '', placeholder: 'Where to', allowSwap: true },
   {
     name: 'des3',
-    icon: <MapMarked style={{height: '0.875rem'}} />,
+    icon: <MapMarked style={{ height: '0.875rem' }} />,
     value: '',
     placeholder: 'New destination',
     allowSwap: true,
@@ -52,11 +52,11 @@ type PudoItemAllKeys = (typeof pendingAddItems)[number]['name'] | PudoItemKeys
 export function Default() {
   const [exampleItems, setExampleItems] = useState<PudoItemProps[]>(exampleItem)
   const [exampleValues, setExampleValues] = useState<PudoValueChange>(
-    exampleItem.map(({name, value}) => ({name, value})),
+    exampleItem.map(({ name, value }) => ({ name, value })),
   )
   const [formValues, setFormValues] = useState<
     PudoValueChange<PudoItemAllKeys>
-  >(pudoItems.map(({name, value = ''}) => ({name, value})))
+  >(pudoItems.map(({ name, value = '' }) => ({ name, value })))
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceUpdate = useCallback(
@@ -65,7 +65,7 @@ export function Default() {
 
       const newItemsConfig = exampleItems.slice()
       newValue.forEach((item) => {
-        const updateIndex = newItemsConfig.find(({name}) => item.name === name)
+        const updateIndex = newItemsConfig.find(({ name }) => item.name === name)
         if (!updateIndex) {
           return
         }
@@ -82,9 +82,9 @@ export function Default() {
       currState.map((item, index) =>
         index === 0
           ? {
-              ...item,
-              placeholder: 'Current location: Hanoi',
-            }
+            ...item,
+            placeholder: 'Current location: Hanoi',
+          }
           : item,
       ),
     )
@@ -168,13 +168,13 @@ export function Default() {
             name: 'item2',
             title: (
               <>
-                <p style={{marginBlock: '0 1rem', color: 'blueviolet'}}>
+                <p style={{ marginBlock: '0 1rem', color: 'blueviolet' }}>
                   <strong>Title only:</strong> Lorem ipsum dolor sit, amet
                   consectetur adipisicing elit. Laborum assumenda officiis
                   voluptates quam rem qui libero commodi veritatis.
                 </p>
                 <SlideAction
-                  css={{marginBlock: '0.5rem'}}
+                  style={{ marginBlock: '0.5rem' }}
                   label='Some danger action on title'
                   labelType='slide'
                 />
@@ -184,7 +184,7 @@ export function Default() {
           {
             name: 'item3',
             content: (
-              <p style={{marginBlock: '0'}}>
+              <p style={{ marginBlock: '0' }}>
                 This item has <strong>content only</strong> ✨. Lorem ipsum
                 dolor sit, amet consectetur adipisicing elit. Laborum assumenda
                 officiis voluptates quam rem qui libero commodi veritatis.
@@ -257,15 +257,15 @@ export function Default() {
       <div className={classes.compactContainer}>
         <Pudo
           items={[
-            {name: 'item1', value: '', placeholder: 'item1'},
-            {name: 'item2', value: '', placeholder: 'item2'},
+            { name: 'item1', value: '', placeholder: 'item1' },
+            { name: 'item2', value: '', placeholder: 'item2' },
           ]}
           compact='sm'
         />
         <Pudo
           items={[
-            {name: 'item1', value: '', placeholder: 'item1'},
-            {name: 'item2', value: '', placeholder: 'item2'},
+            { name: 'item1', value: '', placeholder: 'item1' },
+            { name: 'item2', value: '', placeholder: 'item2' },
           ]}
           compact='md'
         />
@@ -287,7 +287,7 @@ export function Default() {
           illo temporibus velit, beatae dolores accusantium quis vel corporis neque
           harum? Accusantium, voluptates consequuntur?`,
             },
-            {name: 'item2', title: 'Destination'},
+            { name: 'item2', title: 'Destination' },
           ]}
           type='custom'
           compact='sm'
@@ -304,7 +304,7 @@ export function Default() {
           illo temporibus velit, beatae dolores accusantium quis vel corporis neque
           harum? Accusantium, voluptates consequuntur?`,
             },
-            {name: 'item2', title: 'Destination'},
+            { name: 'item2', title: 'Destination' },
           ]}
           type='custom'
           compact='md'
@@ -326,7 +326,7 @@ export function Default() {
           harum? Accusantium, voluptates consequuntur?`,
             placeholder: 'item1',
           },
-          {name: 'item2', value: 'Destination', placeholder: 'item2'},
+          { name: 'item2', value: 'Destination', placeholder: 'item2' },
         ]}
       />
     </div>

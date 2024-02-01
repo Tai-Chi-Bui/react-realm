@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import SnackbarPrefixIcon from './snackbar-prefix-icon'
 import SnackbarSuffixIcon from './snackbar-suffix-icon'
 import SnackbarText from './snackbar-text'
@@ -16,7 +15,6 @@ interface Props {
   handleClose?: () => void
   onClick?: (e: React.MouseEvent, id: number | string | undefined) => void
   autoClose?: false | number
-  css?: unknown
   className?: string
   type?: 'success' | 'warning' | 'default' | 'error' | 'reminder' | 'ongoing'
 }
@@ -30,7 +28,6 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       children,
       // StyledComponentProps
       id,
-      css = {},
       // VariantProps
       type = 'default',
       className,
@@ -46,15 +43,15 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
 
     const snackbarRef = useDOMRef<HTMLDivElement>(ref)
 
-    const {child: SnackbarSuffixIconElement} = pickChild<
+    const { child: SnackbarSuffixIconElement } = pickChild<
       typeof SnackbarSuffixIcon
     >(children, SnackbarSuffixIcon)
 
-    const {child: SnackbarPrefixIconElement} = pickChild<
+    const { child: SnackbarPrefixIconElement } = pickChild<
       typeof SnackbarPrefixIcon
     >(children, SnackbarPrefixIcon)
 
-    const {child: SnackbarTextElement} = pickChild<typeof SnackbarText>(
+    const { child: SnackbarTextElement } = pickChild<typeof SnackbarText>(
       children,
       SnackbarText,
     )
@@ -90,28 +87,26 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       <>
         {isOpen &&
           renderContent(
-            <CssInjection css={css} childrenRef={snackbarRef}>
+            <div
+              className={contentClasses}
+              ref={snackbarRef}
+              onClick={handleClick}
+              {...htmlProps}
+            >
+              <SnackbarPrefixIconElement />
+              <SnackbarTextElement />
               <div
-                className={contentClasses}
-                ref={snackbarRef}
-                onClick={handleClick}
-                {...htmlProps}
+                className={`cdg-snackbar-right-section ${styles.snackbarRightSection}`}
               >
-                {SnackbarPrefixIconElement}
-                {SnackbarTextElement}
-                <div
-                  className={`cdg-snackbar-right-section ${styles.snackbarRightSection}`}
-                >
-                  {SnackbarSuffixIconElement &&
-                    React.cloneElement(
-                      SnackbarSuffixIconElement as unknown as JSX.Element,
-                      {
-                        onClose: () => handleClose?.(),
-                      },
-                    )}
-                </div>
+                {SnackbarSuffixIconElement &&
+                  React.cloneElement(
+                    SnackbarSuffixIconElement as unknown as JSX.Element,
+                    {
+                      onClose: () => handleClose?.(),
+                    },
+                  )}
               </div>
-            </CssInjection>,
+            </div>
           )}
       </>
     )

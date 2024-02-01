@@ -1,5 +1,5 @@
 // import type {StoryDecorator} from '@ladle/react'
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import SearchField from './index'
 
@@ -24,13 +24,13 @@ const style: {
 export const Variants: React.FC = () => {
   const [value, setValue] = React.useState('My initial value')
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Basic</h3>
       <SearchField
         placeholder='Search'
         onSubmit={(text) => console.log(text)}
         value={'Initial value'}
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
       />
 
       <h3>isErrored</h3>
@@ -40,7 +40,7 @@ export const Variants: React.FC = () => {
         onSubmit={(text) => console.log(text)}
         value={'Initial value'}
         isErrored={true}
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
         errorMessage='SearchField error message'
       />
 
@@ -48,14 +48,14 @@ export const Variants: React.FC = () => {
       <SearchField
         isDisabled
         placeholder='Search'
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
         onSubmit={(text) => console.log(text)}
       />
       <h3>isReadOnly</h3>
       <SearchField
         isReadOnly
         placeholder='Search'
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
         onSubmit={(text) => console.log(text)}
       />
 
@@ -64,20 +64,20 @@ export const Variants: React.FC = () => {
         placeholder='Search'
         value={value}
         onChange={(value) => setValue(value)}
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
       />
       <h3> Max Length</h3>
       <SearchField
         placeholder='Search'
         maxLength={10}
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
         onSubmit={(text) => console.log(text)}
       />
       <h3> Min Length</h3>
       <SearchField
         placeholder='Search'
         minLength={5}
-        css={{width: '15rem'}}
+        style={{ width: '15rem' }}
         onSubmit={(text) => console.log(text)}
       />
 
@@ -85,7 +85,7 @@ export const Variants: React.FC = () => {
       <SearchField
         placeholder='Search'
         minLength={5}
-        css={{
+        style={{
           width: '343px',
         }}
         h5
@@ -96,7 +96,7 @@ export const Variants: React.FC = () => {
       <SearchField
         placeholder='Search'
         minLength={5}
-        css={{
+        style={{
           width: '343px',
           boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 4px;',
         }}

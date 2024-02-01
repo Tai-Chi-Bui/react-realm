@@ -1,11 +1,10 @@
 import Color from 'colorjs.io'
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/linear.module.css'
 
 interface Props {
-  css?: unknown
   size?: number
   color?: string
   value?: number
@@ -20,7 +19,6 @@ export type LinearProgressProps = Props &
 const LinearProgress = React.forwardRef<HTMLDivElement, LinearProgressProps>(
   (props, ref) => {
     const {
-      css = {},
       value,
       size = 4,
       className,
@@ -71,7 +69,7 @@ const LinearProgress = React.forwardRef<HTMLDivElement, LinearProgressProps>(
         if (value && value >= 0 && value <= 100) {
           transform = `translateX(${value - 100}%)`
         }
-        return {transform}
+        return { transform }
       }
       return {}
     }, [value, variant])
@@ -95,54 +93,52 @@ const LinearProgress = React.forwardRef<HTMLDivElement, LinearProgressProps>(
         if (valueBuffer && valueBuffer >= 0 && valueBuffer <= 100) {
           transform = `translateX(${(valueBuffer || 0) - 100}%)`
         }
-        return {transform}
+        return { transform }
       }
       return {}
     }, [valueBuffer, variant])
 
     return (
-      <CssInjection css={css} childrenRef={rootRef}>
-        <div
-          ref={rootRef}
-          className={linearClass}
-          style={
-            {
-              '--cdg-progress-linear-color': color,
-              height: `${size}px`,
-            } as React.CSSProperties
-          }
-          {...htmlProps}
-        >
-          {variant === 'buffer' && (
-            <div
-              className={`${styles.dashed} cdg-progress-linear-dashed`}
-              style={
-                {
-                  '--cdg-progress-linear-color': color,
-                  backgroundImage: `radial-gradient(circle at center, ${color} 40%, transparent 0%)`,
-                  backgroundSize: `${size * 2}px ${size}px`,
-                } as React.CSSProperties
-              }
-            />
-          )}
+      <div
+        ref={rootRef}
+        className={linearClass}
+        style={
+          {
+            '--cdg-progress-linear-color': color,
+            height: `${size}px`,
+          } as React.CSSProperties
+        }
+        {...htmlProps}
+      >
+        {variant === 'buffer' && (
           <div
-            className={bar1Class}
-            style={{...bar1Style, backgroundColor: color}}
+            className={`${styles.dashed} cdg-progress-linear-dashed`}
+            style={
+              {
+                '--cdg-progress-linear-color': color,
+                backgroundImage: `radial-gradient(circle at center, ${color} 40%, transparent 0%)`,
+                backgroundSize: `${size * 2}px ${size}px`,
+              } as React.CSSProperties
+            }
           />
-          {variant !== 'determinate' && (
-            <div
-              className={bar2Class}
-              style={
-                {
-                  ...bar2Syle,
-                  '--cdg-progress-linear-color': color,
-                  '--cdg-progress-linear-shadeColor': shadeColor,
-                } as unknown as React.CSSProperties
-              }
-            />
-          )}
-        </div>
-      </CssInjection>
+        )}
+        <div
+          className={bar1Class}
+          style={{ ...bar1Style, backgroundColor: color }}
+        />
+        {variant !== 'determinate' && (
+          <div
+            className={bar2Class}
+            style={
+              {
+                ...bar2Syle,
+                '--cdg-progress-linear-color': color,
+                '--cdg-progress-linear-shadeColor': shadeColor,
+              } as unknown as React.CSSProperties
+            }
+          />
+        )}
+      </div>
     )
   },
 )

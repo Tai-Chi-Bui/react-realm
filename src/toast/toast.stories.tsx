@@ -1,8 +1,8 @@
-import {faImage, faXmark} from '@fortawesome/free-solid-svg-icons'
-import type {Meta} from '@storybook/react'
-import React, {Key} from 'react'
-import {Button, Dropdown, Icon, Toast, ToastContextProvider, useToast} from '..'
-import './stories.css'
+import { faImage, faXmark } from '@fortawesome/free-solid-svg-icons'
+import type { Meta } from '@storybook/react'
+import React, { Key } from 'react'
+import { Button, Dropdown, Icon, Toast, ToastContextProvider, useToast } from '..'
+import './stories.style'
 
 const style: React.CSSProperties = {
   display: 'flex',
@@ -24,7 +24,7 @@ export const Basic: React.FC = () => {
   const [isDefaultOpen, setIsDefaultOpen] = React.useState(false)
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Default toast</h3>
       <Dropdown.Select
         isRequired
@@ -52,13 +52,13 @@ export const Basic: React.FC = () => {
         <Dropdown.Item key='center'>Center</Dropdown.Item>
         <Dropdown.Item key='bottom'>Bottom</Dropdown.Item>
       </Dropdown.Select>
-      <Button css={{width: '8rem'}} onPress={() => setIsDefaultOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsDefaultOpen(true)}>
         Open toast
       </Button>
       <Toast
         isOpen={isDefaultOpen}
         handleClose={() => setIsDefaultOpen(false)}
-        anchorOrigin={{horizontal, vertical}}
+        anchorOrigin={{ horizontal, vertical }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -74,7 +74,7 @@ export const Basic: React.FC = () => {
           <Button>Take action</Button>
         </Toast.Actions>
       </Toast>
-      <div style={{height: '1500px'}}></div>
+      <div style={{ height: '1500px' }}></div>
     </div>
   )
 }
@@ -86,16 +86,16 @@ export const Colors: React.FC = () => {
   const [isNegativeOpen, setIsNegativeOpen] = React.useState(false)
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Informative: blue</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsInformativeOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsInformativeOpen(true)}>
         Open toast
       </Button>
       <Toast
         isOpen={isInformativeOpen}
         handleClose={() => setIsInformativeOpen(false)}
         color='informative'
-        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -113,14 +113,14 @@ export const Colors: React.FC = () => {
       </Toast>
 
       <h3>Neutral: white</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsNeutralOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsNeutralOpen(true)}>
         Open toast
       </Button>
       <Toast
         isOpen={isNeutralOpen}
         handleClose={() => setIsNeutralOpen(false)}
         color='neutral'
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -138,14 +138,14 @@ export const Colors: React.FC = () => {
       </Toast>
 
       <h3>Negative: red</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsNegativeOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsNegativeOpen(true)}>
         Open toast
       </Button>
       <Toast
         isOpen={isNegativeOpen}
         handleClose={() => setIsNegativeOpen(false)}
         color='negative'
-        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -163,14 +163,14 @@ export const Colors: React.FC = () => {
       </Toast>
 
       <h3>Positive: green</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsPositiveOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsPositiveOpen(true)}>
         Open toast
       </Button>
       <Toast
         isOpen={isPositiveOpen}
         handleClose={() => setIsPositiveOpen(false)}
         color='positive'
-        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -193,9 +193,9 @@ export const Colors: React.FC = () => {
 export const AutoClose: React.FC = () => {
   const [isAutoCloseOpen, setIsAutoCloseOpen] = React.useState(false)
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Auto-close toast</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsAutoCloseOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsAutoCloseOpen(true)}>
         Open toast
       </Button>
       <Toast
@@ -203,7 +203,7 @@ export const AutoClose: React.FC = () => {
         handleClose={() => setIsAutoCloseOpen(false)}
         autoClose={1000}
         color='informative'
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <Toast.Icon>
           <Icon icon={faImage} />
@@ -226,9 +226,9 @@ export const AutoClose: React.FC = () => {
 export const Portal: React.FC = () => {
   const [isAutoCloseOpen, setIsAutoCloseOpen] = React.useState(false)
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Portals to body</h3>
-      <Button css={{width: '8rem'}} onPress={() => setIsAutoCloseOpen(true)}>
+      <Button style={{ width: '8rem' }} onPress={() => setIsAutoCloseOpen(true)}>
         Open toast
       </Button>
       <Toast
@@ -269,7 +269,7 @@ const SubService1 = () => {
       }}
     >
       <Button
-        css={{width: 'fit-content'}}
+        style={{ width: 'fit-content' }}
         onClick={() =>
           toast.show({
             color: 'informative',
@@ -281,7 +281,7 @@ const SubService1 = () => {
         Open toast
       </Button>
       <Button
-        css={{width: 'fit-content'}}
+        style={{ width: 'fit-content' }}
         onClick={() =>
           toast.show({
             title: 'Lorem ipsum dolor, sit amet consectetur',
@@ -307,7 +307,7 @@ const SubService2 = () => {
       }}
     >
       <Button
-        css={{width: 'fit-content'}}
+        style={{ width: 'fit-content' }}
         onClick={() =>
           toast.show({
             autoClose: false,
@@ -326,7 +326,7 @@ const SubService2 = () => {
       >
         Open toast autoClose: false
       </Button>
-      <Button css={{width: 'fit-content'}} onClick={() => toast.clearAll()}>
+      <Button style={{ width: 'fit-content' }} onClick={() => toast.clearAll()}>
         Clear all toasts
       </Button>
     </div>
@@ -342,7 +342,7 @@ export const Multiple: React.FC = () => {
   )
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Toast as a service</h3>
       <Dropdown.Select
         isRequired
@@ -370,7 +370,7 @@ export const Multiple: React.FC = () => {
         <Dropdown.Item key='center'>Center</Dropdown.Item>
         <Dropdown.Item key='bottom'>Bottom</Dropdown.Item>
       </Dropdown.Select>
-      <ToastContextProvider anchorOrigin={{horizontal, vertical}}>
+      <ToastContextProvider anchorOrigin={{ horizontal, vertical }}>
         <>
           <SubService1 />
           <SubService2 />

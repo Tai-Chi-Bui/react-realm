@@ -1,6 +1,5 @@
 'use client'
-
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Button from '../button'
 import SubHeader from './index'
@@ -21,8 +20,8 @@ const style: {
 
 export const Default: React.FC = () => {
   return (
-    <div style={{padding: '3em'}}>
-      <div style={{marginBottom: '2rem', ...style, alignItems: 'flex-start'}}>
+    <div style={{ padding: '3em' }}>
+      <div style={{ marginBottom: '2rem', ...style, alignItems: 'flex-start' }}>
         <h3>Default</h3>
         <SubHeader>
           <SubHeader.Header>
@@ -34,14 +33,8 @@ export const Default: React.FC = () => {
         <h3>With actions</h3>
         <SubHeader
           variant='h5'
-          css={{
-            '@mobile': {
-              flexDirection: 'column',
-              alignItems: 'unset',
-            },
-          }}
         >
-          <div style={{flex: 1, ...style}}>
+          <div style={{ flex: 1, ...style }}>
             <SubHeader.Header>
               <SubHeader.Title>Title</SubHeader.Title>
             </SubHeader.Header>

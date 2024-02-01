@@ -1,7 +1,7 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import ModalActions from './modal-actions'
 import ModalCloseIcon from './modal-closeIcon'
 import ModalDescription from './modal-description'
@@ -17,7 +17,6 @@ interface Props {
   onClick?: () => void
   onKeyDown?: (e: KeyboardEvent) => void
   triggerId?: string
-  css?: unknown
 }
 
 export type ModalProps = Props &
@@ -26,8 +25,6 @@ export type ModalProps = Props &
 const Modal = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   const {
     h5 = false,
-    // StyledComponentProps
-    css = {},
     // children
     children,
     // ComponentProps
@@ -49,25 +46,25 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   const CloseIconRef = React.useRef<HTMLButtonElement | null>(null)
 
   // Pick title child component
-  const {child: ModalTitleElement} = pickChild<typeof ModalTitle>(
+  const { child: ModalTitleElement } = pickChild<typeof ModalTitle>(
     children,
     ModalTitle,
   )
 
   // Pick description child component
-  const {child: ModalDescriptionElement} = pickChild<typeof ModalDescription>(
+  const { child: ModalDescriptionElement } = pickChild<typeof ModalDescription>(
     children,
     ModalDescription,
   )
 
   // Pick action child component
-  const {child: ModalActionsElement} = pickChild<typeof ModalActions>(
+  const { child: ModalActionsElement } = pickChild<typeof ModalActions>(
     children,
     ModalActions,
   )
 
   // Pick modal close icon
-  const {child: CloseIconElement} = pickChild<typeof ModalCloseIcon>(
+  const { child: CloseIconElement } = pickChild<typeof ModalCloseIcon>(
     children,
     ModalCloseIcon,
   )
@@ -189,32 +186,30 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection css={css}>
-      <div
-        ref={ModalRef}
-        tabIndex={0}
-        role='dialog'
-        aria-modal={true}
-        onClick={(e) => handleClick?.(e as unknown as MouseEvent)}
-        onKeyDown={(e) => handleKeyDown?.(e as unknown as KeyboardEvent)}
-        className={modalClassNames}
-        {...htmlProps}
-      >
-        <div tabIndex={0} className={contentClassNames}>
-          <div className={headerClassNames}>
-            {ModalTitleElement}
-            {CloseIconElement &&
-              React.cloneElement(CloseIconElement as unknown as JSX.Element, {
-                onClose: () => handleClose?.(),
-                ref: CloseIconRef,
-              })}
-          </div>
-
-          {ModalDescriptionElement}
-          {ModalActionsElement}
+    <div
+      ref={ModalRef}
+      tabIndex={0}
+      role='dialog'
+      aria-modal={true}
+      onClick={(e) => handleClick?.(e as unknown as MouseEvent)}
+      onKeyDown={(e) => handleKeyDown?.(e as unknown as KeyboardEvent)}
+      className={modalClassNames}
+      {...htmlProps}
+    >
+      <div tabIndex={0} className={contentClassNames}>
+        <div className={headerClassNames}>
+          <ModalTitleElement />
+          {CloseIconElement &&
+            React.cloneElement(CloseIconElement as unknown as JSX.Element, {
+              onClose: () => handleClose?.(),
+              ref: CloseIconRef,
+            })}
         </div>
+
+        <ModalDescriptionElement />
+        <ModalActionsElement />
       </div>
-    </CssInjection>
+    </div>
   )
 })
 

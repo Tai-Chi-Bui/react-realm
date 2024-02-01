@@ -1,9 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/page-header-description.module.css'
 
 interface Props {
-  css?: unknown
   children: React.ReactNode
 }
 
@@ -14,7 +12,7 @@ const PageHeaderSubtitle = React.forwardRef<
   HTMLDivElement,
   PageHeaderSubtitleProps
 >((props, ref) => {
-  const {children, css = {}, className, ...htmlProps} = props
+  const { children, className, ...htmlProps } = props
 
   const rootClasses = [
     styles.pageHeaderSubtitle,
@@ -25,11 +23,9 @@ const PageHeaderSubtitle = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <span className={rootClasses} ref={ref} {...htmlProps}>
-        {children}
-      </span>
-    </CssInjection>
+    <span className={rootClasses} ref={ref} {...htmlProps}>
+      {children}
+    </span>
   )
 })
 

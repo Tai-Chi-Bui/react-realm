@@ -1,8 +1,7 @@
-import React, {useRef} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {useId} from '../utils/useId'
+import React, { useRef } from 'react'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { useId } from '../utils/useId'
 import styles from './styles/toggle.module.css'
 
 interface Props {
@@ -32,7 +31,6 @@ interface Props {
   'aria-details'?: string
   'aria-errormessage'?: string
   className?: string
-  css?: unknown
   variant?: 'h5'
 }
 
@@ -50,7 +48,6 @@ const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>((props, ref) => {
     isRequired = false,
     isDisabled = false,
     variant,
-    css = {},
     className = '',
   } = props
   const [isActive, setIsActive] = React.useState(
@@ -108,40 +105,38 @@ const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>((props, ref) => {
   }, [isSelected, defaultSelected])
 
   return (
-    <CssInjection css={css} childrenRef={toggleWrapperRef}>
-      <div
-        ref={toggleWrapperRef}
-        tabIndex={isDisabled ? -1 : 0}
-        className={toggleClasses}
-        onClick={onClick}
-        onKeyDown={handleKeyDown}
-      >
-        <input
-          name={name}
-          id={toggleId}
-          type='checkbox'
-          ref={toggleRef}
-          checked={isSelected}
-          disabled={isDisabled}
-          readOnly={isReadOnly}
-          required={isRequired}
-          defaultChecked={defaultSelected}
-          onChange={onChange}
-          onBlur={props.onBlur}
-          onKeyUp={props.onKeyUp}
-          onFocus={props.onFocus}
-          onKeyDown={props.onKeyDown}
-          aria-label={props['aria-label']}
-          aria-controls={props['aria-controls']}
-          aria-details={props['aria-details']}
-          aria-labelledby={props['aria-labelledby']}
-          aria-describedby={props['aria-describedby']}
-          aria-errormessage={props['aria-errormessage']}
-          className={styles.toggleInput}
-        />
-        <div className={toggleCicleClasses} />
-      </div>
-    </CssInjection>
+    <div
+      ref={toggleWrapperRef}
+      tabIndex={isDisabled ? -1 : 0}
+      className={toggleClasses}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+    >
+      <input
+        name={name}
+        id={toggleId}
+        type='checkbox'
+        ref={toggleRef}
+        checked={isSelected}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
+        required={isRequired}
+        defaultChecked={defaultSelected}
+        onChange={onChange}
+        onBlur={props.onBlur}
+        onKeyUp={props.onKeyUp}
+        onFocus={props.onFocus}
+        onKeyDown={props.onKeyDown}
+        aria-label={props['aria-label']}
+        aria-controls={props['aria-controls']}
+        aria-details={props['aria-details']}
+        aria-labelledby={props['aria-labelledby']}
+        aria-describedby={props['aria-describedby']}
+        aria-errormessage={props['aria-errormessage']}
+        className={styles.toggleInput}
+      />
+      <div className={toggleCicleClasses} />
+    </div>
   )
 })
 

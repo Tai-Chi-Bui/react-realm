@@ -1,5 +1,5 @@
-import type {Meta} from '@storybook/react'
-import React, {useState} from 'react'
+import type { Meta } from '@storybook/react'
+import React, { useState } from 'react'
 import TimePicker from './index'
 
 const style: React.CSSProperties = {
@@ -21,26 +21,23 @@ export const Basic: React.FC = () => {
   const [valueMinTime, setValueMinTime] = useState('08:25 AM')
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3>Default (format: hh:mm AA)</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           defaultValue={'12:00 PM'}
-          // onFocus={() => console.log('onFocus')}
-          // onBlur={() => console.log('onBlur')}
-          // onOpenChange={(open) => console.log('onOpenChange: ', open)}
         />
       </div>
       <h3>Disable</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker defaultValue={'12:00 PM'} isDisabled />
       </div>
       <h3>Readonly</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker defaultValue={'12:00 PM'} isReadOnly />
       </div>
       <h3>With 12-hours uncontrolled</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           formatTime='hh:mm:ss AA'
           views={['hours12', 'minutes', 'seconds', 'sessions']}
@@ -48,7 +45,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>With 12-hours controlled</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           formatTime='hh:mm:ss AA'
           views={['hours12', 'minutes', 'seconds', 'sessions']}
@@ -60,7 +57,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>With 24-hours uncontrolled</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           formatTime='HH:mm:ss'
           views={['hours24', 'minutes', 'seconds']}
@@ -69,7 +66,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>With 24-hours controlled</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           formatTime='HH:mm:ss'
           views={['hours24', 'minutes', 'seconds']}
@@ -82,7 +79,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>Disabled dropdown with min times</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <TimePicker
           formatTime='hh:mm AA'
           views={['hours12', 'minutes', 'sessions']}

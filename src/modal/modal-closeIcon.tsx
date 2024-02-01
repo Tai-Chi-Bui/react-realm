@@ -1,12 +1,10 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/modal.module.css'
 
 interface Props {
   children?: React.ReactNode
   onClose?: () => void
-  css?: unknown
 }
 
 export type ModalCloseIconProps = Props &
@@ -14,7 +12,7 @@ export type ModalCloseIconProps = Props &
 
 const ModalCloseIcon = React.forwardRef<HTMLDivElement, ModalCloseIconProps>(
   (props, ref) => {
-    const {children, css = {}, onClose, className, ...htmlProps} = props
+    const { children, onClose, className, ...htmlProps } = props
 
     const modalCloseIconRef = useDOMRef<HTMLDivElement>(ref)
 
@@ -23,17 +21,15 @@ const ModalCloseIcon = React.forwardRef<HTMLDivElement, ModalCloseIconProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css}>
-        <div
-          ref={modalCloseIconRef}
-          onClick={() => onClose?.()}
-          tabIndex={0}
-          className={classNames}
-          {...htmlProps}
-        >
-          {children}
-        </div>
-      </CssInjection>
+      <div
+        ref={modalCloseIconRef}
+        onClick={() => onClose?.()}
+        tabIndex={0}
+        className={classNames}
+        {...htmlProps}
+      >
+        {children}
+      </div>
     )
   },
 )

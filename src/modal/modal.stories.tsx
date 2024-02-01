@@ -1,6 +1,6 @@
-import {faXmark} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Button from '../button'
 import Icon from '../icon'
@@ -16,7 +16,7 @@ export const Default: React.FC = () => {
   return (
     <div>
       <h3>Default Modal is Medium sized</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setDefaultOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setDefaultOpen(true)}>
         Open Modal
       </Button>
       <Modal.Trigger
@@ -58,7 +58,7 @@ export const Variants: React.FC = () => {
   return (
     <div>
       <h3>Small sized modal</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setSmallOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setSmallOpen(true)}>
         Open Modal
       </Button>
       <Modal.Trigger
@@ -77,7 +77,7 @@ export const Variants: React.FC = () => {
       </Modal.Trigger>
 
       <h3>Medium sized modal</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setMediumOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setMediumOpen(true)}>
         Open Modal
       </Button>
       <Modal.Trigger
@@ -96,7 +96,7 @@ export const Variants: React.FC = () => {
       </Modal.Trigger>
 
       <h3>Large sized modal</h3>
-      <Button css={{width: '7.8rem'}} onPress={() => setLargeOpen(true)}>
+      <Button style={{ width: '7.8rem' }} onPress={() => setLargeOpen(true)}>
         Open Modal
       </Button>
       <Modal.Trigger
@@ -139,7 +139,7 @@ const ChildModal: React.FC = () => {
     <>
       <Button
         variant='secondary'
-        css={{width: '7.8rem'}}
+        style={{ width: '7.8rem' }}
         onPress={() => setIsChildOpen(true)}
       >
         Open Child
@@ -149,7 +149,7 @@ const ChildModal: React.FC = () => {
         handleClose={() => handleChildClose?.()}
         className='parent-modal-trigger'
       >
-        <Modal css={{width: '20rem'}}>
+        <Modal style={{ width: '20rem' }}>
           <Modal.Title>My child modal</Modal.Title>
           <Modal.CloseIcon>
             <FontAwesomeIcon icon={faXmark} />
@@ -178,7 +178,7 @@ export const NestedModal: React.FC = () => {
       <h3>Nested Modal</h3>
       <Button
         variant='secondary'
-        css={{width: '7.8rem'}}
+        style={{ width: '7.8rem' }}
         onPress={() => setParentOpen(true)}
         data-target='parent-modal' // This is needed for accessibility. When modal unmouts, focus will be set to this element
       >
@@ -222,7 +222,7 @@ export const H5: React.FC = () => {
     <>
       <div>
         <h3>Default</h3>
-        <Button css={{width: '7.8rem'}} onPress={() => setIsOpenModal(true)}>
+        <Button style={{ width: '7.8rem' }} onPress={() => setIsOpenModal(true)}>
           Open Modal
         </Button>
         <Modal.Trigger
@@ -246,7 +246,7 @@ export const H5: React.FC = () => {
       </div>
       <div>
         <h3>Open Modal with icon close</h3>
-        <Button css={{width: '7.8rem'}} onPress={() => setIsOpenModal2(true)}>
+        <Button style={{ width: '7.8rem' }} onPress={() => setIsOpenModal2(true)}>
           Open Modal
         </Button>
         <Modal.Trigger isOpen={isOpenModal2}>
@@ -256,7 +256,7 @@ export const H5: React.FC = () => {
               <Icon
                 onClick={() => setIsOpenModal2(false)}
                 icon={faXmark}
-                style={{width: 25, height: 25, paddingTop: 24}}
+                style={{ width: 25, height: 25, paddingTop: 24 }}
               />
             </Modal.CloseIcon>
             <Modal.Description h5>{lorem}</Modal.Description>
@@ -277,5 +277,4 @@ const meta = {
     layout: 'fullscreen',
   },
 } satisfies Meta<typeof Default>
-
 export default meta

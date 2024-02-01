@@ -1,9 +1,0 @@
-@import '../../theme/theme.module.css';
-@layer default;
-
-@layer default {
-  .cdgTableToolbar {
-    padding-bottom: var(--cdg-spacing-6);
-    overflow-x: auto;
-  }
-}

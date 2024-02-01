@@ -1,6 +1,5 @@
 import React from 'react'
-import CssInjection from '../../utils/objectToCss/CssInjection'
-import {Component} from '../utils'
+import { Component } from '../utils'
 import styles from './body.module.css'
 
 interface Props {
@@ -8,7 +7,6 @@ interface Props {
   component?: Component
   weight?: 'none' | 'bold' | 'semibold'
   children: React.ReactNode
-  css?: unknown
 }
 
 export type bodyTypographyProps = Props &
@@ -16,7 +14,6 @@ export type bodyTypographyProps = Props &
 
 const Body: React.FC<bodyTypographyProps> = (props) => {
   const {
-    css = {},
     children,
     variant = 'body1',
     weight,
@@ -42,11 +39,9 @@ const Body: React.FC<bodyTypographyProps> = (props) => {
 
   return (
     <>
-      <CssInjection css={css}>
-        <Component className={classNames} {...htmlProps}>
-          {children}
-        </Component>
-      </CssInjection>
+      <Component className={classNames} {...htmlProps}>
+        {children}
+      </Component>
     </>
   )
 }

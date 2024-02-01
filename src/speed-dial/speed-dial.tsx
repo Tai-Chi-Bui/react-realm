@@ -1,23 +1,21 @@
-import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import React, {useState} from 'react'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react'
 import {
   KeyboardNavigationProvider,
   useKeyboardNavigation,
   useKeyboardNavigationState,
 } from '../utils/hooks'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {SpeedDialAction} from './speed-dial-action'
-import {SpeedDialTrigger} from './speed-dial-trigger'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { SpeedDialAction } from './speed-dial-action'
+import { SpeedDialTrigger } from './speed-dial-trigger'
 import styles from './styles/speed-dial.module.css'
 
 interface Props {
-  actions: Array<{name: string; icon: string; onClick: () => void}>
+  actions: Array<{ name: string; icon: string; onClick: () => void }>
   position?: 'up' | 'right' | 'down' | 'left'
   className?: string
-  css?: unknown
 }
 
 export type SpeedDialProps = Props &
@@ -26,8 +24,6 @@ export type SpeedDialProps = Props &
 const SpeedDial = React.forwardRef<HTMLDivElement, SpeedDialProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       className,
       actions,
       position = 'up',
@@ -67,7 +63,7 @@ const SpeedDial = React.forwardRef<HTMLDivElement, SpeedDialProps>(
       resetFocus?.()
     }
 
-    const {onKeyDown, nextFocus, prevFocus, resetFocus} =
+    const { onKeyDown, nextFocus, prevFocus, resetFocus } =
       useKeyboardNavigation()
 
     const handleKeyDown = onKeyDown?.<HTMLDivElement>({
@@ -114,42 +110,40 @@ const SpeedDial = React.forwardRef<HTMLDivElement, SpeedDialProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={speedDialRef}>
-        <div
-          {...htmlProps}
-          className={rootClasses}
-          ref={speedDialRef}
-          role='presentation'
-          onMouseLeave={handleMouseLeave}
-          onKeyDown={handleKeyDown}
+      <div
+        {...htmlProps}
+        className={rootClasses}
+        ref={speedDialRef}
+        role='presentation'
+        onMouseLeave={handleMouseLeave}
+        onKeyDown={handleKeyDown}
+      >
+        <SpeedDialTrigger
+          isOpen={isOpen}
+          onMouseEnter={handleMouseEnter}
+          onFocus={handleFocus}
+          onClick={toggleOpen}
+          aria-expanded={isOpen}
+          aria-haspopup={true}
         >
-          <SpeedDialTrigger
-            isOpen={isOpen}
-            onMouseEnter={handleMouseEnter}
-            onFocus={handleFocus}
-            onClick={toggleOpen}
-            aria-expanded={isOpen}
-            aria-haspopup={true}
-          >
-            <span className={triggerClasses}>
-              <FontAwesomeIcon icon={faPlus} />
-            </span>
-          </SpeedDialTrigger>
-          <ul className={actionClasses} role='menu'>
-            {actions.map(({name, icon, onClick}, index) => (
-              <SpeedDialAction
-                key={index}
-                onClick={() => handleActionClick(onClick)}
-                icon={icon}
-                name={name}
-                position={position}
-                isVisible={isOpen}
-                disabled={!isOpen}
-              />
-            ))}
-          </ul>
-        </div>
-      </CssInjection>
+          <span className={triggerClasses}>
+            <FontAwesomeIcon icon={faPlus} />
+          </span>
+        </SpeedDialTrigger>
+        <ul className={actionClasses} role='menu'>
+          {actions.map(({ name, icon, onClick }, index) => (
+            <SpeedDialAction
+              key={index}
+              onClick={() => handleActionClick(onClick)}
+              icon={icon}
+              name={name}
+              position={position}
+              isVisible={isOpen}
+              disabled={!isOpen}
+            />
+          ))}
+        </ul>
+      </div>
     )
   },
 )
@@ -158,7 +152,7 @@ export const SpeedDialContextWrapper = React.forwardRef<
   HTMLDivElement,
   SpeedDialProps
 >((props, ref) => {
-  const {provider} = useKeyboardNavigationState()
+  const { provider } = useKeyboardNavigationState()
 
   return (
     <KeyboardNavigationProvider {...provider}>

@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import {CSSProperties, forwardRef, useCallback, useRef, useState} from 'react'
+import { CSSProperties, forwardRef, useCallback, useRef, useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {SLIDER_REDUCE_OPACITY} from './slide-action.const'
-import {SlideActionProps, SlideDraggerProps} from './slide-action.types'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { SLIDER_REDUCE_OPACITY } from './slide-action.const'
+import { SlideActionProps, SlideDraggerProps } from './slide-action.types'
 import SlideDragger from './slide-dragger'
 import classes from './styles/slide-action.module.css'
 
@@ -28,7 +27,6 @@ const isValidColorVariable = (color: string): boolean => {
 const SlideAction = forwardRef<HTMLDivElement, SlideActionProps>(
   (
     {
-      css = {},
       className = '',
       icon,
       color = '--cdg-color-dangerShades',
@@ -70,7 +68,7 @@ const SlideAction = forwardRef<HTMLDivElement, SlideActionProps>(
     )
 
     const handleOnDrag = useCallback<NonNullable<SlideDraggerProps['onDrag']>>(
-      ({slideDragWidth, maxSlideDistance}, _, {x}) => {
+      ({ slideDragWidth, maxSlideDistance }, _, { x }) => {
         if (!slideRef.current || !slideLabelRef.current) {
           return
         }
@@ -92,7 +90,7 @@ const SlideAction = forwardRef<HTMLDivElement, SlideActionProps>(
     const handleOnDragEnd = useCallback<
       NonNullable<SlideDraggerProps['onDragEnd']>
     >(
-      ({maxSlideDistance}, _, {x}, setPosition) => {
+      ({ maxSlideDistance }, _, { x }, setPosition) => {
         if (!slideRef.current) {
           return
         }
@@ -105,7 +103,7 @@ const SlideAction = forwardRef<HTMLDivElement, SlideActionProps>(
           setDisableDrag(false)
 
           onChange?.(false)
-          setPosition({x: 0, y: 0}, {transition: 'transform .2s ease'})
+          setPosition({ x: 0, y: 0 }, { transition: 'transform .2s ease' })
 
           handleUpdateSlideBg(0, 0)
         }
@@ -152,38 +150,36 @@ const SlideAction = forwardRef<HTMLDivElement, SlideActionProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={slideRef}>
-        <div
-          ref={slideRef}
-          className={rootClasses}
-          // data-color={color} // attr(data-color) is not widely supported yet, using inline style for now
-          style={
-            {
-              '--slide-action-theme': isValidColorVariable(color)
-                ? `var(${color})`
-                : color,
-            } as CSSProperties
-          }
-          {...htmlDivAttributes}
-        >
-          <div ref={slideBgRef} className={bgClasses} />
-          <SlideDragger
-            slideRef={slideRef}
-            icon={icon}
-            onDrag={handleOnDrag}
-            onDragEnd={handleOnDragEnd}
-            disableDrag={disableDrag}
-          />
+      <div
+        ref={slideRef}
+        className={rootClasses}
+        // data-color={color} // attr(data-color) is not widely supported yet, using inline style for now
+        style={
+          {
+            '--slide-action-theme': isValidColorVariable(color)
+              ? `var(${color})`
+              : color,
+          } as CSSProperties
+        }
+        {...htmlDivAttributes}
+      >
+        <div ref={slideBgRef} className={bgClasses} />
+        <SlideDragger
+          slideRef={slideRef}
+          icon={icon}
+          onDrag={handleOnDrag}
+          onDragEnd={handleOnDragEnd}
+          disableDrag={disableDrag}
+        />
 
-          <div
-            ref={slideLabelRef}
-            className={labelClasses}
-            title={typeof children === 'string' ? children : label}
-          >
-            {children || label}
-          </div>
+        <div
+          ref={slideLabelRef}
+          className={labelClasses}
+          title={typeof children === 'string' ? children : label}
+        >
+          {children || label}
         </div>
-      </CssInjection>
+      </div>
     )
   },
 )

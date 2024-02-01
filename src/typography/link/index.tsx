@@ -6,7 +6,6 @@ interface Props {
   variant?: 'link1' | 'link2' | 'link3'
   weight?: 'semibold' | 'bold'
   children: React.ReactNode
-  css?: unknown
 }
 
 export type linkTypographyProps = Props &
@@ -14,7 +13,6 @@ export type linkTypographyProps = Props &
 
 const Link: React.FC<linkTypographyProps> = (props) => {
   const {
-    css = {},
     children,
     weight,
     variant = 'link1',
@@ -35,11 +33,9 @@ const Link: React.FC<linkTypographyProps> = (props) => {
 
   return (
     <>
-      <CssInjection css={css}>
-        <a {...htmlProps} className={classNames}>
-          {children}
-        </a>
-      </CssInjection>
+      <a {...htmlProps} className={classNames}>
+        {children}
+      </a>
     </>
   )
 }

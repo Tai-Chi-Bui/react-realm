@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react'
-import {ETheme} from './ThemeProvider'
+import { useEffect, useState } from 'react'
+import { ETheme } from './ThemeProvider'
 
 export function useCurrentTheme() {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false)
@@ -11,7 +11,7 @@ export function useCurrentTheme() {
   useEffect(() => {
     updateCurrentTheme()
     const mutationObserver = new MutationObserver(updateCurrentTheme)
-    mutationObserver.observe(document.body, {attributes: true})
+    mutationObserver.observe(document.body, { attributes: true })
   }, [])
 
   return isDarkTheme ? ETheme.Dark : ETheme.Light

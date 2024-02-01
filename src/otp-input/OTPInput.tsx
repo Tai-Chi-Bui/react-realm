@@ -1,12 +1,11 @@
-import React, {memo, useCallback, useState} from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import SingleInput from './SingleInput'
 import styles from './styles/otpInput.module.css'
 
 export interface Props {
   otp?: string
-  css?: unknown
   length?: number
   disabled?: boolean
   isMobile?: boolean
@@ -24,7 +23,6 @@ const OTPInputComponent = React.forwardRef<HTMLDivElement, OTPInputProps>(
   (props, ref) => {
     const {
       otp,
-      css = {},
       disabled,
       autoFocus,
       className,
@@ -206,32 +204,30 @@ const OTPInputComponent = React.forwardRef<HTMLDivElement, OTPInputProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css}>
-        <div ref={inputRef} className={classNames} {...htmlProps}>
-          {Array.from(Array(length).keys()).map((index) => (
-            <SingleInput
-              index={index}
-              disabled={disabled}
-              isMobile={isMobile}
-              autoFocus={autoFocus}
-              isErrored={isErrored}
-              autoComplete='one-time-code'
-              key={`SingleInput-${index}`}
-              focus={activeInput === index}
-              isNumberInput={isNumberInput}
-              value={otpValues && otpValues[index]}
-              {...(isNumberInput
-                ? {type: 'number', pattern: 'd{1}', inputMode: 'numeric'}
-                : undefined)}
-              onBlur={onBlur}
-              onInput={handleOnInput}
-              onPaste={handleOnPaste}
-              onKeyDown={handleOnKeyDown}
-              onFocus={handleOnFocus(index)}
-            />
-          ))}
-        </div>
-      </CssInjection>
+      <div ref={inputRef} className={classNames} {...htmlProps}>
+        {Array.from(Array(length).keys()).map((index) => (
+          <SingleInput
+            index={index}
+            disabled={disabled}
+            isMobile={isMobile}
+            autoFocus={autoFocus}
+            isErrored={isErrored}
+            autoComplete='one-time-code'
+            key={`SingleInput-${index}`}
+            focus={activeInput === index}
+            isNumberInput={isNumberInput}
+            value={otpValues && otpValues[index]}
+            {...(isNumberInput
+              ? { type: 'number', pattern: 'd{1}', inputMode: 'numeric' }
+              : undefined)}
+            onBlur={onBlur}
+            onInput={handleOnInput}
+            onPaste={handleOnPaste}
+            onKeyDown={handleOnKeyDown}
+            onFocus={handleOnFocus(index)}
+          />
+        ))}
+      </div>
     )
   },
 )

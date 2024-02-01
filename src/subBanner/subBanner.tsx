@@ -1,18 +1,15 @@
 'use client'
-
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/subBanner.module.css'
 import SubBannerDescription from './subBanner-description'
-import SubBannerImage, {SubBannerImageProps} from './subBanner-image'
+import SubBannerImage, { SubBannerImageProps } from './subBanner-image'
 import SubBannerTitle from './subBanner-title'
 
 interface Props {
   children?: React.ReactNode
   variant?: 'primary' | 'secondary'
-  css?: unknown
   className?: string
 }
 
@@ -23,8 +20,6 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
   (props, ref) => {
     const {
       children,
-      // styled component props
-      css = {},
       className = '',
       // VariantProps
       variant = 'primary',
@@ -33,7 +28,7 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
     } = props
 
     const subBannerRef = useDOMRef<HTMLDivElement>(ref)
-    const {child: SubBannerImageElement} = pickChild<typeof SubBannerImage>(
+    const { child: SubBannerImageElement } = pickChild<typeof SubBannerImage>(
       children,
       SubBannerImage,
     )
@@ -46,17 +41,17 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
       }
     }
 
-    const {child: SubBannerTitleElement} = pickChild<typeof SubBannerTitle>(
+    const { child: SubBannerTitleElement } = pickChild<typeof SubBannerTitle>(
       children,
       SubBannerTitle,
     )
 
-    const {child: SubBannerDescriptionElement} = pickChild<
+    const { child: SubBannerDescriptionElement } = pickChild<
       typeof SubBannerDescription
     >(children, SubBannerDescription)
 
     return (
-      <CssInjection css={css} childrenRef={subBannerRef}>
+      <>
         {variant == 'primary' ? (
           <div
             className={`cdg-sub-banner ${className} ${styles.subBanner} `}
@@ -68,8 +63,8 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
               <div
                 className={`cdg-bottom-content-container ${styles.bottomContentContainer} `}
               >
-                {SubBannerTitleElement}
-                {SubBannerDescriptionElement}
+                <SubBannerTitleElement />
+                <SubBannerDescriptionElement />
               </div>
             </div>
           </div>
@@ -84,12 +79,12 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
             <div
               className={`cdg-bottom-content-container ${styles.bottomContentContainer} ${styles.bottomContentContainerSecondary}`}
             >
-              {SubBannerTitleElement}
-              {SubBannerDescriptionElement}
+              <SubBannerTitleElement />
+              <SubBannerDescriptionElement />
             </div>
           </div>
         )}
-      </CssInjection>
+      </>
     )
   },
 )

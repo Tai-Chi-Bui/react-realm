@@ -3,7 +3,6 @@ import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/navbar-actions.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   alternativeElement?: React.ReactNode
 }
@@ -15,7 +14,6 @@ const NavbarActions = React.forwardRef<HTMLDivElement, NavbarActionsProps>(
   (props, ref) => {
     const {
       children,
-      css = {},
       alternativeElement,
       className,
       ...htmlProps
@@ -34,20 +32,18 @@ const NavbarActions = React.forwardRef<HTMLDivElement, NavbarActionsProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div className={rootClasses} ref={ref} {...htmlProps}>
-          <div className={defaultClasses}>{children}</div>
-          {alternativeElement ? (
-            <div
-              className={`${styles.alternativeNavbarActions} cdg-navbar-actions-alternative`}
-            >
-              {alternativeElement}
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
-      </CssInjection>
+      <div className={rootClasses} ref={ref} {...htmlProps}>
+        <div className={defaultClasses}>{children}</div>
+        {alternativeElement ? (
+          <div
+            className={`${styles.alternativeNavbarActions} cdg-navbar-actions-alternative`}
+          >
+            {alternativeElement}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     )
   },
 )

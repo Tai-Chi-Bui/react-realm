@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../button'
 
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import ProgressBar from './index'
 
 const style: {
@@ -23,28 +23,28 @@ const style: {
 }
 
 export const Size: React.FC = () => (
-  <div style={{...style}}>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+  <div style={{ ...style }}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={20} size='sm' label='sm' />
     </div>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={20} size='md' label='md' />
     </div>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={20} size='lg' label='lg' />
     </div>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={20} size='xl' label='xl' />
     </div>
   </div>
 )
 
 export const Color: React.FC = () => (
-  <div style={{...style}}>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+  <div style={{ ...style }}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={20} color='blue' label='blue' />
     </div>
-    <div style={{width: '100%', marginBottom: '10px'}}>
+    <div style={{ width: '100%', marginBottom: '10px' }}>
       <ProgressBar value={40} color='green' label='green' />
     </div>
 
@@ -96,10 +96,9 @@ export const Variants = () => {
   }, [startProcess])
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <ProgressBar value={20} variant='normal' label='normal' />
       <ProgressBar
-        css={{marginBlock: '$4'}}
         value={20}
         variant='rounded'
         label='rounded'
@@ -108,7 +107,6 @@ export const Variants = () => {
       <br></br>
 
       <ProgressBar
-        css={{marginBlock: '$4'}}
         value={progressValue}
         maxValue={MAX_VALUE}
         size='md'
@@ -118,7 +116,7 @@ export const Variants = () => {
         onComplete={() => setIsCompleted(true)}
       />
 
-      <div style={{flexDirection: 'row', ...style}}>
+      <div style={{ flexDirection: 'row', ...style }}>
         {isCompleted ? (
           <>
             <h3>Completed</h3>
@@ -145,7 +143,7 @@ export const Variants = () => {
 }
 
 export const LoadingState = () => (
-  <div style={{...style}}>
+  <div style={{ ...style }}>
     <ProgressBar variant='rounded' label='Loading' loading />
     <ProgressBar
       variant='rounded'

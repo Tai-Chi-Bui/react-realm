@@ -1,8 +1,7 @@
-import {HTMLAttributes, ReactNode, RefObject} from 'react'
-import {DraggableOptions} from '../utils/hooks'
+import { HTMLAttributes, ReactNode, RefObject } from 'react'
+import { DraggableOptions } from '../utils/hooks'
 
 type Props = {
-  css?: unknown
   icon?: ReactNode
   label?: string
   color?: string
@@ -46,11 +45,11 @@ export type SlideDraggerProps = {
   slideRef: RefObject<HTMLDivElement>
   icon?: ReactNode
   onDrag?: (
-    slideDragInfo: {slideDragWidth: number; maxSlideDistance: number},
+    slideDragInfo: { slideDragWidth: number; maxSlideDistance: number },
     ...params: Parameters<NonNullable<DraggableOptions['onMove']>>
   ) => void
   onDragEnd?: (
-    slideDragInfo: {slideDragWidth: number; maxSlideDistance: number},
+    slideDragInfo: { slideDragWidth: number; maxSlideDistance: number },
     ...params: Parameters<NonNullable<DraggableOptions['onEnd']>>
   ) => void
   disableDrag?: boolean

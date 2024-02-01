@@ -1,10 +1,10 @@
-import {faBagShopping, faPlus} from '@fortawesome/free-solid-svg-icons'
-import {faChair} from '@fortawesome/free-solid-svg-icons/faChair'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Meta} from '@storybook/react'
-import React, {useState} from 'react'
+import { faBagShopping, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faChair } from '@fortawesome/free-solid-svg-icons/faChair'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Meta } from '@storybook/react'
+import React, { useState } from 'react'
 import SpeedDial2 from '.'
-import {Checkbox} from '..'
+import { Checkbox } from '..'
 import Radio from '../radio'
 
 export const Positions: React.FC = () => {
@@ -19,7 +19,7 @@ export const Positions: React.FC = () => {
     setShowing(!showing)
   }
   return (
-    <div style={{padding: '10px'}}>
+    <div style={{ padding: '10px' }}>
       <div
         style={{
           display: 'flex',
@@ -38,7 +38,7 @@ export const Positions: React.FC = () => {
             onChange={(position) => {
               setPosition(position as 'up' | 'down' | 'left' | 'right')
             }}
-            css={{flexDirection: 'row'}}
+            style={{ flexDirection: 'row' }}
           >
             <Radio description='Up' value='up' id='item1' />
             <Radio description='Down' value='down' />
@@ -114,8 +114,8 @@ export const Positions: React.FC = () => {
             <FontAwesomeIcon
               icon={faPlus}
               style={{
-                ...(showing && {transform: 'rotate(45deg)'}),
-                ...{transition: 'all 0.2s'},
+                ...(showing && { transform: 'rotate(45deg)' }),
+                ...{ transition: 'all 0.2s' },
               }}
             />
           </SpeedDial2.Button>

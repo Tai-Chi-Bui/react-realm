@@ -2,12 +2,11 @@ import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
 import NavbarActions from './navbar-actions'
 import NavbarBrand from './navbar-brand'
-import {NavbarLinks} from './navbar-links'
-import {NavbarSeperator} from './navbar-seperator'
+import { NavbarLinks } from './navbar-links'
+import { NavbarSeperator } from './navbar-seperator'
 import styles from './styles/navbar.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   variant?: 'portal' | 'website'
   color?: 'blue' | 'white'
@@ -24,8 +23,6 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>((props, ref) => {
     color = 'blue',
     variant = 'portal',
     className = '',
-    // StyledComponentProps
-    css = {},
     // HTMLDiv props
     ...htmlProps
   } = props
@@ -48,11 +45,9 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <nav className={rootClasses} ref={ref} role='navigation' {...htmlProps}>
-        {children}
-      </nav>
-    </CssInjection>
+    <nav className={rootClasses} ref={ref} role='navigation' {...htmlProps}>
+      {children}
+    </nav>
   )
 })
 

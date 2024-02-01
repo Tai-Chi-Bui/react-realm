@@ -2,9 +2,9 @@
 
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import SidebarActions from './sidebar-actions'
 import SidebarContent from './sidebar-content'
 import SidebarTitle from './sidebar-title'
@@ -16,7 +16,6 @@ interface Props {
   handleClose?: () => void
   onClick?: (event: MouseEvent) => void
   position?: 'left' | 'right'
-  css?: unknown
   variant?: 'primary' | 'secondary'
   className?: string
 }
@@ -27,8 +26,6 @@ export type SidebarProps = Props &
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const {
     children,
-    // StyledComponentProps
-    css = {},
     // VariantProps
     variant = 'primary',
     position = 'left',
@@ -44,15 +41,15 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const sidebarRef = useDOMRef<HTMLDivElement>(ref)
 
   // Pick title actions component
-  const {child: SidebarActionsElement} = pickChild<typeof SidebarActions>(
+  const { child: SidebarActionsElement } = pickChild<typeof SidebarActions>(
     children,
     SidebarActions,
   )
-  const {child: SidebarContentElement} = pickChild<typeof SidebarContent>(
+  const { child: SidebarContentElement } = pickChild<typeof SidebarContent>(
     children,
     SidebarContent,
   )
-  const {child: SidebarTitleElement} = pickChild<typeof SidebarTitle>(
+  const { child: SidebarTitleElement } = pickChild<typeof SidebarTitle>(
     children,
     SidebarTitle,
   )
@@ -76,27 +73,25 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   }, [isOpen])
 
   return (
-    <CssInjection css={css} childrenRef={sidebarRef}>
+    <>
       {isOpen && (
         <div
           className={`cdg-sidebar-wrapper ${styles.sidebarWrapper} ${className}`}
           onClick={(e) => handleClickBackDrop(e as unknown as MouseEvent)}
         >
           <div
-            className={`cdg-sidebar ${styles.sidebar} ${
-              variant ? styles[`sidebar${capitalizeFirstLetter(variant)}`] : ''
-            } ${
-              position
+            className={`cdg-sidebar ${styles.sidebar} ${variant ? styles[`sidebar${capitalizeFirstLetter(variant)}`] : ''
+              } ${position
                 ? styles[`sidebar${capitalizeFirstLetter(position)}`]
                 : ''
-            }`}
+              }`}
             ref={sidebarRef}
             onClick={(e) => handleClickSidebar(e as unknown as MouseEvent)}
             {...htmlProps}
           >
             {variant == 'primary' && (
               <div className={`cdg-sidebar-header ${styles.sidebarHeader}`}>
-                {SidebarTitleElement}
+                <SidebarTitleElement />
                 <div
                   className={`cdg-sidebar-close-icon ${styles.sidebarCloseIcon}`}
                   onClick={() => handleClose?.()}
@@ -110,12 +105,12 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
                 </div>
               </div>
             )}
-            {SidebarContentElement}
-            {SidebarActionsElement}
+            <SidebarContentElement />
+            <SidebarActionsElement />
           </div>
         </div>
       )}
-    </CssInjection>
+    </>
   )
 })
 

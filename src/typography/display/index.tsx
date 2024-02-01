@@ -1,6 +1,6 @@
 import React from 'react'
 import CssInjection from '../../utils/objectToCss/CssInjection'
-import {Component} from '../utils'
+import { Component } from '../utils'
 import styles from './display.module.css'
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
   weight?: 'bold' | 'semibold'
   component?: Component
   children: React.ReactNode
-  css?: unknown
 }
 
 export type displayTypographyProps = Props &
@@ -16,7 +15,6 @@ export type displayTypographyProps = Props &
 
 const Display: React.FC<displayTypographyProps> = (props) => {
   const {
-    css = {},
     children,
     variant = 'display1',
     weight = 'bold',
@@ -50,11 +48,9 @@ const Display: React.FC<displayTypographyProps> = (props) => {
 
   return (
     <>
-      <CssInjection css={css}>
-        <Component {...htmlProps} className={classNames}>
-          {children}
-        </Component>
-      </CssInjection>
+      <Component {...htmlProps} className={classNames}>
+        {children}
+      </Component>
     </>
   )
 }

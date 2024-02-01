@@ -1,4 +1,4 @@
-import React, {createContext, useCallback, useEffect, useState} from 'react'
+import React, { createContext, useCallback, useEffect, useState } from 'react'
 
 export enum ETheme {
   Light = 'light',

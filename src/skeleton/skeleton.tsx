@@ -1,10 +1,9 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/skeleton.module.css'
 
 interface Props {
-  css?: unknown
   color?: string
   width?: string | number
   height?: string | number
@@ -23,7 +22,6 @@ const Skeleton = React.forwardRef<HTMLElement, SkeletonProps>((props, ref) => {
     height,
     children,
     className,
-    css = {},
     variant = 'text',
     component = 'span',
     animation = 'pulse',
@@ -51,18 +49,18 @@ const Skeleton = React.forwardRef<HTMLElement, SkeletonProps>((props, ref) => {
   }, [className])
 
   return (
-    <CssInjection css={css} childrenRef={skeletonRef}>
+    <>
       {React.createElement(
         component,
         {
           ...htmlProps,
           className: skeletonClass,
-          style: {'--skeleton-color': color, width, height},
+          style: { '--skeleton-color': color, width, height },
           ref: skeletonRef,
         },
         children,
       )}
-    </CssInjection>
+    </>
   )
 })
 

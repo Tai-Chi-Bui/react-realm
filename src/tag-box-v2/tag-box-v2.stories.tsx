@@ -1,6 +1,6 @@
-import type {Meta} from '@storybook/react'
-import React, {useEffect, useState} from 'react'
-import TagBoxV2, {Tag} from './index'
+import type { Meta } from '@storybook/react'
+import React, { useEffect, useState } from 'react'
+import TagBoxV2, { Tag } from './index'
 
 const style: React.CSSProperties = {
   display: 'flex',
@@ -68,13 +68,13 @@ export const WithErroredItems: React.FC = () => {
   }, [])
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <TagBoxV2
         tagBoxLabel='Attribute values'
         addTagPlaceholder='Please enter to add tag'
         tags={tags}
         isErrored={true}
-        css={{width: '100%'}}
+        style={{ width: '100%' }}
       />
     </div>
   )
@@ -99,14 +99,14 @@ export const Basic: React.FC = () => {
   const handleEditTag = (id: number, value: string) => {
     const updatedTags = tags.map((tag) => {
       if (tag.id === id) {
-        return {id, value}
+        return { id, value }
       }
       return tag
     })
     setTags(updatedTags)
   }
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <TagBoxV2
         tagBoxLabel='Attribute values'
         addTagPlaceholder='Please enter to add tag'
@@ -120,7 +120,7 @@ export const Basic: React.FC = () => {
         onEditTag={(tagToBeEdited) =>
           handleEditTag(tagToBeEdited.id as number, tagToBeEdited.value)
         }
-        css={{width: '70%'}}
+        style={{ width: '70%' }}
       />
     </div>
   )

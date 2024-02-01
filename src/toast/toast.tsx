@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/toast.module.css'
 import ToastActions from './toast-actions'
 import ToastCloseIcon from './toast-closeIcon'
@@ -23,7 +23,6 @@ interface Props {
   handleClose?: () => void
   autoClose?: false | number
   anchorOrigin?: Anchor
-  css?: unknown
   color?: 'informative' | 'neutral' | 'negative' | 'positive'
 }
 
@@ -33,8 +32,6 @@ export type ToastProps = Props &
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const {
     children,
-    // StyledComponentProps
-    css = {},
     // VariantProps
     color = 'neutral',
     //Component props
@@ -43,7 +40,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
     handleClose,
     autoClose = false,
     isItemContainer = false,
-    anchorOrigin = {horizontal: 'center', vertical: 'center'},
+    anchorOrigin = { horizontal: 'center', vertical: 'center' },
     className,
     // HTMLDiv Props
     ...htmlProps
@@ -52,32 +49,32 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const toastRef = useDOMRef<HTMLDivElement>(ref)
 
   // Pick child element from children props
-  const {child: ToastActionsElement} = pickChild<typeof ToastActions>(
+  const { child: ToastActionsElement } = pickChild<typeof ToastActions>(
     children,
     ToastActions,
   )
 
-  const {child: ToastCloseIconElement} = pickChild<typeof ToastCloseIcon>(
+  const { child: ToastCloseIconElement } = pickChild<typeof ToastCloseIcon>(
     children,
     ToastCloseIcon,
   )
 
-  const {child: ToastIconElement} = pickChild<typeof ToastIcon>(
+  const { child: ToastIconElement } = pickChild<typeof ToastIcon>(
     children,
     ToastIcon,
   )
 
-  const {child: ToastLabelElement} = pickChild<typeof ToastLabel>(
+  const { child: ToastLabelElement } = pickChild<typeof ToastLabel>(
     children,
     ToastLabel,
   )
 
-  const {child: ToastMessagelement} = pickChild<typeof ToastMessage>(
+  const { child: ToastMessagelement } = pickChild<typeof ToastMessage>(
     children,
     ToastMessage,
   )
 
-  const {child: ToastTitleElement} = pickChild<typeof ToastTitle>(
+  const { child: ToastTitleElement } = pickChild<typeof ToastTitle>(
     children,
     ToastTitle,
   )
@@ -128,28 +125,26 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
     <>
       {isOpen &&
         renderContent(
-          <CssInjection css={css} childrenRef={toastRef}>
-            <div ref={toastRef} className={toastClasses} {...htmlProps}>
-              <div className={`${styles.toastHeader}`}>
-                <div className={`${styles.toastHeaderLeft}`}>
-                  {ToastIconElement}
-                  {ToastTitleElement}
-                </div>
-                <div className={`${styles.toastHeaderRight}`}>
-                  {ToastLabelElement}
-                  {ToastCloseIconElement &&
-                    React.cloneElement(
-                      ToastCloseIconElement as unknown as JSX.Element,
-                      {
-                        onClose: () => handleClose?.(),
-                      },
-                    )}
-                </div>
+          <div ref={toastRef} className={toastClasses} {...htmlProps}>
+            <div className={`${styles.toastHeader}`}>
+              <div className={`${styles.toastHeaderLeft}`}>
+                <ToastIconElement />
+                <ToastTitleElement />
               </div>
-              {ToastMessagelement}
-              {ToastActionsElement}
+              <div className={`${styles.toastHeaderRight}`}>
+                <ToastLabelElement />
+                {ToastCloseIconElement &&
+                  React.cloneElement(
+                    ToastCloseIconElement as unknown as JSX.Element,
+                    {
+                      onClose: () => handleClose?.(),
+                    },
+                  )}
+              </div>
             </div>
-          </CssInjection>,
+            <ToastMessagelement />
+            <ToastActionsElement />
+          </div>
         )}
     </>
   )

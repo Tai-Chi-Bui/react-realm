@@ -1,6 +1,6 @@
-import {faBug} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import type {Meta} from '@storybook/react'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Meta } from '@storybook/react'
 import React from 'react'
 import Textfield from './index'
 
@@ -39,8 +39,8 @@ const Select = (
 export const Basic: React.FC = () => {
   const [value, setValue] = React.useState('')
   return (
-    <div style={{...style}}>
-      <div style={{...styleRow}}>
+    <div style={{ ...style }}>
+      <div style={{ ...styleRow }}>
         <Textfield
           type='number'
           placeholder='Enter your name'
@@ -52,7 +52,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>Controlled (min-max number input)</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           placeholder='Pick a number from 1 - 100'
           value={value}
@@ -67,7 +67,7 @@ export const Basic: React.FC = () => {
       </div>
 
       <h3>With Label</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           label={
             <>
@@ -80,7 +80,7 @@ export const Basic: React.FC = () => {
       </div>
 
       <h3>With Helper Text</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           label='Name'
           placeholder='Enter your name'
@@ -89,7 +89,7 @@ export const Basic: React.FC = () => {
       </div>
 
       <h3>Error</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           isErrored
           label='Name'
@@ -100,7 +100,7 @@ export const Basic: React.FC = () => {
       </div>
 
       <h3>With Icons</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           label='Name'
           leftIcon={<FontAwesomeIcon icon={faBug} />}
@@ -120,7 +120,7 @@ export const Basic: React.FC = () => {
       </div>
 
       <h3>Disabled</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield label='Name' placeholder='Enter your name' isDisabled />
         <Textfield
           label='Name'
@@ -143,7 +143,7 @@ export const Basic: React.FC = () => {
         />
       </div>
       <h3>Prefix</h3>
-      <div style={{...styleRow}}>
+      <div style={{ ...styleRow }}>
         <Textfield
           label='Name'
           prefix={Select}
@@ -152,7 +152,7 @@ export const Basic: React.FC = () => {
       </div>
       <h3>Password</h3>
       <Textfield
-        css={{width: '16rem'}}
+        style={{ width: '16rem' }}
         label='Password'
         placeholder='Enter your password'
         helperText='Your password should contain at least 18 characters.'
@@ -160,7 +160,7 @@ export const Basic: React.FC = () => {
       />
       <h3>Max length</h3>
       <Textfield
-        css={{width: '16rem'}}
+        style={{ width: '16rem' }}
         label='Password'
         placeholder='This has a max length of 10'
         helperText='Your input should be equal or less than 10 characters.'
@@ -168,7 +168,7 @@ export const Basic: React.FC = () => {
       />
       <h3>Min length</h3>
       <Textfield
-        css={{width: '16rem'}}
+        style={{ width: '16rem' }}
         label='Password'
         placeholder='This has a min length of 5'
         helperText='Your input should be equal or more than 5 characters.'
@@ -180,7 +180,7 @@ export const Basic: React.FC = () => {
 
 export const ForH5Variant = () => {
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <Textfield
         type='text'
         label='Name'

@@ -1,6 +1,6 @@
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import PageHeader from '.'
-import {Badge, Breadcrumbs, Button} from '..'
+import { Badge, Breadcrumbs, Button } from '..'
 
 const isCurrent = (i: number) => {
   if (window && window.location) return window.location.hash === `#${i}`
@@ -18,18 +18,18 @@ export const Basic = () => {
         backgroundColor: 'var(--cdg-color-gray20)',
       }}
     >
-      <PageHeader color='white' css={{padding: '0 48px'}}>
+      <PageHeader color='white' style={{ padding: '0 48px' }}>
         <PageHeader.Header>
           <PageHeader.Title>Title</PageHeader.Title>
           <PageHeader.Subtitle>This is subtitle</PageHeader.Subtitle>
         </PageHeader.Header>
       </PageHeader>
 
-      <PageHeader color='white' css={{padding: '0 48px'}}>
+      <PageHeader color='white' style={{ padding: '0 48px' }}>
         <PageHeader.Header>
           <PageHeader.Title>Title</PageHeader.Title>
           <PageHeader.Subtitle>This is subtitle</PageHeader.Subtitle>
-          <Button css={{marginLeft: 'auto'}}>Call to action</Button>
+          <Button style={{ marginLeft: 'auto' }}>Call to action</Button>
           <Button>Call to action</Button>
           <Button>Call to action</Button>
         </PageHeader.Header>
@@ -43,7 +43,7 @@ export const Basic = () => {
         <PageHeader.Header>
           <PageHeader.Title>Title</PageHeader.Title>
           <PageHeader.Subtitle>This is subtitle</PageHeader.Subtitle>
-          <Button css={{marginLeft: 'auto'}}>Call to action</Button>
+          <Button style={{ marginLeft: 'auto' }}>Call to action</Button>
           <Button>Call to action</Button>
           <Button>Call to action</Button>
         </PageHeader.Header>
@@ -59,7 +59,7 @@ export const Basic = () => {
           <PageHeader.Title>Title</PageHeader.Title>
           <PageHeader.Subtitle>This is subtitle</PageHeader.Subtitle>
           <Badge label='Processing' variant='outline' />
-          <Button css={{marginLeft: 'auto'}}>Call to action</Button>
+          <Button style={{ marginLeft: 'auto' }}>Call to action</Button>
           <Button>Call to action</Button>
           <Button>Call to action</Button>
         </PageHeader.Header>
@@ -95,7 +95,7 @@ export const Basic = () => {
           <PageHeader.Title>Title</PageHeader.Title>
           <PageHeader.Subtitle>This is subtitle</PageHeader.Subtitle>
           <Badge label='Processing' variant='outline' />
-          <Button css={{marginLeft: 'auto'}}>Call to action</Button>
+          <Button style={{ marginLeft: 'auto' }}>Call to action</Button>
           <Button>Call to action</Button>
           <Button>Call to action</Button>
         </PageHeader.Header>

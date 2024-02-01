@@ -1,6 +1,6 @@
-import {faClose} from '@fortawesome/free-solid-svg-icons/faClose'
-import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons/faClose'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import get from 'lodash/get'
 import React, {
   AriaAttributes,
@@ -12,9 +12,8 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/tag-box-v2.module.css'
-import {CustomTagBoxRef, Tag, TagBoxV2Props} from './types'
+import { CustomTagBoxRef, Tag, TagBoxV2Props } from './types'
 
 const TagBoxV2 = forwardRef<
   CustomTagBoxRef,
@@ -35,7 +34,6 @@ const TagBoxV2 = forwardRef<
       customValidationHandler,
       addTagPlaceholder,
       canRemoveOnDeleteAndBackspaceKey,
-      css = {},
       ...props // aria-* and data-* attributes
     },
     ref,
@@ -133,7 +131,7 @@ const TagBoxV2 = forwardRef<
       event: React.ChangeEvent<HTMLInputElement>,
       tag: Tag,
     ) => {
-      setCurrentlyEditingTag({id: tag.id, value: event.target.value})
+      setCurrentlyEditingTag({ id: tag.id, value: event.target.value })
     }
 
     const handleBlurTagInput = (
@@ -226,104 +224,102 @@ const TagBoxV2 = forwardRef<
     }, [])
 
     return (
-      <CssInjection css={css}>
-        <div className={tagBoxV2Classes} {...props}>
-          {/**************  Label  *************/}
-          <div
-            aria-label={tagBoxLabel}
-            onClick={handleClickContainer}
-            className={`${styles.label} cdg-tag-box-v2-label`}
-          >
-            {tagBoxLabel}
-            {isRequired && (
-              <span className={`${styles.asterisk} cdg-tag-box-v2-asterisk`}>
-                *
-              </span>
-            )}
-          </div>
-
-          {/**************  The main box  *************/}
-          <div
-            ref={tagBoxRef}
-            onClick={handleClickContainer}
-            onFocus={handleFocusNewTag}
-            onBlur={handleBlurNewTag}
-            className={tagBoxV2ContainerClasses}
-          >
-            {/**** This is to loop and create tags ****/}
-            {tags.map((tag) => (
-              <div
-                key={tag.id}
-                onClick={(event) => handleClickOrDblClickTag(event, tag)}
-                onDoubleClick={(event) => handleClickOrDblClickTag(event, tag)}
-                className={tagClasses(tag)}
-              >
-                <div
-                  title={isEditable ? 'Click to edit' : undefined}
-                  className={`${styles.tagContent} cdg-tag-box-v2-tag-content`}
-                >
-                  {currentlyEditingTag && currentlyEditingTag.id === tag.id ? (
-                    <input
-                      type='text'
-                      autoFocus
-                      size={get(currentlyEditingTag, 'value.length', 0) + 1}
-                      value={currentlyEditingTag.value}
-                      onChange={(event) => handleChangeTagInput(event, tag)}
-                      onBlur={(event) => handleBlurTagInput(event, tag)}
-                      onKeyDown={(event) => handleKeyDownTagInput(event, tag)}
-                      className={`${styles.tagInput} cdg-tag-box-v2-tag-input`}
-                    />
-                  ) : (
-                    tag.value
-                  )}
-                </div>
-                {!isDisabled && (
-                  <FontAwesomeIcon
-                    icon={faClose}
-                    onClick={(event) => handleClickRemoveIcon(event, tag)}
-                    style={{
-                      display:
-                        currentlyEditingTag && currentlyEditingTag.id === tag.id
-                          ? 'none'
-                          : 'inline-block',
-                    }}
-                    className={`${styles.tagCloseIcon} cdg-tag-box-v2-tag-icon`}
-                  />
-                )}
-              </div>
-            ))}
-
-            {/**** add new button ****/}
-            {!isDisabled && (
-              <div className={`${styles.buttonContainer} cdg-tag-box-v2-add`}>
-                {!isUsingNewTagInput && (
-                  <div
-                    onClick={handleClickAddNewTag}
-                    className={`${styles.newTagButton} cdg-tag-box-v2-add-button`}
-                  >
-                    <FontAwesomeIcon icon={faPlus} />
-                    <p>New Tag</p>
-                  </div>
-                )}
-                <input
-                  type='text'
-                  style={{
-                    display: isUsingNewTagInput ? 'inline-block' : 'none',
-                  }}
-                  placeholder={addTagPlaceholder}
-                  ref={inputRef}
-                  value={newTagValue}
-                  onClick={(event) => event.stopPropagation()}
-                  onChange={handleChangeNewTag}
-                  onKeyDown={handleKeyDownNewTag}
-                  onBlur={handleBlurNewTag}
-                  className={`${styles.newTagInput} cdg-tag-box-v2-add-input`}
-                />
-              </div>
-            )}
-          </div>
+      <div className={tagBoxV2Classes} {...props}>
+        {/**************  Label  *************/}
+        <div
+          aria-label={tagBoxLabel}
+          onClick={handleClickContainer}
+          className={`${styles.label} cdg-tag-box-v2-label`}
+        >
+          {tagBoxLabel}
+          {isRequired && (
+            <span className={`${styles.asterisk} cdg-tag-box-v2-asterisk`}>
+              *
+            </span>
+          )}
         </div>
-      </CssInjection>
+
+        {/**************  The main box  *************/}
+        <div
+          ref={tagBoxRef}
+          onClick={handleClickContainer}
+          onFocus={handleFocusNewTag}
+          onBlur={handleBlurNewTag}
+          className={tagBoxV2ContainerClasses}
+        >
+          {/**** This is to loop and create tags ****/}
+          {tags.map((tag) => (
+            <div
+              key={tag.id}
+              onClick={(event) => handleClickOrDblClickTag(event, tag)}
+              onDoubleClick={(event) => handleClickOrDblClickTag(event, tag)}
+              className={tagClasses(tag)}
+            >
+              <div
+                title={isEditable ? 'Click to edit' : undefined}
+                className={`${styles.tagContent} cdg-tag-box-v2-tag-content`}
+              >
+                {currentlyEditingTag && currentlyEditingTag.id === tag.id ? (
+                  <input
+                    type='text'
+                    autoFocus
+                    size={get(currentlyEditingTag, 'value.length', 0) + 1}
+                    value={currentlyEditingTag.value}
+                    onChange={(event) => handleChangeTagInput(event, tag)}
+                    onBlur={(event) => handleBlurTagInput(event, tag)}
+                    onKeyDown={(event) => handleKeyDownTagInput(event, tag)}
+                    className={`${styles.tagInput} cdg-tag-box-v2-tag-input`}
+                  />
+                ) : (
+                  tag.value
+                )}
+              </div>
+              {!isDisabled && (
+                <FontAwesomeIcon
+                  icon={faClose}
+                  onClick={(event) => handleClickRemoveIcon(event, tag)}
+                  style={{
+                    display:
+                      currentlyEditingTag && currentlyEditingTag.id === tag.id
+                        ? 'none'
+                        : 'inline-block',
+                  }}
+                  className={`${styles.tagCloseIcon} cdg-tag-box-v2-tag-icon`}
+                />
+              )}
+            </div>
+          ))}
+
+          {/**** add new button ****/}
+          {!isDisabled && (
+            <div className={`${styles.buttonContainer} cdg-tag-box-v2-add`}>
+              {!isUsingNewTagInput && (
+                <div
+                  onClick={handleClickAddNewTag}
+                  className={`${styles.newTagButton} cdg-tag-box-v2-add-button`}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                  <p>New Tag</p>
+                </div>
+              )}
+              <input
+                type='text'
+                style={{
+                  display: isUsingNewTagInput ? 'inline-block' : 'none',
+                }}
+                placeholder={addTagPlaceholder}
+                ref={inputRef}
+                value={newTagValue}
+                onClick={(event) => event.stopPropagation()}
+                onChange={handleChangeNewTag}
+                onKeyDown={handleKeyDownNewTag}
+                onBlur={handleBlurNewTag}
+                className={`${styles.newTagInput} cdg-tag-box-v2-add-input`}
+              />
+            </div>
+          )}
+        </div>
+      </div>
     )
   },
 )

@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Radio from '../radio'
 import SpeedDial from '../speed-dial/speed-dial'
@@ -40,13 +40,13 @@ export const Positions: React.FC = () => {
   >('up')
   return (
     <>
-      <div style={{...style}}>
+      <div style={{ ...style }}>
         <Radio.Group
           value={position}
           onChange={(position) => {
             setPosition(position as 'up' | 'down' | 'left' | 'right')
           }}
-          css={{flexDirection: 'row'}}
+          style={{ flexDirection: 'row' }}
         >
           <Radio description='Up' value='up' id='item1' />
           <Radio description='Down' value='down' />
@@ -54,7 +54,7 @@ export const Positions: React.FC = () => {
           <Radio description='Right' value='right' />
         </Radio.Group>
       </div>
-      <div style={{position: 'relative', width: '600px', height: '400px'}}>
+      <div style={{ position: 'relative', width: '600px', height: '400px' }}>
         <br />
         {/* Render other content */}
         {/* Render the SpeedDial component with the actions prop */}

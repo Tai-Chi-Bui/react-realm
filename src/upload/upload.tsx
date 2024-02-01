@@ -1,7 +1,6 @@
-import React, {useMemo} from 'react'
-import {useIsDarkTheme} from '../theme'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { useMemo } from 'react'
+import { useIsDarkTheme } from '../theme'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   convertFileSizeToReadableNumber,
   DEFAULT_FILE_ACCEPT,
@@ -23,7 +22,6 @@ interface Props {
   label?: string
   onError?: (error: string) => void
   customErrorMessages?: React.ReactNode
-  css?: unknown
 }
 
 export type UploadProps = Props &
@@ -31,8 +29,6 @@ export type UploadProps = Props &
 
 const Upload = React.forwardRef<HTMLDivElement, UploadProps>((props, ref) => {
   const {
-    // StyledComponentProps
-    css = {},
     // VariantProps
     getFile = () => {
       // Default
@@ -155,54 +151,52 @@ const Upload = React.forwardRef<HTMLDivElement, UploadProps>((props, ref) => {
   }, [isDarkTheme, isDisabled, selectedFiles.length])
 
   return (
-    <CssInjection css={css} childrenRef={uploadRef}>
-      <div ref={uploadRef} className={uploadWrapperClasses} {...htmlProps}>
-        {label && (
-          <>
-            <label className={`${styles.label}`}>
-              <span className='cdg-label'> {label}</span>
-              <span className={`cdg-isRequired-Sign ${styles.isRequiredSign}`}>
-                {isRequired ? ' *' : ''}
-              </span>
-            </label>
-          </>
-        )}
-        <div className={`${styles.uploadContainer}`}>
-          <input
-            ref={uploadInputRef}
-            type='file'
-            accept={accept}
-            multiple={multiple}
-            onChange={handleFileFieldChange}
-          />
-          <button
-            onClick={onOpenUploadClick}
-            type='button'
-            role='button'
-            className={browseFileClasses}
-          >
-            <span className={`${styles.browseFileSpan}`}>Browse file</span>
-          </button>
-          <div onClick={onOpenUploadClick} className={uploadContentClasses}>
-            {selectedFiles.length > 0 ? (
-              <p className={`${styles.uploadContentText}`}>
-                {selectedFiles.map((file) => file.name).join(', ')}
-              </p>
-            ) : (
-              placeholder
-            )}
-          </div>
-        </div>
-        <div className={`${styles.helperText}`}>
-          {helperText
-            ? helperText
-            : `Maximum size: ${convertFileSizeToReadableNumber(fileSizeLimit)}`}
-        </div>
-        <div className={`${styles.uploadError}`}>
-          {handleErrorMessage(error)}
+    <div ref={uploadRef} className={uploadWrapperClasses} {...htmlProps}>
+      {label && (
+        <>
+          <label className={`${styles.label}`}>
+            <span className='cdg-label'> {label}</span>
+            <span className={`cdg-isRequired-Sign ${styles.isRequiredSign}`}>
+              {isRequired ? ' *' : ''}
+            </span>
+          </label>
+        </>
+      )}
+      <div className={`${styles.uploadContainer}`}>
+        <input
+          ref={uploadInputRef}
+          type='file'
+          accept={accept}
+          multiple={multiple}
+          onChange={handleFileFieldChange}
+        />
+        <button
+          onClick={onOpenUploadClick}
+          type='button'
+          role='button'
+          className={browseFileClasses}
+        >
+          <span className={`${styles.browseFileSpan}`}>Browse file</span>
+        </button>
+        <div onClick={onOpenUploadClick} className={uploadContentClasses}>
+          {selectedFiles.length > 0 ? (
+            <p className={`${styles.uploadContentText}`}>
+              {selectedFiles.map((file) => file.name).join(', ')}
+            </p>
+          ) : (
+            placeholder
+          )}
         </div>
       </div>
-    </CssInjection>
+      <div className={`${styles.helperText}`}>
+        {helperText
+          ? helperText
+          : `Maximum size: ${convertFileSizeToReadableNumber(fileSizeLimit)}`}
+      </div>
+      <div className={`${styles.uploadError}`}>
+        {handleErrorMessage(error)}
+      </div>
+    </div>
   )
 })
 

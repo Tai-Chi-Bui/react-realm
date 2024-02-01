@@ -1,12 +1,12 @@
 'use client'
 
-import React, {useCallback} from 'react'
+import React, { useCallback } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import Ellipsis from './components/Ellipsis'
 import ItemCounting from './components/ItemCounting'
 import RowsCounting from './components/RowsCounting'
-import {usePagination} from './pagination.hooks'
+import { usePagination } from './pagination.hooks'
 import styles from './styles/pagination.module.css'
 
 interface Props {
@@ -18,7 +18,6 @@ interface Props {
   rowsPerPage?: number
   rowsOptions?: number[]
   onRowsPerPageChange?: (rows: number) => void
-  css?: unknown
 }
 
 export type PaginationProps = Props &
@@ -28,7 +27,6 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
   (props, ref) => {
     const {
       count,
-      css = {},
       // ComponentProps
       page = 1,
       total = 1,
@@ -40,7 +38,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       ...htmlProps
     } = props
     const paginationRef = useDOMRef<HTMLDivElement>(ref)
-    const {items, active, setPage, next, previous} = usePagination({
+    const { items, active, setPage, next, previous } = usePagination({
       page,
       total,
       initialPage,
@@ -69,8 +67,8 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
         const itemStyle =
           item.toString().length > 3
             ? {
-                padding: '0 4px',
-              }
+              padding: '0 4px',
+            }
             : undefined
 
         return (
@@ -112,61 +110,59 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={paginationRef}>
+      <div
+        className={`${styles.pagination} cdg-pagination`}
+        ref={paginationRef}
+        role='navigation'
+        aria-label='pagination'
+        {...htmlProps}
+      >
+        {rowsPerPage && (
+          <RowsCounting
+            rowsOptions={rowsOptions}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={onRowsPerPageChange}
+          />
+        )}
+        {count && (
+          <ItemCounting
+            count={count}
+            page={page}
+            rowsPerPage={rowsPerPage ?? 0}
+          />
+        )}
         <div
-          className={`${styles.pagination} cdg-pagination`}
-          ref={paginationRef}
-          role='navigation'
-          aria-label='pagination'
-          {...htmlProps}
+          onClick={previous}
+          aria-label='previous page'
+          className={previousPageClasses}
         >
-          {rowsPerPage && (
-            <RowsCounting
-              rowsOptions={rowsOptions}
-              rowsPerPage={rowsPerPage}
-              onRowsPerPageChange={onRowsPerPageChange}
-            />
-          )}
-          {count && (
-            <ItemCounting
-              count={count}
-              page={page}
-              rowsPerPage={rowsPerPage ?? 0}
-            />
-          )}
-          <div
-            onClick={previous}
-            aria-label='previous page'
-            className={previousPageClasses}
+          <svg
+            viewBox='0 0 320 512'
+            className={`${styles.paginationItemSvg} cdg-pagination-item-svg`}
           >
-            <svg
-              viewBox='0 0 320 512'
-              className={`${styles.paginationItemSvg} cdg-pagination-item-svg`}
-            >
-              <path
-                fill={active === 1 ? '#D2D0CE' : '#201F1E'}
-                d='M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z'
-              ></path>
-            </svg>
-          </div>
-          {items.map(renderItem)}
-          <div
-            onClick={next}
-            aria-label='next page'
-            className={nextPageClasses}
-          >
-            <svg
-              viewBox='0 0 320 512'
-              className={`${styles.paginationItemSvg} cdg-pagination-item-svg`}
-            >
-              <path
-                fill={active === total ? '#D2D0CE' : '#201F1E'}
-                d='M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z'
-              ></path>
-            </svg>
-          </div>
+            <path
+              fill={active === 1 ? '#D2D0CE' : '#201F1E'}
+              d='M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z'
+            ></path>
+          </svg>
         </div>
-      </CssInjection>
+        {items.map(renderItem)}
+        <div
+          onClick={next}
+          aria-label='next page'
+          className={nextPageClasses}
+        >
+          <svg
+            viewBox='0 0 320 512'
+            className={`${styles.paginationItemSvg} cdg-pagination-item-svg`}
+          >
+            <path
+              fill={active === total ? '#D2D0CE' : '#201F1E'}
+              d='M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z'
+            ></path>
+          </svg>
+        </div>
+      </div>
     )
   },
 )

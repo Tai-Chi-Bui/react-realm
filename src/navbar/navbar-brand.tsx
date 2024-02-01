@@ -1,9 +1,7 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/navbar.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   hiddenOnMobile?: boolean
 }
@@ -17,8 +15,6 @@ const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
       // ComponentProps
       children,
       className = '',
-      // StyledComponentProps
-      css = {},
       hiddenOnMobile = false,
       // HTMLDiv props
       ...htmlProps
@@ -42,11 +38,9 @@ const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div className={rootClasses} ref={ref} {...htmlProps}>
-          {renderChildren()}
-        </div>
-      </CssInjection>
+      <div className={rootClasses} ref={ref} {...htmlProps}>
+        {renderChildren()}
+      </div>
     )
   },
 )

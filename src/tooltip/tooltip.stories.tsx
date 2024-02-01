@@ -1,7 +1,7 @@
-import {Meta} from '@storybook/react'
-import React, {useState} from 'react'
+import { Meta } from '@storybook/react'
+import React, { useState } from 'react'
 import Button from '../button'
-import {Placement} from './index'
+import { Placement } from './index'
 import Tooltip from './tooltip'
 import TooltipTrigger from './tooltip-trigger'
 
@@ -10,7 +10,7 @@ export const Controlled: React.FC = () => {
   const [isOpenSimple, setIsOpenSimple] = useState(false)
 
   return (
-    <div style={{marginLeft: '1.5rem'}}>
+    <div style={{ marginLeft: '1.5rem' }}>
       <h3>Tooltip State: {isOpen ? 'opened' : 'closed'}</h3>
       <TooltipTrigger
         isOpen={isOpen}
@@ -19,7 +19,7 @@ export const Controlled: React.FC = () => {
         }}
       >
         <Button>Trigger</Button>
-        <Tooltip title='Title' dismissible css={{backgroundColor: '#0142AF'}}>
+        <Tooltip title='Title' dismissible style={{ backgroundColor: '#0142AF' }}>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente
           quam ullam amet est rerum in enim doloribus laborum beatae veniam
           corrupti blanditiis, neque fuga, ipsam ut consequuntur laboriosam.
@@ -59,7 +59,7 @@ export const Placements: React.FC = () => {
   const [currentPlacement, setCurrentPlacement] = useState<Placement>('bottom')
 
   return (
-    <div style={{marginLeft: '1.5rem'}}>
+    <div style={{ marginLeft: '1.5rem' }}>
       <h3>Select direction for testing</h3>
       <select
         onChange={(e) => {
@@ -102,7 +102,7 @@ export const Offset: React.FC = () => {
   const [mainAxis, setMainAxis] = useState(0)
 
   return (
-    <div style={{marginLeft: '1.5rem'}}>
+    <div style={{ marginLeft: '1.5rem' }}>
       <h3>Offset</h3>
       <div
         style={{
@@ -113,7 +113,7 @@ export const Offset: React.FC = () => {
           marginBottom: '24px',
         }}
       >
-        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label htmlFor='cross-axis'>Cross Axis</label>
           <input
             id='cross-axis'
@@ -125,7 +125,7 @@ export const Offset: React.FC = () => {
             }}
           ></input>
         </div>
-        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label htmlFor='main-axis'>Main Axis</label>
           <input
             id='main-axis'
@@ -145,7 +145,7 @@ export const Offset: React.FC = () => {
         }}
       >
         <TooltipTrigger
-          offset={{crossAxis: crossAxis, mainAxis: mainAxis}}
+          offset={{ crossAxis: crossAxis, mainAxis: mainAxis }}
           isOpen={true}
         >
           <Button>Trigger</Button>
@@ -164,7 +164,7 @@ export const Offset: React.FC = () => {
 export const Delay: React.FC = () => {
   const [delayTime, setDelayTime] = useState(0)
   return (
-    <div style={{marginLeft: '1.5rem'}}>
+    <div style={{ marginLeft: '1.5rem' }}>
       <h3>Delay</h3>
       <div
         style={{
@@ -175,7 +175,7 @@ export const Delay: React.FC = () => {
           marginBottom: '24px',
         }}
       >
-        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label htmlFor='delay-time'>Delay Time (Ms)</label>
           <input
             id='delay-time'

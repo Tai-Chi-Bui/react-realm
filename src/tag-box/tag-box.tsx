@@ -1,13 +1,12 @@
-import React, {createRef, RefObject} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { createRef, RefObject } from 'react'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import stylesItem from './styles/tag-box-item.module.css'
 import styles from './styles/tag-box.module.css'
 import TagBoxAction from './tag-box-action'
 import TagBoxInput from './tag-box-input'
 import TagBoxItem from './tag-box-item'
-import {ChevronDown, ChevronUp} from './utils'
+import { ChevronDown, ChevronUp } from './utils'
 
 type Item = {
   id: string | number
@@ -20,7 +19,6 @@ type Item = {
 interface Props {
   id?: string
   items: Item[]
-  css?: unknown
   typeable?: boolean
   helperText?: string
   isErrored?: boolean
@@ -49,7 +47,6 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
     icon,
     label,
     items,
-    css = {},
     children,
     className,
     isRequired,
@@ -67,7 +64,7 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
 
   const inputRef = useDOMRef<HTMLInputElement>(null)
   const tagBoxRef = useDOMRef<HTMLDivElement>(ref)
-  const {child: TagBoxActionElement} = pickChild<typeof TagBoxAction>(
+  const { child: TagBoxActionElement } = pickChild<typeof TagBoxAction>(
     children,
     TagBoxAction,
   )
@@ -177,7 +174,7 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
   )
 
   return (
-    <CssInjection css={css}>
+    <>
       <div {...htmlProps} ref={tagBoxRef} className={rootClass}>
         <div className={wrapperClass} onClick={focusInput}>
           {label && (
@@ -239,12 +236,12 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
                 )}
                 {((!collaspable && typeable) ||
                   (collaspable && typeable && isOpen)) && (
-                  <TagBoxInput
-                    ref={inputRef}
-                    wrapperRef={bodyContentRef}
-                    onEnter={onAdd}
-                  />
-                )}
+                    <TagBoxInput
+                      ref={inputRef}
+                      wrapperRef={bodyContentRef}
+                      onEnter={onAdd}
+                    />
+                  )}
               </div>
               {collaspable && (
                 <div
@@ -269,11 +266,11 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
             <span className={`${styles.helperText} cdg-tag-box-helper-text`}>
               {helperText}
             </span>
-            {TagBoxActionElement}
+            <TagBoxActionElement />
           </div>
         )}
       </div>
-    </CssInjection>
+    </>
   )
 })
 

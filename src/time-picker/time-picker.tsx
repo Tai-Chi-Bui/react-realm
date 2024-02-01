@@ -1,10 +1,9 @@
 'use client'
-import {cloneDeep} from 'lodash'
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import { cloneDeep } from 'lodash'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Popover from '../popover'
-import TextField, {TextFieldProps} from '../textfield'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import TextField, { TextFieldProps } from '../textfield'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   DEFAULT_VIEWS,
   EMPTY_DISPLAY_TIME_DROPDOWN_LIST,
@@ -17,10 +16,9 @@ import {
   TimePickerFormat,
   ViewType,
 } from './types'
-import {getSelectionOnFocus, replaceBetween, splitTimeFormat} from './utils'
+import { getSelectionOnFocus, replaceBetween, splitTimeFormat } from './utils'
 
 interface Props {
-  css?: unknown
   className?: string
   isErrored?: boolean
   isReadOnly?: boolean
@@ -45,8 +43,6 @@ export type TimePickerProps = Props &
 const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       // ComponentProps
       className,
       value,
@@ -92,7 +88,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     useEffect(() => {
       if (minTime && selectedDropdownValue) {
-        const {hour, minute, second, session} = splittedTimeFormat
+        const { hour, minute, second, session } = splittedTimeFormat
         const minTimeDropdown = {
           hour: minTime.substring(hour.start, hour.end),
           minute: minTime.substring(minute.start, minute.end),
@@ -145,7 +141,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         timePickerInputRef.current.value = newValue ?? ''
       }
       if (newValue) {
-        const {hour, minute, second, session} = splittedTimeFormat
+        const { hour, minute, second, session } = splittedTimeFormat
         setSelectedDropdownValue({
           hour: newValue.substring(hour.start, hour.end),
           minute: newValue.substring(minute.start, minute.end),
@@ -180,7 +176,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     )
 
     const resetToMinTime = () => {
-      const {hour, minute, second, session} = splittedTimeFormat
+      const { hour, minute, second, session } = splittedTimeFormat
       const minTimeDropdown = {
         hour: minTime.substring(hour.start, hour.end),
         minute: minTime.substring(minute.start, minute.end),
@@ -188,11 +184,11 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         session: minTime.substring(session.start, session.end),
       }
       let needUpdatValue = false
-      const newSelectedDropdownValue = {...selectedDropdownValue}
+      const newSelectedDropdownValue = { ...selectedDropdownValue }
       // Reset hour to min hour
       if (
         Number(newSelectedDropdownValue.hour) <
-          Number(minTimeDropdownValue.hour) ||
+        Number(minTimeDropdownValue.hour) ||
         minTimeDropdownValue.hour === '-'
       ) {
         needUpdatValue = true
@@ -201,7 +197,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       // Reset minute to min minute
       if (
         Number(newSelectedDropdownValue.minute) <
-          Number(minTimeDropdownValue.minute) ||
+        Number(minTimeDropdownValue.minute) ||
         minTimeDropdownValue.minute === '-'
       ) {
         needUpdatValue = true
@@ -210,7 +206,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       // Reset second to min second
       if (
         Number(newSelectedDropdownValue.second) <
-          Number(minTimeDropdownValue.second) ||
+        Number(minTimeDropdownValue.second) ||
         minTimeDropdownValue.second === '-'
       ) {
         needUpdatValue = true
@@ -251,31 +247,31 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
      */
     const handlePopoverClose =
       (isClosePopover = false) =>
-      (event?: React.FocusEvent<HTMLInputElement>) => {
-        // Prevent to call action when close popup and click outside
-        if (!isOpen && isClosePopover) return
-        event?.preventDefault()
-        event?.stopPropagation()
-        // Reset for empty value input
-        if (
-          !timePickerInputRef.current?.value ||
-          timePickerInputRef.current?.value === formatTime
-        ) {
-          if (timePickerInputRef.current) {
-            timePickerInputRef.current.value = ''
+        (event?: React.FocusEvent<HTMLInputElement>) => {
+          // Prevent to call action when close popup and click outside
+          if (!isOpen && isClosePopover) return
+          event?.preventDefault()
+          event?.stopPropagation()
+          // Reset for empty value input
+          if (
+            !timePickerInputRef.current?.value ||
+            timePickerInputRef.current?.value === formatTime
+          ) {
+            if (timePickerInputRef.current) {
+              timePickerInputRef.current.value = ''
+            }
+            setSelectedDropdownValue(cloneDeep(EMPTY_DISPLAY_TIME_DROPDOWN_LIST))
+          } else {
+            resetToMinTime()
           }
-          setSelectedDropdownValue(cloneDeep(EMPTY_DISPLAY_TIME_DROPDOWN_LIST))
-        } else {
-          resetToMinTime()
+          // Close popover when click outside
+          if (isClosePopover) {
+            setIsOpen(false)
+            onOpenChange?.(false)
+          }
+          // Clear selection position of input
+          setSelectedSelectionInput(cloneDeep(EMPTY_TIME_PICKER_FORMAT))
         }
-        // Close popover when click outside
-        if (isClosePopover) {
-          setIsOpen(false)
-          onOpenChange?.(false)
-        }
-        // Clear selection position of input
-        setSelectedSelectionInput(cloneDeep(EMPTY_TIME_PICKER_FORMAT))
-      }
 
     const handleFocusInput = (event: React.FocusEvent<HTMLInputElement>) => {
       event.preventDefault()
@@ -337,8 +333,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       const currentValue = timePickerInputRef.current.value
       const currentValueArr = currentValue.split('')
       const currentNumber = Number(
-        `${currentValueArr[selectedSelectionInput.start]}${
-          currentValueArr[selectedSelectionInput.end - 1]
+        `${currentValueArr[selectedSelectionInput.start]}${currentValueArr[selectedSelectionInput.end - 1]
         }`,
       )
 
@@ -467,14 +462,12 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       // Checks if current value is lower max value at selection format position
       if (
         Number(
-          `${currentValueArr[selectedSelectionInput.start]}${
-            currentValueArr[selectedSelectionInput.end - 1]
+          `${currentValueArr[selectedSelectionInput.start]}${currentValueArr[selectedSelectionInput.end - 1]
           }${key}`,
         ) <= selectedSelectionInput.max
       ) {
-        replaceText = `${
-          currentValueArr[selectedSelectionInput.end - 1] ?? '0'
-        }${key}`
+        replaceText = `${currentValueArr[selectedSelectionInput.end - 1] ?? '0'
+          }${key}`
 
         selecttionPositionInput = getSelectionOnFocus(
           formatTime,
@@ -559,7 +552,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       setNewValueForInput(
         currentValue,
         replaceText,
-        {start: selectedSelectionInput.start, end: selectedSelectionInput.end},
+        { start: selectedSelectionInput.start, end: selectedSelectionInput.end },
         selectedSelectionInput,
       )
     }
@@ -574,7 +567,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     const setNewValueForInput = (
       currentValue: string,
       replaceText: string,
-      replacePosition: {start: number; end: number},
+      replacePosition: { start: number; end: number },
       selecttionPositionInput: TimePickerFormat,
     ) => {
       if (!timePickerInputRef.current) return
@@ -584,7 +577,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         replacePosition.start,
         replacePosition.end,
       )
-      const {hour, minute, second, session} = splittedTimeFormat
+      const { hour, minute, second, session } = splittedTimeFormat
       setSelectedDropdownValue({
         hour: timePickerInputRef.current.value.substring(hour.start, hour.end),
         minute: timePickerInputRef.current.value.substring(
@@ -607,10 +600,10 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         return (
           formatValue.format &&
           formatValue.format ===
-            timePickerInputRef.current?.value.substring(
-              formatValue.start,
-              formatValue.end,
-            )
+          timePickerInputRef.current?.value.substring(
+            formatValue.start,
+            formatValue.end,
+          )
         )
       })
       // If valid value then emits event onTimeChange
@@ -657,65 +650,63 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     }, [])
 
     return (
-      <CssInjection css={css} childrenRef={containerRef}>
-        <div
-          ref={containerRef as React.RefObject<HTMLDivElement>}
-          className={`${className} ${styles.timePickerContainer} cdg-time-picker-container`}
-        >
-          <Popover
-            anchor={
-              <TextField
-                inputRef={timePickerInputRef}
-                onFocus={handleFocusInput}
-                onBlur={handlePopoverClose()}
-                onClick={handleInputClick}
-                onKeyDown={handleKeyDown}
-                placeholder={formatTime}
-                className={`${styles.timePickerInput} cdg-time-picker-input`}
-                rightIcon={
-                  <button
-                    onClick={handleIconClockClick}
-                    className={`${styles.timePickerInputIcon} cdg-time-picker-input-icon`}
-                    disabled={htmlProps.isDisabled}
-                    ref={timePickerIconRef}
+      <div
+        ref={containerRef as React.RefObject<HTMLDivElement>}
+        className={`${className} ${styles.timePickerContainer} cdg-time-picker-container`}
+      >
+        <Popover
+          anchor={
+            <TextField
+              inputRef={timePickerInputRef}
+              onFocus={handleFocusInput}
+              onBlur={handlePopoverClose()}
+              onClick={handleInputClick}
+              onKeyDown={handleKeyDown}
+              placeholder={formatTime}
+              className={`${styles.timePickerInput} cdg-time-picker-input`}
+              rightIcon={
+                <button
+                  onClick={handleIconClockClick}
+                  className={`${styles.timePickerInputIcon} cdg-time-picker-input-icon`}
+                  disabled={htmlProps.isDisabled}
+                  ref={timePickerIconRef}
+                >
+                  <svg
+                    viewBox='0 0 16 16'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
                   >
-                    <svg
-                      viewBox='0 0 16 16'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <path d='M7.34375 4.28125C7.34375 3.91758 7.63633 3.625 8 3.625C8.36367 3.625 8.65625 3.91758 8.65625 4.28125V7.65L10.9887 9.20312C11.2895 9.40547 11.3715 9.81289 11.1473 10.1137C10.9695 10.4145 10.5621 10.4965 10.2613 10.2723L7.63633 8.52227C7.45312 8.42383 7.34375 8.21875 7.34375 7.97539V4.28125ZM8 1C11.8664 1 15 4.13359 15 8C15 11.8664 11.8664 15 8 15C4.13359 15 1 11.8664 1 8C1 4.13359 4.13359 1 8 1ZM2.3125 8C2.3125 11.1418 4.8582 13.6875 8 13.6875C11.1418 13.6875 13.6875 11.1418 13.6875 8C13.6875 4.8582 11.1418 2.3125 8 2.3125C4.8582 2.3125 2.3125 4.8582 2.3125 8Z' />
-                    </svg>
-                  </button>
-                }
-                {...htmlProps}
-              />
-            }
-            attachToElement={
-              containerRef.current && containerRef.current.parentElement
-            }
-            direction='bottom-left'
-            offset={8}
-            isOpen={isOpen}
-            onClose={handlePopoverClose(true)}
-          >
-            <TimePickerDropdown
-              isUncontrolledComponent={isUncontrolledComponent}
-              views={views}
-              isOpen={isOpen}
-              value={selectedDropdownValue}
-              onItemClick={handleItemClick}
-              onOkClick={handleOkClick}
-              hourStep={hourStep}
-              minuteStep={minuteStep}
-              hasFooter={hasFooter}
-              isReadOnly={!!htmlProps.isReadOnly}
-              onEscapeKeyDown={handleEscapeKeyDown}
-              minTimeDropdownValue={minTimeDropdownValue}
+                    <path d='M7.34375 4.28125C7.34375 3.91758 7.63633 3.625 8 3.625C8.36367 3.625 8.65625 3.91758 8.65625 4.28125V7.65L10.9887 9.20312C11.2895 9.40547 11.3715 9.81289 11.1473 10.1137C10.9695 10.4145 10.5621 10.4965 10.2613 10.2723L7.63633 8.52227C7.45312 8.42383 7.34375 8.21875 7.34375 7.97539V4.28125ZM8 1C11.8664 1 15 4.13359 15 8C15 11.8664 11.8664 15 8 15C4.13359 15 1 11.8664 1 8C1 4.13359 4.13359 1 8 1ZM2.3125 8C2.3125 11.1418 4.8582 13.6875 8 13.6875C11.1418 13.6875 13.6875 11.1418 13.6875 8C13.6875 4.8582 11.1418 2.3125 8 2.3125C4.8582 2.3125 2.3125 4.8582 2.3125 8Z' />
+                  </svg>
+                </button>
+              }
+              {...htmlProps}
             />
-          </Popover>
-        </div>
-      </CssInjection>
+          }
+          attachToElement={
+            containerRef.current && containerRef.current.parentElement
+          }
+          direction='bottom-left'
+          offset={8}
+          isOpen={isOpen}
+          onClose={handlePopoverClose(true)}
+        >
+          <TimePickerDropdown
+            isUncontrolledComponent={isUncontrolledComponent}
+            views={views}
+            isOpen={isOpen}
+            value={selectedDropdownValue}
+            onItemClick={handleItemClick}
+            onOkClick={handleOkClick}
+            hourStep={hourStep}
+            minuteStep={minuteStep}
+            hasFooter={hasFooter}
+            isReadOnly={!!htmlProps.isReadOnly}
+            onEscapeKeyDown={handleEscapeKeyDown}
+            minTimeDropdownValue={minTimeDropdownValue}
+          />
+        </Popover>
+      </div>
     )
   },
 )

@@ -1,13 +1,10 @@
 'use client'
-
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import styles from './styles/sub-header-description.module.css'
 
 interface Props {
   children: React.ReactNode
   variant?: 'default' | 'h5'
-  css?: unknown
   className?: string
 }
 
@@ -20,24 +17,20 @@ const SubHeaderDescription = React.forwardRef<
 >((props, ref) => {
   const {
     children,
-    css = {},
     className = '',
     variant = 'default',
     ...htmlProps
   } = props
 
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <p
-        className={`cdg-sub-header-description ${className} ${
-          styles.subHeaderDescription
+    <p
+      className={`cdg-sub-header-description ${className} ${styles.subHeaderDescription
         } ${styles[`${variant}`]}`}
-        ref={ref}
-        {...htmlProps}
-      >
-        {children}
-      </p>
-    </CssInjection>
+      ref={ref}
+      {...htmlProps}
+    >
+      {children}
+    </p>
   )
 })
 

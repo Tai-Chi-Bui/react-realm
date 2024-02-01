@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, {useCallback, useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/radio-group.module.css'
 
 interface RadioGroupContextValue {
@@ -13,7 +13,7 @@ interface RadioGroupContextValue {
 
 export const RadioContext = React.createContext<RadioGroupContextValue>({
   value: '',
-  handleOnClickRadionButton: () => {},
+  handleOnClickRadionButton: () => { },
   radioName: '',
 })
 
@@ -26,7 +26,6 @@ interface Props {
   'aria-labelledby'?: string
   groupName?: string
   orientation?: 'vertical' | 'horizontal'
-  css?: unknown
 }
 
 export type RadioGroupProps = Props &
@@ -40,7 +39,6 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       value = null,
       onChange,
       onBlur,
-      css = {},
       groupName = `cdg-group-name-${Math.random().toString(36).substring(2)}`,
       'aria-labelledby': ariaLabelledBy = '',
       ...htmlProps
@@ -78,30 +76,27 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
     }, [selectedValue])
 
     return (
-      <CssInjection css={css} childrenRef={groupRef}>
-        <div
-          className={`cdg-radio-group ${styles.radioGroup} ${
-            orientation
-              ? styles[`radioGroup${capitalizeFirstLetter(orientation)}`]
-              : ''
+      <div
+        className={`cdg-radio-group ${styles.radioGroup} ${orientation
+          ? styles[`radioGroup${capitalizeFirstLetter(orientation)}`]
+          : ''
           }`}
-          ref={groupRef}
-          onBlur={handleBlur}
-          {...htmlProps}
-          aria-labelledby={ariaLabelledBy}
-          role=''
+        ref={groupRef}
+        onBlur={handleBlur}
+        {...htmlProps}
+        aria-labelledby={ariaLabelledBy}
+        role=''
+      >
+        <RadioContext.Provider
+          value={{
+            value: handleControl(),
+            handleOnClickRadionButton,
+            radioName: groupName,
+          }}
         >
-          <RadioContext.Provider
-            value={{
-              value: handleControl(),
-              handleOnClickRadionButton,
-              radioName: groupName,
-            }}
-          >
-            {children}
-          </RadioContext.Provider>
-        </div>
-      </CssInjection>
+          {children}
+        </RadioContext.Provider>
+      </div>
     )
   },
 )

@@ -7,7 +7,6 @@ import PageHeaderTitle from './page-header-title'
 import styles from './styles/page-header-description.module.css'
 
 interface Props {
-  css?: unknown
   children?: React.ReactNode
   color?: 'white' | 'blue'
 }
@@ -18,7 +17,7 @@ export type PageHeaderProps = Props &
 // eslint-disable-next-line react-refresh/only-export-components
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   (props, ref) => {
-    const {children, color = 'white', css = {}, className, ...htmlProps} = props
+    const { children, color = 'white', className, ...htmlProps } = props
 
     const rootClasses = [
       styles.pageHeader,
@@ -30,11 +29,9 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       .join(' ')
 
     return (
-      <CssInjection css={css} childrenRef={ref}>
-        <div className={rootClasses} ref={ref} {...htmlProps}>
-          {children}
-        </div>
-      </CssInjection>
+      <div className={rootClasses} ref={ref} {...htmlProps}>
+        {children}
+      </div>
     )
   },
 )

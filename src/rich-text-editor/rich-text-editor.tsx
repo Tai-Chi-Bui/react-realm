@@ -1,4 +1,3 @@
-// import Heading from '@tiptap/extension-heading'
 import CharacterCount from '@tiptap/extension-character-count'
 import Color from '@tiptap/extension-color'
 import Image from '@tiptap/extension-image'
@@ -9,13 +8,13 @@ import Superscript from '@tiptap/extension-superscript'
 import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
 import Underline from '@tiptap/extension-underline'
-import {Content, EditorContent, JSONContent, useEditor} from '@tiptap/react'
+import { Content, EditorContent, JSONContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import isEqual from 'lodash/isEqual'
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {RichTextEditorProvider} from './rich-text-editor.context'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { RichTextEditorProvider } from './rich-text-editor.context'
 import styles from './styles/rich-text-editor.module.css'
 
 interface Props {
@@ -27,7 +26,6 @@ interface Props {
   content?: Content
   placeholder?: string
   className?: string
-  css?: unknown
 }
 interface StorageCount {
   characters: () => number
@@ -40,7 +38,6 @@ const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorProps>(
   (props, ref) => {
     const {
       children,
-      css = {},
       characterCount,
       outputType = 'html',
       onChange,
@@ -74,7 +71,7 @@ const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorProps>(
       ],
       injectCSS: false,
 
-      onTransaction: ({editor}) => {
+      onTransaction: ({ editor }) => {
         let output
         let shouldChange
         if (outputType === 'html') {
@@ -114,20 +111,18 @@ const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorProps>(
           editor,
         }}
       >
-        <CssInjection childrenRef={textEditorRef} css={css}>
-          <div {...htmlProps} ref={textEditorRef} className={rootClasses}>
-            {children}
-            <EditorContent
-              editor={editor}
-              className={`${styles.editorContent} cdg-rich-text-editor-content`}
-            />
-            {characterCount && (
-              <div className={`${styles.characterCount}`}>
-                {CharacterCountFunc()}/{characterCount}
-              </div>
-            )}
-          </div>
-        </CssInjection>
+        <div {...htmlProps} ref={textEditorRef} className={rootClasses}>
+          {children}
+          <EditorContent
+            editor={editor}
+            className={`${styles.editorContent} cdg-rich-text-editor-content`}
+          />
+          {characterCount && (
+            <div className={`${styles.characterCount}`}>
+              {CharacterCountFunc()}/{characterCount}
+            </div>
+          )}
+        </div>
       </RichTextEditorProvider>
     )
   },

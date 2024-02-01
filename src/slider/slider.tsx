@@ -1,12 +1,10 @@
 'use client'
 
-import React, {HTMLAttributes, useEffect, useState} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import React, { HTMLAttributes, useEffect, useState } from 'react'
+import { useDOMRef } from '../utils/use-dom-ref'
 import classes from './styles/slider.module.css'
 
 interface Props {
-  css?: unknown
   isDisabled?: boolean
   tooltip?: boolean
   onChange?: (value: number) => void
@@ -33,7 +31,6 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     value,
     defaultValue,
     className = '',
-    css = {},
     ...htmlDivAttributes
   } = props
   const sliderRef = useDOMRef<HTMLDivElement>(ref)
@@ -89,9 +86,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
           Math.round(
             ((sliderProgressWidth / (sliderWidth - thumbWidth)) *
               (maxValue - minValue)) /
-              step,
+            step,
           ) *
-            step +
+          step +
           minValue
         setCurrentValue(newValue)
         thumb.setAttribute('value', newValue.toString())
@@ -118,9 +115,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
           Math.round(
             ((sliderProgressWidth / (sliderWidth - thumbWidth)) *
               (maxValue - minValue)) /
-              step,
+            step,
           ) *
-            step +
+          step +
           minValue
         setCurrentValue(newValue)
         thumb.setAttribute('value', newValue.toString())
@@ -231,19 +228,17 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     .join(' ')
 
   return (
-    <CssInjection childrenRef={sliderRef} css={css}>
-      <div
-        ref={sliderRef}
-        className={rootClasses}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-        {...htmlDivAttributes}
-      >
-        <div className={`${classes.rangeSliderProgress} cdg-range-slider-progress`}>
-          <div className={thumbClasses} />
-        </div>
+    <div
+      ref={sliderRef}
+      className={rootClasses}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      {...htmlDivAttributes}
+    >
+      <div className={`${classes.rangeSliderProgress} cdg-range-slider-progress`}>
+        <div className={thumbClasses} />
       </div>
-    </CssInjection>
+    </div>
   )
 })
 export default Slider

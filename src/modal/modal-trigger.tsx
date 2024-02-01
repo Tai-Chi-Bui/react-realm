@@ -1,8 +1,7 @@
 import React from 'react'
 import Portal from '../portal'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import Modal from './modal'
 import styles from './styles/modal.module.css'
 
@@ -21,8 +20,6 @@ export type ModalTriggerProps = Props &
 const ModalTrigger = React.forwardRef<HTMLDivElement, ModalTriggerProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       // children
       children,
       // ComponentProps
@@ -38,7 +35,7 @@ const ModalTrigger = React.forwardRef<HTMLDivElement, ModalTriggerProps>(
 
     const modalRef = useDOMRef<HTMLDivElement>(ref)
     const modalWrapperRef = useDOMRef<HTMLDivElement>(null)
-    const {child: ModalElement} = pickChild<typeof Modal>(children, Modal)
+    const { child: ModalElement } = pickChild<typeof Modal>(children, Modal)
 
     const handleClickBackdrop = (e: MouseEvent) => {
       e.stopPropagation()
@@ -52,23 +49,21 @@ const ModalTrigger = React.forwardRef<HTMLDivElement, ModalTriggerProps>(
 
     return (
       <Portal open={isOpen}>
-        <CssInjection css={css}>
-          <div
-            ref={modalWrapperRef}
-            onClick={(e) => handleClickBackdrop?.(e as unknown as MouseEvent)}
-            className={classNames}
-            {...htmlProps}
-          >
-            {ModalElement &&
-              React.cloneElement(ModalElement as unknown as JSX.Element, {
-                onClose: () => handleClose?.(),
-                ref: modalRef,
-                size: size,
-                handleClose: () => handleClose?.(),
-                triggerId: id,
-              })}
-          </div>
-        </CssInjection>
+        <div
+          ref={modalWrapperRef}
+          onClick={(e) => handleClickBackdrop?.(e as unknown as MouseEvent)}
+          className={classNames}
+          {...htmlProps}
+        >
+          {ModalElement &&
+            React.cloneElement(ModalElement as unknown as JSX.Element, {
+              onClose: () => handleClose?.(),
+              ref: modalRef,
+              size: size,
+              handleClose: () => handleClose?.(),
+              triggerId: id,
+            })}
+        </div>
       </Portal>
     )
   },

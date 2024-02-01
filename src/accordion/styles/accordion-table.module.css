@@ -24,14 +24,14 @@
     gap: var(--cdg-spacing-4) var(--cdg-spacing-12);
   }
 
-  .accordionTable > * {
+  .accordionTable>* {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
   }
 
-  .accordionTable > * > * {
+  .accordionTable>*>* {
     width: 50%;
   }
 }

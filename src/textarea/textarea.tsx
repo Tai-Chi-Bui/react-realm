@@ -1,13 +1,11 @@
 'use client'
 import React from 'react'
-import {useIsDarkTheme} from '../theme'
-import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {useId} from '../utils/useId'
+import { useIsDarkTheme } from '../theme'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { useId } from '../utils/useId'
 import styles from './styles/textarea.module.css'
 
 interface Props {
-  css?: unknown
   id?: string
   label?: React.ReactNode
   cols?: number
@@ -54,14 +52,14 @@ interface Props {
   'aria-activedescendant'?: string
   'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both'
   'aria-haspopup'?:
-    | boolean
-    | 'false'
-    | 'true'
-    | 'menu'
-    | 'listbox'
-    | 'tree'
-    | 'grid'
-    | 'dialog'
+  | boolean
+  | 'false'
+  | 'true'
+  | 'menu'
+  | 'listbox'
+  | 'tree'
+  | 'grid'
+  | 'dialog'
   'aria-controls'?: string
   'aria-label'?: string
   'aria-labelledby'?: string
@@ -78,8 +76,6 @@ export type TextareaProps = Props &
 const Textarea = React.forwardRef<HTMLDivElement, TextareaProps>(
   (props, ref) => {
     const {
-      // StyledComponentProps
-      css = {},
       // ComponentProps
       label,
       id,
@@ -123,7 +119,7 @@ const Textarea = React.forwardRef<HTMLDivElement, TextareaProps>(
       ...ariaSafeProps
     } = props
     const isDarkTheme = useIsDarkTheme()
-    const htmlProps = {...ariaSafeProps} as unknown as Omit<
+    const htmlProps = { ...ariaSafeProps } as unknown as Omit<
       React.HTMLAttributes<HTMLDivElement>,
       keyof Props
     >
@@ -211,63 +207,61 @@ const Textarea = React.forwardRef<HTMLDivElement, TextareaProps>(
     }, [variant])
 
     return (
-      <CssInjection css={css} childrenRef={wrapperRef}>
-        <div {...htmlProps} className={wrapperClasses} ref={wrapperRef}>
-          {label && (
-            <label htmlFor={textareaId} className={labelClasses}>
-              {label}
-              {isRequired && (
-                <span className={`${styles.asterisk} cdg-textarea-asterisk`}>
-                  *
-                </span>
-              )}
-            </label>
-          )}
-          <textarea
-            ref={textareaFieldRef}
-            className={textareaClasses}
-            id={textareaId}
-            cols={cols}
-            rows={rows}
-            wrap={wrap}
-            name={name}
-            value={value}
-            tabIndex={tabIndex}
-            autoFocus={autoFocus}
-            autoCapitalize={autoCapitalize}
-            readOnly={isReadOnly}
-            required={isRequired}
-            disabled={isDisabled}
-            maxLength={maxLength}
-            minLength={minLength}
-            placeholder={placeholder}
-            onCut={onCut}
-            onCopy={onCopy}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onPaste={onPaste}
-            onInput={onInput}
-            onKeyUp={onKeyUp}
-            onSelect={onSelect}
-            onChange={handleOnChange}
-            onKeyDown={onKeyDown}
-            onBeforeInput={onBeforeInput}
-            onCompositionEnd={onCompositionEnd}
-            onCompositionStart={onCompositionStart}
-            onCompositionUpdate={onCompositionUpdate}
-          />
-          {wordCount && (
-            <div className={wordCountClasses}>
-              {wordCountValue}
-              {maxLength ? `/${maxLength}` : null}
-            </div>
-          )}
-          {isErrored && errorMessage && (
-            <div className={errorMessageClasses}>{errorMessage}</div>
-          )}
-          {helperText && <div className={helperTextClasses}>{helperText}</div>}
-        </div>
-      </CssInjection>
+      <div {...htmlProps} className={wrapperClasses} ref={wrapperRef}>
+        {label && (
+          <label htmlFor={textareaId} className={labelClasses}>
+            {label}
+            {isRequired && (
+              <span className={`${styles.asterisk} cdg-textarea-asterisk`}>
+                *
+              </span>
+            )}
+          </label>
+        )}
+        <textarea
+          ref={textareaFieldRef}
+          className={textareaClasses}
+          id={textareaId}
+          cols={cols}
+          rows={rows}
+          wrap={wrap}
+          name={name}
+          value={value}
+          tabIndex={tabIndex}
+          autoFocus={autoFocus}
+          autoCapitalize={autoCapitalize}
+          readOnly={isReadOnly}
+          required={isRequired}
+          disabled={isDisabled}
+          maxLength={maxLength}
+          minLength={minLength}
+          placeholder={placeholder}
+          onCut={onCut}
+          onCopy={onCopy}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          onPaste={onPaste}
+          onInput={onInput}
+          onKeyUp={onKeyUp}
+          onSelect={onSelect}
+          onChange={handleOnChange}
+          onKeyDown={onKeyDown}
+          onBeforeInput={onBeforeInput}
+          onCompositionEnd={onCompositionEnd}
+          onCompositionStart={onCompositionStart}
+          onCompositionUpdate={onCompositionUpdate}
+        />
+        {wordCount && (
+          <div className={wordCountClasses}>
+            {wordCountValue}
+            {maxLength ? `/${maxLength}` : null}
+          </div>
+        )}
+        {isErrored && errorMessage && (
+          <div className={errorMessageClasses}>{errorMessage}</div>
+        )}
+        {helperText && <div className={helperTextClasses}>{helperText}</div>}
+      </div>
     )
   },
 )

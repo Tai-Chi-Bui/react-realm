@@ -1,12 +1,11 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import WizardItem from './item'
 import styles from './styles/wizard.module.css'
-import {pickChilds, TickIcon} from './utils'
+import { pickChilds, TickIcon } from './utils'
 
 interface Props {
-  css?: unknown
   items?: string[]
   currentStep?: number
   erroredSteps?: number[]
@@ -19,7 +18,6 @@ export type WizardProps = Props &
 
 const Wizard = React.forwardRef<HTMLDivElement, WizardProps>((props, ref) => {
   const {
-    css = {},
     children,
     items = [],
     currentStep = 1,
@@ -40,69 +38,67 @@ const Wizard = React.forwardRef<HTMLDivElement, WizardProps>((props, ref) => {
   const list = isControlled ? collection : items
 
   return (
-    <CssInjection css={css}>
-      <div
-        ref={wizardRef}
-        className={`${styles.wizard} cdg-wizard`}
-        {...htmlProps}
-      >
-        <div className={`${styles.track} cdg-wizard-track`}>
-          {list.map((item, index: number) => (
-            <div
-              key={`${isControlled ? item.props.title : item}-${index}`}
-              className={`${styles.trackItem} cdg-wizard-track-item`}
-              style={{width: `calc(100% / ${itemWidth})`}}
-            >
-              <Line
-                side='left'
-                bordered={index === 0}
-                active={currentStep > index + 1 || index + 1 === currentStep}
-                error={!!erroredSteps.includes(index + 1)}
-              />
-              {isControlled ? (
-                item
-              ) : (
-                <Item
-                  onKeyDown={(event) => {
-                    const key = event.key
-                    if (key === 'Enter' || key === ' ') {
-                      onStepClick?.(index + 1)
-                    }
-                  }}
-                  onClick={() => onStepClick?.(index + 1)}
-                  error={!!erroredSteps.includes(index + 1)}
-                  style={{cursor: onStepClick ? 'pointer' : ''}}
-                  active={currentStep > index + 1 || index + 1 === currentStep}
-                >
-                  {currentStep > index + 1 ? <TickIcon /> : index + 1}
-                </Item>
-              )}
-              <Line
-                side='right'
-                bordered={index === collection.length - 1}
-                active={currentStep > index + 1}
-                error={!!erroredSteps.includes(index + 1)}
-              />
-            </div>
-          ))}
-        </div>
-        <div className={`${styles.title}`}>
-          {list.map((item, index: number) => (
-            <Title
-              key={index}
-              style={{width: `calc(100% / ${itemWidth})`}}
+    <div
+      ref={wizardRef}
+      className={`${styles.wizard} cdg-wizard`}
+      {...htmlProps}
+    >
+      <div className={`${styles.track} cdg-wizard-track`}>
+        {list.map((item, index: number) => (
+          <div
+            key={`${isControlled ? item.props.title : item}-${index}`}
+            className={`${styles.trackItem} cdg-wizard-track-item`}
+            style={{ width: `calc(100% / ${itemWidth})` }}
+          >
+            <Line
+              side='left'
+              bordered={index === 0}
               active={currentStep > index + 1 || index + 1 === currentStep}
-            >
-              {isControlled ? item.props.title : item}
-            </Title>
-          ))}
-        </div>
+              error={!!erroredSteps.includes(index + 1)}
+            />
+            {isControlled ? (
+              item
+            ) : (
+              <Item
+                onKeyDown={(event) => {
+                  const key = event.key
+                  if (key === 'Enter' || key === ' ') {
+                    onStepClick?.(index + 1)
+                  }
+                }}
+                onClick={() => onStepClick?.(index + 1)}
+                error={!!erroredSteps.includes(index + 1)}
+                style={{ cursor: onStepClick ? 'pointer' : '' }}
+                active={currentStep > index + 1 || index + 1 === currentStep}
+              >
+                {currentStep > index + 1 ? <TickIcon /> : index + 1}
+              </Item>
+            )}
+            <Line
+              side='right'
+              bordered={index === collection.length - 1}
+              active={currentStep > index + 1}
+              error={!!erroredSteps.includes(index + 1)}
+            />
+          </div>
+        ))}
       </div>
-    </CssInjection>
+      <div className={`${styles.title}`}>
+        {list.map((item, index: number) => (
+          <Title
+            key={index}
+            style={{ width: `calc(100% / ${itemWidth})` }}
+            active={currentStep > index + 1 || index + 1 === currentStep}
+          >
+            {isControlled ? item.props.title : item}
+          </Title>
+        ))}
+      </div>
+    </div>
   )
 })
 
-const Line = ({side, bordered, active, error}) => (
+const Line = ({ side, bordered, active, error }) => (
   <div
     className={[
       styles.line,
@@ -117,7 +113,7 @@ const Line = ({side, bordered, active, error}) => (
   />
 )
 
-const Item = ({active, error, onKeyDown, onClick, style, children}) => (
+const Item = ({ active, error, onKeyDown, onClick, style, children }) => (
   <div
     tabIndex={0}
     className={[
@@ -136,7 +132,7 @@ const Item = ({active, error, onKeyDown, onClick, style, children}) => (
   </div>
 )
 
-const Title = ({active, style, children}) => (
+const Title = ({ active, style, children }) => (
   <div
     style={style}
     className={[

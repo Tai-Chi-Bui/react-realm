@@ -1,21 +1,18 @@
-import React, {PropsWithChildren} from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
+import React, { PropsWithChildren } from 'react'
 import styles from './styles/navbar-seperator.module.css'
 
 export type NavbarSeperatorProps = PropsWithChildren<
-  {css?: unknown} & React.HTMLAttributes<HTMLDivElement>
+  {} & React.HTMLAttributes<HTMLDivElement>
 >
 
 export const NavbarSeperator = React.forwardRef<
   HTMLDivElement,
   NavbarSeperatorProps
 >((props, ref) => {
-  const {children, css = {}, ...htmlProps} = props
+  const { children, ...htmlProps } = props
   return (
-    <CssInjection css={css} childrenRef={ref}>
-      <div className={styles.navbarSeperator} ref={ref} {...htmlProps}>
-        {children}
-      </div>
-    </CssInjection>
+    <div className={styles.navbarSeperator} ref={ref} {...htmlProps}>
+      {children}
+    </div>
   )
 })

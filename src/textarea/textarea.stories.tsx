@@ -1,7 +1,7 @@
-import {faBook} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import type {Meta} from '@storybook/react'
-import React, {useState} from 'react'
+import { faBook } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Meta } from '@storybook/react'
+import React, { useState } from 'react'
 import Textarea from './index'
 
 const style: React.CSSProperties = {
@@ -17,16 +17,11 @@ export const Basic: React.FC = () => {
   const [value, setValue] = useState('My initial value')
 
   return (
-    <div style={{...style}}>
+    <div style={{ ...style }}>
       <h3> H5</h3>
       <Textarea
         variant='h5'
         placeholder='Type your feedback here'
-        css={{
-          textarea: {
-            height: '129px',
-          },
-        }}
         label='Details'
         resizable={false}
         wordCount
@@ -40,7 +35,7 @@ export const Basic: React.FC = () => {
         label={
           <>
             My custom label &nbsp;
-            <FontAwesomeIcon icon={faBook} style={{fontSize: '0.9em'}} />
+            <FontAwesomeIcon icon={faBook} style={{ fontSize: '0.9em' }} />
           </>
         }
         placeholder='Enter your message'
@@ -88,7 +83,6 @@ export const Basic: React.FC = () => {
       <Textarea
         label='Disabled Text Label'
         placeholder='Enter your message'
-        css={{'& textarea': {width: '600px', height: '300px'}}}
       />
     </div>
   )

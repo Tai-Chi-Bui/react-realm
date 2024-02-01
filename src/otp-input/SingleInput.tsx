@@ -1,6 +1,6 @@
-import React, {memo, useLayoutEffect} from 'react'
+import React, { memo, useLayoutEffect } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/otpInput.module.css'
 import usePrevious from './usePrevious'
 
@@ -9,7 +9,6 @@ export interface SingleOTPInputProps
   index: number
   focus?: boolean
   autoFocus?: boolean
-  css?: unknown
   isNumberInput?: boolean
   isMobile?: boolean
   isErrored?: boolean
@@ -20,7 +19,6 @@ const SingleOTPInputComponent = React.forwardRef<
   SingleOTPInputProps
 >((props, ref) => {
   const {
-    css = {},
     className,
     index,
     focus,
@@ -66,9 +64,7 @@ const SingleOTPInputComponent = React.forwardRef<
     .join(' ')
 
   return (
-    <CssInjection css={css}>
-      <input {...htmlProps} ref={inputRef} className={classNames} />
-    </CssInjection>
+    <input {...htmlProps} ref={inputRef} className={classNames} />
   )
 })
 
