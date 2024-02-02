@@ -1,12 +1,12 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
-import ErrorAction, {ErrorActionProps} from './error-action'
-import ErrorDescription, {ErrorDescriptionProps} from './error-description'
-import ErrorIcon from './error-icon'
-import ErrorImage, {ErrorImageProps} from './error-image'
-import ErrorTitle, {ErrorTitleProps} from './error-title'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
+import ErrorAction, { ErrorActionProps } from './error-action'
+import ErrorDescription, { ErrorDescriptionProps } from './error-description'
+import ErrorIcon, { ErrorIconProps } from './error-icon'
+import ErrorImage, { ErrorImageProps } from './error-image'
+import ErrorTitle, { ErrorTitleProps } from './error-title'
 import styles from './styles/error.module.css'
 
 interface Props {
@@ -34,7 +34,7 @@ const Error = React.forwardRef<HTMLDivElement, ErrorProps>((props, ref) => {
   const errorRef = useDOMRef<HTMLDivElement>(ref)
 
   // Pick title child component
-  const {child: ErrorTitleElement} = pickChild<typeof ErrorTitle>(
+  const { child: ErrorTitleElement } = pickChild<React.ReactElement<ErrorTitleProps>>(
     children,
     ErrorTitle,
   )
@@ -48,7 +48,7 @@ const Error = React.forwardRef<HTMLDivElement, ErrorProps>((props, ref) => {
   }
 
   // Pick description child component
-  const {child: ErrorDescriptionElement} = pickChild<typeof ErrorDescription>(
+  const { child: ErrorDescriptionElement } = pickChild<React.ReactElement<ErrorDescriptionProps>>(
     children,
     ErrorDescription,
   )
@@ -62,7 +62,7 @@ const Error = React.forwardRef<HTMLDivElement, ErrorProps>((props, ref) => {
   }
 
   // Pick action child component
-  const {child: ErrorActionsElement} = pickChild<typeof ErrorAction>(
+  const { child: ErrorActionsElement } = pickChild<React.ReactElement<ErrorActionProps>>(
     children,
     ErrorAction,
   )
@@ -76,13 +76,13 @@ const Error = React.forwardRef<HTMLDivElement, ErrorProps>((props, ref) => {
   }
 
   // Pick icon child component
-  const {child: ErrorIconElement} = pickChild<typeof ErrorIcon>(
+  const { child: ErrorIconElement } = pickChild<React.ReactElement<ErrorIconProps>>(
     children,
     ErrorIcon,
   )
 
   // Pick Image child component
-  const {child: ErrorImageElement} = pickChild<typeof ErrorImage>(
+  const { child: ErrorImageElement } = pickChild<React.ReactElement<ErrorImageProps>>(
     children,
     ErrorImage,
   )

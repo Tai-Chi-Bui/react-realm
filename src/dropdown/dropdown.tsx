@@ -6,13 +6,13 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import {
   DropdownContext,
   DropdownItemKey,
   SelectedItemDropdown,
 } from './dropdown-context'
-import DropdownItem, {DropdownItemProps} from './dropdown-item'
+import DropdownItem, { DropdownItemProps } from './dropdown-item'
 import DropdownList from './dropdown-list'
 import DropdownHeader from './dropdown.header'
 import {
@@ -26,7 +26,7 @@ import {
 
 import Popover from '../popover'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useId} from '../utils/useId'
+import { useId } from '../utils/useId'
 import DropdownComboBox from './dropdown.combobox'
 import DropdownSection from './dropdown.section'
 import DropdownSelect from './dropdown.select'
@@ -193,7 +193,7 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
 
   const dropdownId = useId(id)
 
-  const htmlProps = {...ariaSafeProps} as Omit<
+  const htmlProps = { ...ariaSafeProps } as Omit<
     React.HTMLAttributes<HTMLDivElement>,
     keyof Props
   >
@@ -353,8 +353,8 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
                     focusedItem.props.children as React.ReactElement,
                   )
                 }
-                onSelectionChange?.(focusedItem?.props?.value as Key)
-                onValueChange?.(focusedItem?.props?.value as Key)
+                onSelectionChange?.(focusedItem?.props?.value as number | string)
+                onValueChange?.(focusedItem?.props?.value as number | string)
               }
             }
 
@@ -839,7 +839,7 @@ const Select = React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
           <Popover
             isOpen={open}
             anchor={contentElement}
-            css={{width: '100%'}}
+            css={{ width: '100%' }}
             direction='bottom-left'
             onClose={handleClosePopover}
             onPositionedChange={handlePositionedChange}

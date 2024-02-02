@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import Box from '../box'
 import Button from '../button'
@@ -20,7 +20,7 @@ export const Default: React.FC = () => {
         justifyContent: 'space-between',
       }}
     >
-      <div style={{fontWeight: '500', fontSize: '1.2em'}}>Title</div>
+      <div style={{ fontWeight: '500', fontSize: '1.2em' }}>Title</div>
       <div
         style={{
           fontSize: '0.8em',
@@ -48,8 +48,8 @@ export const Default: React.FC = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Button css={{width: '48%'}}>Action</Button>
-            <Button variant='danger' css={{width: '48%'}}>
+            <Button css={{ width: '48%' }}>Action</Button>
+            <Button variant='danger' css={{ width: '48%' }}>
               Warning
             </Button>
           </div>
