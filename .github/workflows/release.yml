@@ -18,7 +18,7 @@ jobs:
       - name: Setup Bot
         run: |
           git config --global user.email "tai.c.bui@gmail.com"
-          git config --global user.name "Tai Bui"
+          git config --global user.name "taicbui"
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
