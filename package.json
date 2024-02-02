@@ -43,7 +43,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "version": "changeset version && pnpm run format"
+    "version": "changeset version"
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1",
