@@ -1,5 +1,11 @@
 # @comfortdelgro/react-compass
 
+## 0.0.1
+
+### Patch Changes
+
+- d620762: First release
+
 ## 4.2.0
 
 ### Minor Changes
