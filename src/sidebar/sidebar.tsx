@@ -2,12 +2,12 @@
 
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import SidebarActions from './sidebar-actions'
-import SidebarContent from './sidebar-content'
-import SidebarTitle from './sidebar-title'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import SidebarActions, { SidebarActionsProps } from './sidebar-actions'
+import SidebarContent, { SidebarContentProps } from './sidebar-content'
+import SidebarTitle, { SidebarTitleProps } from './sidebar-title'
 import styles from './styles/sidebar.module.css'
 
 interface Props {
@@ -44,15 +44,15 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const sidebarRef = useDOMRef<HTMLDivElement>(ref)
 
   // Pick title actions component
-  const {child: SidebarActionsElement} = pickChild<typeof SidebarActions>(
+  const { child: SidebarActionsElement } = pickChild<React.ReactElement<SidebarActionsProps>>(
     children,
     SidebarActions,
   )
-  const {child: SidebarContentElement} = pickChild<typeof SidebarContent>(
+  const { child: SidebarContentElement } = pickChild<React.ReactElement<SidebarContentProps>>(
     children,
     SidebarContent,
   )
-  const {child: SidebarTitleElement} = pickChild<typeof SidebarTitle>(
+  const { child: SidebarTitleElement } = pickChild<React.ReactElement<SidebarTitleProps>>(
     children,
     SidebarTitle,
   )
@@ -83,13 +83,11 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
           onClick={(e) => handleClickBackDrop(e as unknown as MouseEvent)}
         >
           <div
-            className={`cdg-sidebar ${styles.sidebar} ${
-              variant ? styles[`sidebar${capitalizeFirstLetter(variant)}`] : ''
-            } ${
-              position
+            className={`cdg-sidebar ${styles.sidebar} ${variant ? styles[`sidebar${capitalizeFirstLetter(variant)}`] : ''
+              } ${position
                 ? styles[`sidebar${capitalizeFirstLetter(position)}`]
                 : ''
-            }`}
+              }`}
             ref={sidebarRef}
             onClick={(e) => handleClickSidebar(e as unknown as MouseEvent)}
             {...htmlProps}

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom'
 import {
   binarySearch,
@@ -9,7 +9,7 @@ import {
   transformItem,
 } from '.'
 import DragAndDropListOutletItem from '../item/outlet'
-import type {IItemProps, IProps, TEvent} from './types'
+import type { IItemProps, IProps, TEvent } from './types'
 
 const AUTOSCROLL_ACTIVE_OFFSET = 200
 const AUTOSCROLL_SPEED_RATIO = 10
@@ -49,8 +49,8 @@ class List extends React.Component<IProps> {
     scrollingSpeed: 0,
     scrollWindow: false,
   }
-  schdOnPointerMove: {(e: PointerEvent): void; cancel(): void}
-  schdOnEnd: {(e: PointerEvent): void; cancel(): void}
+  schdOnPointerMove: { (e: PointerEvent): void; cancel(): void }
+  schdOnEnd: { (e: PointerEvent): void; cancel(): void }
 
   static defaultProps = {
     removableByMove: false,
@@ -69,7 +69,7 @@ class List extends React.Component<IProps> {
 
   override componentDidUpdate(
     _prevProps: IProps,
-    prevState: {scrollingSpeed: number},
+    prevState: { scrollingSpeed: number },
   ) {
     if (
       prevState.scrollingSpeed !== this.state.scrollingSpeed &&
@@ -89,7 +89,7 @@ class List extends React.Component<IProps> {
   }
 
   doScrolling = () => {
-    const {scrollingSpeed, scrollWindow} = this.state
+    const { scrollingSpeed, scrollWindow } = this.state
     const listEl = this.listRef.current!
     window.requestAnimationFrame(() => {
       if (scrollWindow) {
@@ -136,7 +136,7 @@ class List extends React.Component<IProps> {
     const index = this.getTargetIndex(event as unknown as TEvent)
     if (index === -1 || !this.props.values[index]) {
       if (this.state.selectedItem !== -1) {
-        this.setState({selectedItem: -1})
+        this.setState({ selectedItem: -1 })
         this.finishDrop()
       }
       return
@@ -168,7 +168,7 @@ class List extends React.Component<IProps> {
     index: number,
   ) => {
     if (this.state.selectedItem > -1) {
-      this.setState({selectedItem: -1})
+      this.setState({ selectedItem: -1 })
       this.needle = -1
     }
     const targetRect = target.getBoundingClientRect()
@@ -242,7 +242,7 @@ class List extends React.Component<IProps> {
   }
 
   autoScrolling = (clientY: number) => {
-    const {top, bottom, height} = this.listRef.current!.getBoundingClientRect()
+    const { top, bottom, height } = this.listRef.current!.getBoundingClientRect()
     const viewportHeight =
       window.innerHeight || document.documentElement.clientHeight
     // autoscrolling for the window (down)
@@ -253,7 +253,7 @@ class List extends React.Component<IProps> {
       this.setState({
         scrollingSpeed: Math.round(
           (AUTOSCROLL_ACTIVE_OFFSET - (viewportHeight - clientY)) /
-            AUTOSCROLL_SPEED_RATIO,
+          AUTOSCROLL_SPEED_RATIO,
         ),
         scrollWindow: true,
       })
@@ -267,7 +267,7 @@ class List extends React.Component<IProps> {
       })
     } else {
       if (this.state.scrollWindow && this.state.scrollingSpeed !== 0) {
-        this.setState({scrollingSpeed: 0, scrollWindow: false})
+        this.setState({ scrollingSpeed: 0, scrollWindow: false })
       }
       // autoscrolling for containers with overflow
       if (height + 20 < this.listRef.current!.scrollHeight) {
@@ -275,16 +275,16 @@ class List extends React.Component<IProps> {
         if (clientY - top < AUTOSCROLL_ACTIVE_OFFSET) {
           scrollingSpeed = Math.round(
             (AUTOSCROLL_ACTIVE_OFFSET - (clientY - top)) /
-              -AUTOSCROLL_SPEED_RATIO,
+            -AUTOSCROLL_SPEED_RATIO,
           )
         } else if (bottom - clientY < AUTOSCROLL_ACTIVE_OFFSET) {
           scrollingSpeed = Math.round(
             (AUTOSCROLL_ACTIVE_OFFSET - (bottom - clientY)) /
-              AUTOSCROLL_SPEED_RATIO,
+            AUTOSCROLL_SPEED_RATIO,
           )
         }
         if (this.state.scrollingSpeed !== scrollingSpeed) {
-          this.setState({scrollingSpeed})
+          this.setState({ scrollingSpeed })
         }
       }
     }
@@ -306,11 +306,11 @@ class List extends React.Component<IProps> {
           item,
           movedItem < needle
             ? this.itemTranslateOffsets
-                .slice(movedItem + 1, needle + 1)
-                .reduce((a, b) => a + b, 0)
+              .slice(movedItem + 1, needle + 1)
+              .reduce((a, b) => a + b, 0)
             : this.itemTranslateOffsets
-                .slice(needle, movedItem)
-                .reduce((a, b) => a + b, 0) * -1,
+              .slice(needle, movedItem)
+              .reduce((a, b) => a + b, 0) * -1,
         )
       } else if (movedItem < needle && i > movedItem && i <= needle) {
         transformItem(item, -offset)
@@ -329,12 +329,12 @@ class List extends React.Component<IProps> {
     const targetRect = this.ghostRef.current!.getBoundingClientRect()
     if (Math.abs(initialRect.left - targetRect.left) > targetRect.width) {
       if (this.state.itemDraggedOutOfBounds === -1) {
-        this.setState({itemDraggedOutOfBounds: this.state.itemDragged})
+        this.setState({ itemDraggedOutOfBounds: this.state.itemDragged })
       }
       return true
     }
     if (this.state.itemDraggedOutOfBounds > -1) {
-      this.setState({itemDraggedOutOfBounds: -1})
+      this.setState({ itemDraggedOutOfBounds: -1 })
     }
     return false
   }
@@ -362,18 +362,18 @@ class List extends React.Component<IProps> {
             this.ghostRef.current!,
             // compensate window scroll
             -(window.pageYOffset - this.lastYOffset) +
-              // compensate container scroll
-              -(this.listRef.current!.scrollTop - this.lastListYOffset) +
-              (this.state.itemDragged < this.afterIndex
-                ? this.itemTranslateOffsets
-                    .slice(this.state.itemDragged + 1, this.afterIndex + 1)
-                    .reduce((a, b) => a + b, 0)
-                : this.itemTranslateOffsets
-                    .slice(
-                      this.afterIndex < 0 ? 0 : this.afterIndex,
-                      this.state.itemDragged,
-                    )
-                    .reduce((a, b) => a + b, 0) * -1),
+            // compensate container scroll
+            -(this.listRef.current!.scrollTop - this.lastListYOffset) +
+            (this.state.itemDragged < this.afterIndex
+              ? this.itemTranslateOffsets
+                .slice(this.state.itemDragged + 1, this.afterIndex + 1)
+                .reduce((a, b) => a + b, 0)
+              : this.itemTranslateOffsets
+                .slice(
+                  this.afterIndex < 0 ? 0 : this.afterIndex,
+                  this.state.itemDragged,
+                )
+                .reduce((a, b) => a + b, 0) * -1),
             0,
           )
         }
@@ -400,9 +400,9 @@ class List extends React.Component<IProps> {
     this.getChildren().forEach((item) => {
       setItemTransition(item, 0)
       transformItem(item, null)
-      ;(item as HTMLElement).style.touchAction = ''
+        ; (item as HTMLElement).style.touchAction = ''
     })
-    this.setState({itemDragged: -1, scrollingSpeed: 0})
+    this.setState({ itemDragged: -1, scrollingSpeed: 0 })
     this.afterIndex = -2
     // sometimes the scroll gets messed up after the drop, fix:
     if (this.lastScroll > 0) {

@@ -1,8 +1,8 @@
-import React, {Key} from 'react'
+import React, { Key } from 'react'
 import Dropdown from '../dropdown'
 import TextField from '../textfield'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/dropdown-textfield.module.css'
 
 interface Props {
@@ -40,14 +40,14 @@ interface Props {
   'aria-activedescendant'?: string
   'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both'
   'aria-haspopup'?:
-    | boolean
-    | 'false'
-    | 'true'
-    | 'menu'
-    | 'listbox'
-    | 'tree'
-    | 'grid'
-    | 'dialog'
+  | boolean
+  | 'false'
+  | 'true'
+  | 'menu'
+  | 'listbox'
+  | 'tree'
+  | 'grid'
+  | 'dialog'
   'aria-controls'?: string
   'aria-label'?: string
   'aria-labelledby'?: string
@@ -115,7 +115,7 @@ const DropdownTextfield = React.forwardRef<
 
   const handleDropdownChange = (newValue: Key) => {
     setDropdownKey(newValue)
-    onDropdownInputChange?.(String(newValue), textfieldValue)
+    onDropdownInputChange?.(String(newValue), textfieldValue as number | string)
   }
   const handleInputChange = (value: string | number) => {
     setTextfieldValue(value)
@@ -136,9 +136,8 @@ const DropdownTextfield = React.forwardRef<
         {label && (
           <label
             htmlFor={id}
-            className={`${styles.textFieldLabel} ${
-              h5 ? styles.textFieldLabelH5 : ''
-            }`}
+            className={`${styles.textFieldLabel} ${h5 ? styles.textFieldLabelH5 : ''
+              }`}
           >
             {label}
             {isRequired && <span className={`${styles.asterisk}`}>*</span>}
@@ -181,7 +180,7 @@ const DropdownTextfield = React.forwardRef<
             aria-label={label}
             type={inputType}
             onChange={handleInputChange}
-            value={textfieldValue}
+            value={textfieldValue as number | string}
             errorMessage={errorMessage}
             isErrored={isErrored}
             isReadOnly={isReadOnly}

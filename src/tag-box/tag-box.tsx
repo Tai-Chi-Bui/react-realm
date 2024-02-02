@@ -1,13 +1,13 @@
-import React, {createRef, RefObject} from 'react'
+import React, { createRef, RefObject } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import stylesItem from './styles/tag-box-item.module.css'
 import styles from './styles/tag-box.module.css'
-import TagBoxAction from './tag-box-action'
+import TagBoxAction, { TagBoxActionProps } from './tag-box-action'
 import TagBoxInput from './tag-box-input'
 import TagBoxItem from './tag-box-item'
-import {ChevronDown, ChevronUp} from './utils'
+import { ChevronDown, ChevronUp } from './utils'
 
 type Item = {
   id: string | number
@@ -67,7 +67,7 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
 
   const inputRef = useDOMRef<HTMLInputElement>(null)
   const tagBoxRef = useDOMRef<HTMLDivElement>(ref)
-  const {child: TagBoxActionElement} = pickChild<typeof TagBoxAction>(
+  const { child: TagBoxActionElement } = pickChild<React.ReactElement<TagBoxActionProps>>(
     children,
     TagBoxAction,
   )
@@ -239,12 +239,12 @@ const TagBox = React.forwardRef<HTMLDivElement, TagBoxProps>((props, ref) => {
                 )}
                 {((!collaspable && typeable) ||
                   (collaspable && typeable && isOpen)) && (
-                  <TagBoxInput
-                    ref={inputRef}
-                    wrapperRef={bodyContentRef}
-                    onEnter={onAdd}
-                  />
-                )}
+                    <TagBoxInput
+                      ref={inputRef}
+                      wrapperRef={bodyContentRef}
+                      onEnter={onAdd}
+                    />
+                  )}
               </div>
               {collaspable && (
                 <div

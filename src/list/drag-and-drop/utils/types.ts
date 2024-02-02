@@ -1,4 +1,4 @@
-import {DragAndDropListItemProps} from '../item'
+import { DragAndDropListItemProps } from '../item'
 
 export interface IItemProps {
   key?: number
@@ -13,10 +13,11 @@ export interface IItemProps {
 export interface IProps {
   values: React.Key[]
   removableByMove?: boolean
+  children?: React.ReactNode
   collection: Array<
     React.DetailedReactHTMLElement<DragAndDropListItemProps, HTMLElement>
   >
-  onChange: (meta: {oldIndex: number; newIndex: number}) => void
+  onChange: (meta: { oldIndex: number; newIndex: number }) => void
 }
 
 export type TEvent = React.MouseEvent | React.TouchEvent | React.KeyboardEvent

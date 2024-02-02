@@ -1,11 +1,11 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
-import ModalActions from './modal-actions'
-import ModalCloseIcon from './modal-closeIcon'
-import ModalDescription from './modal-description'
-import ModalTitle from './modal-title'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
+import ModalActions, { ModalActionsProps } from './modal-actions'
+import ModalCloseIcon, { ModalCloseIconProps } from './modal-closeIcon'
+import ModalDescription, { ModalDescriptionProps } from './modal-description'
+import ModalTitle, { ModalTitleProps } from './modal-title'
 import ModalTrigger from './modal-trigger'
 import styles from './styles/modal.module.css'
 
@@ -49,25 +49,25 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   const CloseIconRef = React.useRef<HTMLButtonElement | null>(null)
 
   // Pick title child component
-  const {child: ModalTitleElement} = pickChild<typeof ModalTitle>(
+  const { child: ModalTitleElement } = pickChild<React.ReactElement<ModalTitleProps>>(
     children,
     ModalTitle,
   )
 
   // Pick description child component
-  const {child: ModalDescriptionElement} = pickChild<typeof ModalDescription>(
+  const { child: ModalDescriptionElement } = pickChild<React.ReactElement<ModalDescriptionProps>>(
     children,
     ModalDescription,
   )
 
   // Pick action child component
-  const {child: ModalActionsElement} = pickChild<typeof ModalActions>(
+  const { child: ModalActionsElement } = pickChild<React.ReactElement<ModalActionsProps>>(
     children,
     ModalActions,
   )
 
   // Pick modal close icon
-  const {child: CloseIconElement} = pickChild<typeof ModalCloseIcon>(
+  const { child: CloseIconElement } = pickChild<React.ReactElement<ModalCloseIconProps>>(
     children,
     ModalCloseIcon,
   )

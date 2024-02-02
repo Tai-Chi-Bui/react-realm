@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useMemo} from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
-import {DropdownContext} from './dropdown-context'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
+import { DropdownContext } from './dropdown-context'
 import DropdownLoading from './dropdown-loading'
-import DropdownHeader from './dropdown.header'
-import {useIsInViewport} from './hooks/useInViewport'
+import DropdownHeader, { DropdownHeaderProps } from './dropdown.header'
+import { useIsInViewport } from './hooks/useInViewport'
 import styles from './styles/dropdown.module.css'
-import {getDistanceBetweenElements, textContent} from './utils'
+import { getDistanceBetweenElements, textContent } from './utils'
 
 interface Props {
   searchValue?: string
@@ -23,16 +23,16 @@ export type DropdownItemListProps = Props
 const DropdownList: React.FC<DropdownItemListProps> = (
   props: DropdownItemListProps,
 ) => {
-  const {children, isLoading, css = {}, noDataMessage, onLoadMore} = props
+  const { children, isLoading, css = {}, noDataMessage, onLoadMore } = props
 
   const lastEl = useDOMRef<HTMLDivElement>(null)
   const standEl = useDOMRef<HTMLDivElement>(null)
 
   const isInViewport = useIsInViewport(lastEl)
-  const {searchValue, labelId, isLoadingMore} = useContext(DropdownContext)
+  const { searchValue, labelId, isLoadingMore } = useContext(DropdownContext)
 
-  const {child: DropdownHeaderElement, rest: dropdownItems} = pickChild<
-    typeof DropdownHeader
+  const { child: DropdownHeaderElement, rest: dropdownItems } = pickChild<
+    React.ReactElement<DropdownHeaderProps>
   >(children, DropdownHeader)
 
   const displayedItemsCount = useMemo(() => {

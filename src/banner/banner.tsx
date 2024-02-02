@@ -2,12 +2,12 @@
 
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import BannerDescription from './banner-description'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import BannerDescription, { BannerDescriptionProps } from './banner-description'
 import BannerImage from './banner-image'
-import BannerTitle from './banner-title'
+import BannerTitle, { BannerTitleProps } from './banner-title'
 import styles from './styles/banner.module.css'
 
 interface Props {
@@ -34,17 +34,17 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   } = props
 
   const bannerRef = useDOMRef<HTMLDivElement>(ref)
-  const {child: BannerImageElement} = pickChild<typeof BannerImage>(
+  const { child: BannerImageElement } = pickChild<React.ReactElement<BannerProps>>(
     children,
     BannerImage,
   )
 
-  const {child: BannerTitleElement} = pickChild<typeof BannerTitle>(
+  const { child: BannerTitleElement } = pickChild<React.ReactElement<BannerTitleProps>>(
     children,
     BannerTitle,
   )
 
-  const {child: BannerDescriptionElement} = pickChild<typeof BannerDescription>(
+  const { child: BannerDescriptionElement } = pickChild<React.ReactElement<BannerDescriptionProps>>(
     children,
     BannerDescription,
   )
@@ -52,9 +52,8 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   return (
     <CssInjection css={css} childrenRef={bannerRef}>
       <div
-        className={`cdg-banner ${className} ${styles.banner} ${
-          styles[`bannerSize${capitalizeFirstLetter(size)}`]
-        }`}
+        className={`cdg-banner ${className} ${styles.banner} ${styles[`bannerSize${capitalizeFirstLetter(size)}`]
+          }`}
         ref={bannerRef}
         {...htmlProps}
       >

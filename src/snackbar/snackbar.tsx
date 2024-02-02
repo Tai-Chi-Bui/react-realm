@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
-import SnackbarPrefixIcon from './snackbar-prefix-icon'
-import SnackbarSuffixIcon from './snackbar-suffix-icon'
-import SnackbarText from './snackbar-text'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
+import SnackbarPrefixIcon, { SnackbarPrefixIconProps } from './snackbar-prefix-icon'
+import SnackbarSuffixIcon, { SnackbarSuffixIconProps } from './snackbar-suffix-icon'
+import SnackbarText, { SnackbarTextProps } from './snackbar-text'
 import styles from './styles/snackbar.module.css'
 
 interface Props {
@@ -46,15 +46,15 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
 
     const snackbarRef = useDOMRef<HTMLDivElement>(ref)
 
-    const {child: SnackbarSuffixIconElement} = pickChild<
-      typeof SnackbarSuffixIcon
+    const { child: SnackbarSuffixIconElement } = pickChild<
+      React.ReactElement<SnackbarSuffixIconProps>
     >(children, SnackbarSuffixIcon)
 
-    const {child: SnackbarPrefixIconElement} = pickChild<
-      typeof SnackbarPrefixIcon
+    const { child: SnackbarPrefixIconElement } = pickChild<
+      React.ReactElement<SnackbarPrefixIconProps>
     >(children, SnackbarPrefixIcon)
 
-    const {child: SnackbarTextElement} = pickChild<typeof SnackbarText>(
+    const { child: SnackbarTextElement } = pickChild<React.ReactElement<SnackbarTextProps>>(
       children,
       SnackbarText,
     )

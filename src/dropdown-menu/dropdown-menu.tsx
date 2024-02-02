@@ -1,16 +1,16 @@
 'use client'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Popover from '../popover'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import DropdownMenuContext, {
   DropdownMenuContextType,
 } from './dropdown-menu-context'
 import DropdownMenuItem from './dropdown-menu-item'
-import DropdownMenuMenu from './dropdown-menu-menu'
+import DropdownMenuMenu, { DropdownMenuMenuProps } from './dropdown-menu-menu'
 import DropdownMenuSubmenu from './dropdown-menu-submenu'
-import DropdownMenuToggle from './dropdown-menu-toggle'
+import DropdownMenuToggle, { DropdownMenuToggleProps } from './dropdown-menu-toggle'
 import styles from './styles/dropdown-menu.module.css'
 
 interface Props {
@@ -39,11 +39,11 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
     const dropdownRef = useDOMRef<HTMLDivElement>(ref)
 
     // Pick child element from children props
-    const {child: DropdownMenuToggleElement} = pickChild<
-      typeof DropdownMenuToggle
+    const { child: DropdownMenuToggleElement } = pickChild<
+      React.ReactElement<DropdownMenuToggleProps>
     >(children, DropdownMenuToggle)
 
-    const {child: DropdownMenuMenuElement} = pickChild<typeof DropdownMenuMenu>(
+    const { child: DropdownMenuMenuElement } = pickChild<React.ReactElement<DropdownMenuMenuProps>>(
       children,
       DropdownMenuMenu,
     )

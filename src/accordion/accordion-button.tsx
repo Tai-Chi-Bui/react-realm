@@ -1,5 +1,4 @@
 import React from 'react'
-import CssInjection from '../utils/objectToCss/CssInjection'
 import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/accordion-button.module.css'
 

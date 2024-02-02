@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react'
 import CssInjection from '../../utils/objectToCss/CssInjection'
-import {useDOMRef} from '../../utils/use-dom-ref'
+import { useDOMRef } from '../../utils/use-dom-ref'
 import styles from './index.module.css'
 import DragAndDropListItem from './item'
-import {pickChilds} from './utils'
+import { pickChilds } from './utils'
 import List from './utils/List'
 
 export interface Props {
@@ -18,7 +18,7 @@ export type DragAndDropListProps = Props &
 
 const DragAndDropList = React.forwardRef<HTMLDivElement, DragAndDropListProps>(
   (props, ref) => {
-    const {css = {}, className, children, onReorderByKeys, ...htmlProps} = props
+    const { css = {}, className, children, onReorderByKeys, ...htmlProps } = props
     const dndRef = useDOMRef<HTMLDivElement>(ref)
 
     const collection = React.useMemo(
@@ -41,7 +41,7 @@ const DragAndDropList = React.forwardRef<HTMLDivElement, DragAndDropListProps>(
           <List
             values={items}
             collection={collection}
-            onChange={({oldIndex, newIndex}) => {
+            onChange={({ oldIndex, newIndex }) => {
               const array = items.slice()
               array.splice(
                 newIndex < 0 ? array.length + newIndex : newIndex,

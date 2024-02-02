@@ -1,12 +1,12 @@
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {capitalizeFirstLetter} from '../utils/string'
-import {useDOMRef} from '../utils/use-dom-ref'
-import DialogActions from './dialog-actions'
-import DialogDescription from './dialog-description'
-import DialogIcon from './dialog-icon'
-import DialogTitle from './dialog-title'
+import { pickChild } from '../utils/pick-child'
+import { capitalizeFirstLetter } from '../utils/string'
+import { useDOMRef } from '../utils/use-dom-ref'
+import DialogActions, { DialogActionsProps } from './dialog-actions'
+import DialogDescription, { DialogDescriptionProps } from './dialog-description'
+import DialogIcon, { DialogIconProps } from './dialog-icon'
+import DialogTitle, { DialogTitleProps } from './dialog-title'
 import DialogTrigger from './dialog-trigger'
 import styles from './styles/dialog.module.css'
 
@@ -47,25 +47,25 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
   const LastFocusableRef = React.useRef<HTMLElement | null>(null)
 
   // Pick title child component
-  const {child: DialogTitleElement} = pickChild<typeof DialogTitle>(
+  const { child: DialogTitleElement } = pickChild<React.ReactElement<DialogTitleProps>>(
     children,
     DialogTitle,
   )
 
   // Pick description child component
-  const {child: DialogDescriptionElement} = pickChild<typeof DialogDescription>(
+  const { child: DialogDescriptionElement } = pickChild<React.ReactElement<DialogDescriptionProps>>(
     children,
     DialogDescription,
   )
 
   // Pick action child component
-  const {child: DialogActionsElement} = pickChild<typeof DialogActions>(
+  const { child: DialogActionsElement } = pickChild<React.ReactElement<DialogActionsProps>>(
     children,
     DialogActions,
   )
 
   // Pick icon child component
-  const {child: DialogIconElement} = pickChild<typeof DialogIcon>(
+  const { child: DialogIconElement } = pickChild<React.ReactElement<DialogIconProps>>(
     children,
     DialogIcon,
   )

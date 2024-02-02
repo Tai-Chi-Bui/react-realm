@@ -1,6 +1,6 @@
-import React, {Key} from 'react'
+import React, { Key } from 'react'
 import TabItem from './item'
-import Tabs, {TabsProps} from './tabs'
+import Tabs, { TabsProps } from './tabs'
 interface ItemProps {
   key: Key
   title: string
@@ -20,7 +20,7 @@ const TabsPaneless = React.forwardRef<HTMLDivElement, TabsPanelessProps>(
       <Tabs ref={ref} {...props} hidePanel>
         {[...props.items].map((item) => (
           <TabItem key={item.key} title={item.title}>
-            {item.key}
+            {item.key.toString()}
           </TabItem>
         ))}
       </Tabs>

@@ -2,12 +2,12 @@
 
 import React from 'react'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/subBanner.module.css'
-import SubBannerDescription from './subBanner-description'
-import SubBannerImage, {SubBannerImageProps} from './subBanner-image'
-import SubBannerTitle from './subBanner-title'
+import SubBannerDescription, { SubBannerDescriptionProps } from './subBanner-description'
+import SubBannerImage, { SubBannerImageProps } from './subBanner-image'
+import SubBannerTitle, { SubBannerTitleProps } from './subBanner-title'
 
 interface Props {
   children?: React.ReactNode
@@ -33,7 +33,7 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
     } = props
 
     const subBannerRef = useDOMRef<HTMLDivElement>(ref)
-    const {child: SubBannerImageElement} = pickChild<typeof SubBannerImage>(
+    const { child: SubBannerImageElement } = pickChild<typeof SubBannerImage>(
       children,
       SubBannerImage,
     )
@@ -46,13 +46,13 @@ const SubBanner = React.forwardRef<HTMLDivElement, SubBannerProps>(
       }
     }
 
-    const {child: SubBannerTitleElement} = pickChild<typeof SubBannerTitle>(
+    const { child: SubBannerTitleElement } = pickChild<React.ReactElement<SubBannerTitleProps>>(
       children,
       SubBannerTitle,
     )
 
-    const {child: SubBannerDescriptionElement} = pickChild<
-      typeof SubBannerDescription
+    const { child: SubBannerDescriptionElement } = pickChild<
+      React.ReactElement<SubBannerDescriptionProps>
     >(children, SubBannerDescription)
 
     return (

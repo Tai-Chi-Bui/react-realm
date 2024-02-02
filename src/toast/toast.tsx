@@ -1,15 +1,15 @@
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import CssInjection from '../utils/objectToCss/CssInjection'
-import {pickChild} from '../utils/pick-child'
-import {useDOMRef} from '../utils/use-dom-ref'
+import { pickChild } from '../utils/pick-child'
+import { useDOMRef } from '../utils/use-dom-ref'
 import styles from './styles/toast.module.css'
-import ToastActions from './toast-actions'
-import ToastCloseIcon from './toast-closeIcon'
-import ToastIcon from './toast-icon'
-import ToastLabel from './toast-label'
-import ToastMessage from './toast-message'
-import ToastTitle from './toast-title'
+import ToastActions, { ToastActionsProps } from './toast-actions'
+import ToastCloseIcon, { ToastCloseIconProps } from './toast-closeIcon'
+import ToastIcon, { ToastIconProps } from './toast-icon'
+import ToastLabel, { ToastLabelProps } from './toast-label'
+import ToastMessage, { ToastMessageProps } from './toast-message'
+import ToastTitle, { ToastTitleProps } from './toast-title'
 
 interface Anchor {
   vertical: 'top' | 'bottom' | 'center'
@@ -43,7 +43,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
     handleClose,
     autoClose = false,
     isItemContainer = false,
-    anchorOrigin = {horizontal: 'center', vertical: 'center'},
+    anchorOrigin = { horizontal: 'center', vertical: 'center' },
     className,
     // HTMLDiv Props
     ...delegated
@@ -52,32 +52,32 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const toastRef = useDOMRef<HTMLDivElement>(ref)
 
   // Pick child element from children props
-  const {child: ToastActionsElement} = pickChild<typeof ToastActions>(
+  const { child: ToastActionsElement } = pickChild<React.ReactElement<ToastActionsProps>>(
     children,
     ToastActions,
   )
 
-  const {child: ToastCloseIconElement} = pickChild<typeof ToastCloseIcon>(
+  const { child: ToastCloseIconElement } = pickChild<React.ReactElement<ToastCloseIconProps>>(
     children,
     ToastCloseIcon,
   )
 
-  const {child: ToastIconElement} = pickChild<typeof ToastIcon>(
+  const { child: ToastIconElement } = pickChild<React.ReactElement<ToastIconProps>>(
     children,
     ToastIcon,
   )
 
-  const {child: ToastLabelElement} = pickChild<typeof ToastLabel>(
+  const { child: ToastLabelElement } = pickChild<React.ReactElement<ToastLabelProps>>(
     children,
     ToastLabel,
   )
 
-  const {child: ToastMessagelement} = pickChild<typeof ToastMessage>(
+  const { child: ToastMessagelement } = pickChild<React.ReactElement<ToastMessageProps>>(
     children,
     ToastMessage,
   )
 
-  const {child: ToastTitleElement} = pickChild<typeof ToastTitle>(
+  const { child: ToastTitleElement } = pickChild<React.ReactElement<ToastTitleProps>>(
     children,
     ToastTitle,
   )
