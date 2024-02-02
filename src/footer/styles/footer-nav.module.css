@@ -1,0 +1,45 @@
+@import '../../theme/theme.module.css';
+
+@layer default, variant, compoundVariant;
+
+@layer default {
+  .footerNav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footerNav > div {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .footerNav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 56px;
+    }
+  }
+
+  @media screen and (max-width: 490px) {
+    .footerNav {
+      display: none;
+    }
+  }
+
+  @container CdgFooter (max-width: 768px) {
+    .footerNav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 56px;
+    }
+  }
+
+  @container CdgFooter (max-width: 490px) {
+    .footerNav {
+      display: none;
+    }
+  }
+}

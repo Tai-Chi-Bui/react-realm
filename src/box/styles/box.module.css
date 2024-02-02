@@ -1,0 +1,13 @@
+@import '../../theme/theme.module.css';
+
+@layer default {
+  .box {
+    /* reset */
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
